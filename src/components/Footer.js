@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import {FaInstagram, FaWhatsapp} from 'react-icons/fa';
 
 export default function Footer(){
 
@@ -30,7 +31,11 @@ export default function Footer(){
                 </div>
 
                 <div className="flex flex-col mx-28 text-neutral-gray-two">
-                    <p className="font-bold ">Redes sociales</p>
+                    <p className="font-bold">Redes sociales</p>
+                    <div className="flex my-6 m-0 text-green-three">
+                        <FaInstagram  size="1.5em"/>
+                        <FaWhatsapp className="mx-3" size="1.5em"/>
+                    </div>
 
                 </div>
         </footer>
