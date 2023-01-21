@@ -1,9 +1,11 @@
 import Button from "../components/Button";
+import HomeContent from "../components/HomeContent";
 
 export default function Home(){
     return(
         <div>
-            <span>Cacalli home</span>
+           
+            <HomeContent/>
             
         </div>
     )

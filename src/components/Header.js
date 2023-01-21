@@ -5,7 +5,7 @@ export default function Header(){
     return(
         <header className="flex justify-between mt-8">
             <Link to="/"> Logo Home</Link>
-                <nav className="flex justify-center mx-8">
+                <nav className="flex mx-8">
                     <Button variant="secondary" inverse>Quienes somos</Button>
                     <Button variant="secondary" inverse>Reinventando ciclos</Button>
                     <Button variant="secondary" inverse>Precios</Button>
