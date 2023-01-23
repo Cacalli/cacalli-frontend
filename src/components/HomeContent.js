@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Button from "./Button/Button";
 
 export default function HomeContent(){
     return(
@@ -13,13 +13,13 @@ export default function HomeContent(){
             </div>
 
                 <div className="absolute ml-36 inset-y-0 left-0 mt-52">
-                    <div  className="gap-9 flex mb-8">
+                    <div  className="gap-9  flex mb-8">
                         <img className="w-52 h-60" src="/assets/logoCacalli.png"/>
-                         <h1 className="font-bold text-7xl text-green-one">REINVENTANDO <br/> CICLOS</h1>
+                         <h1 className="font-bold text-7xl text-green-one">REINVENTANDO <span className="flex">CICLOS</span></h1>
                     </div>
 
-                    <div className=" ">
-                    <p className="flex text-2xl mb-8 text-neutral-gray-two">En cacalli reinventamos los ciclos a través de la composta...</p>
+                    <div className="flex flex-col ">
+                    <p className=" text-2xl mb-8 text-neutral-gray-two flex">En cacalli reinventamos los ciclos a través de la composta...</p>
                     <Button className="" variant="primary">¡Quiero unirme!</Button>
                     </div>
                    

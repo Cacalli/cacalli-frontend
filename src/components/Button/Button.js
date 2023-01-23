@@ -1,7 +1,7 @@
 import classNames from "classnames";
 
 const Button=({children, variant, inverse=false})=>{
-    const classes= classNames("py-3 px-5 rounded",{
+    const classes= classNames("py-3 px-5 rounded w-max",{
         "bg-orange-one text-neutral-white": variant=="primary",
         "bg-green-one text-neutral-white": variant=="primary" && inverse,
         "text-orange-one": variant=="secondary",

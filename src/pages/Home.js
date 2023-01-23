@@ -1,4 +1,4 @@
-import Button from "../components/Button";
+import Button from "../components/Button/Button";
 import HomeContent from "../components/HomeContent";
 
 export default function Home(){

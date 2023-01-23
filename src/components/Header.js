@@ -1,4 +1,4 @@
-import Button from "./Button"
+import Button from "./Button/Button"
 import {Link, NavLink} from "react-router-dom"
 
 export default function Header(){

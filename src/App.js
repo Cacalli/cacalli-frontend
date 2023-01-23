@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Button from "./components/Button";
+import Button from "./components/Button/Button";
 
 import Prices from "./pages/Prices";
 import ReinventingCycles from "./pages/ReinventingCycles";
