@@ -2,7 +2,7 @@ import Button from "./Button/Button";
 
 export default function HomeContent(){
     return(
-        <div className="my-14 relative " >
+        <div className="mt-14 relative " >
           
             <div className="h-screen" style={{  
                 backgroundImage: "url(/assets/front-view-cute-dogs-in-costumes.jpg)",
