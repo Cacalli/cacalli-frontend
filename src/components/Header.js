@@ -12,16 +12,16 @@ export default function Header(){
           
                 <nav className="flex mx-8">
 
-                    <Link to="Quienes somos">
+                    <Link to="quienes-somos">
                     <Button variant="secondary" inverse>Quienes somos</Button>
                     </Link>
-                    <Link to="Reinventando ciclos">
+                    <Link to="reinventando-ciclos">
                     <Button variant="secondary" inverse>Reinventando ciclos</Button>
                     </Link>
-                    <Link to="Precios">
+                    <Link to="precios">
                     <Button variant="secondary" inverse>Precios</Button>
                     </Link>
-                    <Link to="Contacto">
+                    <Link to="contacto">
                     <Button variant="secondary" inverse>Contacto</Button>
                     </Link>
                     <Button variant="primary">¡Únete!</Button>
