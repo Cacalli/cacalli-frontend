@@ -15,6 +15,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import NotFound from "./pages/NotFound";
 
 
 
@@ -27,7 +28,7 @@ function App() {
         <Route path='reinventando-ciclos' element={<ReinventingCycles/>} />
         <Route path='precios' element={<Prices/>} />
         <Route path='contact' element={<Contact/>} />
-        {/* <Route path='*' element={<NotFound/>}/> */}
+        <Route path='*' element={<NotFound/>}/>
       </Route>
     )
   );
