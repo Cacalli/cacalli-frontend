@@ -25,7 +25,9 @@ module.exports = {
       //icons
       "icon-hover": "#AB6B0B",
       "icon-destructive": "#EB5757",
-
+    },
+    fontFamily:{
+      "lovelo": ["lovelo"]
     }
   },
   plugins: [],
