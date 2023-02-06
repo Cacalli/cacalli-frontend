@@ -20,7 +20,9 @@ export default function HomeContent(){
 
                     <div className="flex flex-col ">
                     <p className=" text-2xl mb-8 text-neutral-gray-two flex">En cacalli reinventamos los ciclos a través de la composta...</p>
+                    <div>
                     <Button className="" variant="primary">¡Quiero unirme!</Button>
+                    </div>
                     </div>
                    
                 </div>

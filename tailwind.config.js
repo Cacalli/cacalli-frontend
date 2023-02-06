@@ -52,6 +52,8 @@ module.exports = {
       //icons
       "icon-hover": "#AB6B0B",
       "icon-destructive": "#EB5757",
+      //toggle
+      "toggle-plan": "#A8D9E1",
 
     },
   },
