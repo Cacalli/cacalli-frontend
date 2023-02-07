@@ -13,10 +13,7 @@ export default function Header(){
                 <nav className="flex mx-8">
 
                     <Link to="quienes-somos">
-                    <Button variant="secondary" inverse>Quienes somos</Button>
-                    </Link>
-                    <Link to="reinventando-ciclos">
-                    <Button variant="secondary" inverse>Reinventando ciclos</Button>
+                    <Button variant="secondary" inverse>Quiénes somos</Button>
                     </Link>
                     <Link to="precios">
                     <Button variant="secondary" inverse>Precios</Button>
@@ -24,7 +21,10 @@ export default function Header(){
                     <Link to="contacto">
                     <Button variant="secondary" inverse>Contacto</Button>
                     </Link>
+                    <NavLink to="unete">
                     <Button variant="primary">¡Únete!</Button>
+                    </NavLink>
+                   
                     <Button variant="secondary">Ingresa</Button>
                 </nav>
            

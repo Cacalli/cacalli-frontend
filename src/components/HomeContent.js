@@ -24,7 +24,6 @@ export default function HomeContent(){
                     <Button className="" variant="primary">¡Quiero unirme!</Button>
                     </div>
                     </div>
-                   
                 </div>
         </div>
     )
