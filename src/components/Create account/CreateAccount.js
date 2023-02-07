@@ -3,7 +3,7 @@ import Button from "../Button/Button";
 export default function CreateAccount(){
     return(
         <div className="flex justify-center gap-28">
-            <img className="h-atuo" src="/assets/landscape-login.png"/>
+            <img className="h-auto" src="/assets/landscape-login.png"/>
 
             <div className="ml-8">
             <p className="font-bold text-2xl mb-6">Crea tu cuenta</p>

@@ -24,8 +24,9 @@ export default function Header(){
                     <NavLink to="unete">
                     <Button variant="primary">¡Únete!</Button>
                     </NavLink>
-                   
+                    <NavLink to="ingresa">
                     <Button variant="secondary">Ingresa</Button>
+                    </NavLink>
                 </nav>
            
         </header>
