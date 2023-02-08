@@ -9,7 +9,6 @@ export default function Header(){
             <img className="w-30 h-14 py-2" src="/assets/cacalliName.png"/>
             </Link>
             </div>
-          
                 <nav className="flex mx-8">
 
                     <Link to="quienes-somos">
