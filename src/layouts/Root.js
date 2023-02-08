@@ -13,10 +13,7 @@ export default function Root(){
             <Header/>
                 <main>
                 <Outlet/>
-                <Coverage/>
-                <Prices/>
-                <About/>
-                <SubscriptionPlan/>
+                
                 </main>
                
             <Footer/>
