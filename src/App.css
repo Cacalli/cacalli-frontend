@@ -9,7 +9,7 @@
 */
 *, *::before, *::after {
   box-sizing: border-box;
-  text-align: center;
+ 
 }
 /*
   2. Remove default margin
@@ -77,3 +77,4 @@ h6 {
   isolation: isolate;
 
 }
+
