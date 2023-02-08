@@ -6,6 +6,7 @@ const Button=({children, variant, inverse=false})=>{
         "bg-green-one text-neutral-white": variant=="primary" && inverse,
         "text-orange-one": variant=="secondary",
         "text-green-one": variant=="secondary" && inverse,
+        "text-neutral-white border border-neutral-white py-1.5 px-4": variant=="neutral",
         
     })
     return(
