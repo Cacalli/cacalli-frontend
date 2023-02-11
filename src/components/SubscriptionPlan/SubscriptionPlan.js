@@ -4,6 +4,55 @@ import Card from "../Card/Card";
 import Counter from "../Counter/Counter";
 import Toggle from "../Toggle/Toggle";
 
+const SubscriptionPlanCard = ({ image, price, size, descriptionList }) => {
+  return (
+    <Card className="px-12 py-6">
+      <div className="grid justify-items-center my-6">
+        <img className="h-24" src={image} />
+      </div>
+
+      <div className="relative mb-4">
+        <p className="text-neutral-black font-bold text-6xl">${price}</p>
+        <p className="text-lg text-neutral-gray-three absolute bottom-0 right-20">
+          pesos mensuales
+        </p>
+      </div>
+      <p className="text-orange-one text-5xl font-bold mb-10">{size}</p>
+
+      <div className="my-6 text-lg">
+        <ul>
+            {descriptionList.map(descriptionItem=>(
+                  <div className="flex mb-4">
+                  <img className="w-10 h-8" src="/assets/caquita.png" />
+                  <div>
+                    {descriptionItem}
+                    {/* <p className=" text-neutral-gray-two">
+                      lorem
+                    </p> */}
+                  </div>
+                </div>
+            ))}
+        
+        </ul>
+      </div>
+
+      <div className="mb-8 flex justify-items-stretch space-x-36">
+        <p className="text-neutral-gray-two self-center text-lg">
+          Número de paquetes
+        </p>
+        <Counter />
+      </div>
+
+      <div>
+        <Button variant="primary" isFull>
+          Añadir al carrito
+        </Button>
+        <p className="text-center text-orange-one mt-4">Más información</p>
+      </div>
+    </Card>
+  );
+};
+
 export default function SubscriptionPlan(){
     return(
         <div>
@@ -19,54 +68,7 @@ export default function SubscriptionPlan(){
             </div>
 
             <div className="flex grid-cols-3 gap-12 place-content-center mb-6">
-            <Card className="px-12 py-6">
-                <div className="grid justify-items-center my-6">
-                    <img className="h-24" src="/assets/dog-poop.png"/>
-                </div>
-
-                <div className="relative mb-4">
-                <p className="text-neutral-black font-bold text-6xl">$100</p>
-                <p className="text-lg text-neutral-gray-three absolute bottom-0 right-20">pesos mensuales</p>
-                </div>
-                <p className="text-orange-one text-5xl font-bold mb-10">CHICO</p>
-
-              <div  className="my-6 text-lg">
-              <ul>
-                <div className="flex">
-                    <img className="w-10 h-8" src="/assets/caquita.png"/>
-                    <li > Capacidad total de 9 litros</li>
-                </div>
-                <p className="mb-4 pl-10 text-neutral-gray-two">(6 de heces y 3 de mezcla)</p>
-                    
-                    <div className="flex">
-                    <img className="w-10 h-8" src="/assets/caquita.png"/>
-                    <li className="mb-4">Rinde para un perro pequeño (Chihuahua)</li>
-                    </div>
-                   
-                   <div className="flex">
-                   <img className="w-10 h-8" src="/assets/caquita.png"/>
-                   <li className="mb-4">Dos contenedores</li>
-                   </div>
-
-                   <div className="flex mb-10">
-                   <img className="w-10 h-8" src="/assets/caquita.png"/>
-                   <li className="mb-4">KKPAK extra $85 mxn</li>
-                   </div>
-                </ul>
-              </div>
-                
-              <div className="mb-8 flex justify-items-stretch space-x-36">
-                    <p className="text-neutral-gray-two self-center text-lg">Número de paquetes</p>
-                    <Counter/>
-                </div>
-
-                <div>
-                <Button variant="primary" isFull>Añadir al carrito</Button>
-                <p className="text-center text-orange-one mt-4">Más información</p>
-                </div>
-                
-            </Card>
-
+                <SubscriptionPlanCard image="/assets/dog-poop.png" price={100} size="CHICO" descriptionList={["Capacidad total de 9 litros", "Rinde para un perro pequeño (Chihuahua)", "Dos contenedores", "KKPAK extra $85 mxn"]}/>
             <Card className="px-12 py-6">
             <div className="grid justify-items-center my-6">
                     <img className="h-24" src="/assets/standing-dog-poop.png"/>
