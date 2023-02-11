@@ -15,17 +15,7 @@ export default function Footer(){
                 </div>
 
                 <div className="flex flex-col mx-28 text-neutral-gray-two">
-                    <p className="font-bold ">Reinventando ciclos</p>
-                    <Link className="my-6">Colabora con nosotros</Link>
-                    <Link className="my-6">Trabaja en Cacalli</Link>
-                    <Link className="my-6">Composta</Link>
-                </div>
-
-                <div className="flex flex-col mx-28 text-neutral-gray-two">
                     <p className="font-bold ">Contacto</p>
-                    <Link className="my-6">Ayuda con mi plan</Link>
-                    <Link className="my-6">Preguntas frecuentes</Link>
-                    <Link className="my-6">Envíanos un mail</Link>
                     <Link className="my-6">Términos y condiciones</Link>
                     <Link className="my-6">Política de privacidad</Link>
                 </div>
