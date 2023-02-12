@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-const Button=({children, variant, inverse=false, isFull=false})=>{
+const Button=({children, variant, inverse=false, isFull=false, ...restProps})=>{
     const classes= classNames("py-3 px-5 rounded",{
         "w-full": isFull,
         "bg-orange-one text-neutral-white": variant=="primary" && !inverse,
@@ -13,7 +13,7 @@ const Button=({children, variant, inverse=false, isFull=false})=>{
     })
     return(
         
-        <button className={classes}>{children}</button>
+        <button {...restProps} className={classes}>{children}</button>
 
     )
 }

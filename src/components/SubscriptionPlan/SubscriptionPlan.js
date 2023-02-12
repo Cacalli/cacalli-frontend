@@ -1,57 +1,5 @@
-import { FaPoop } from "react-icons/fa";
-import Button from "../Button/Button";
-import Card from "../Card/Card";
-import Counter from "../Counter/Counter";
 import Toggle from "../Toggle/Toggle";
-
-const SubscriptionPlanCard = ({ image, price, size, descriptionList }) => {
-  return (
-    <Card className="px-12 py-6">
-      <div className="grid justify-items-center my-6">
-        <img className="h-24" src={image} />
-      </div>
-
-      <div className="relative mb-4">
-        <p className="text-neutral-black font-bold text-6xl">${price}</p>
-        <p className="text-lg text-neutral-gray-three absolute bottom-0 right-20">
-          pesos mensuales
-        </p>
-      </div>
-      <p className="text-orange-one text-5xl font-bold mb-10">{size}</p>
-
-      <div className="my-6 text-lg">
-        <ul>
-            {descriptionList.map(descriptionItem=>(
-                  <div className="flex mb-4">
-                  <img className="w-10 h-8" src="/assets/caquita.png" />
-                  <div>
-                    {descriptionItem}
-                    {/* <p className=" text-neutral-gray-two">
-                      lorem
-                    </p> */}
-                  </div>
-                </div>
-            ))}
-        
-        </ul>
-      </div>
-
-      <div className="mb-8 flex justify-items-stretch space-x-36">
-        <p className="text-neutral-gray-two self-center text-lg">
-          Número de paquetes
-        </p>
-        <Counter />
-      </div>
-
-      <div>
-        <Button variant="primary" isFull>
-          Añadir al carrito
-        </Button>
-        <p className="text-center text-orange-one mt-4">Más información</p>
-      </div>
-    </Card>
-  );
-};
+import SubscriptionPlanCard from "./SubscriptionPlanCard";
 
 export default function SubscriptionPlan(){
     return(
@@ -67,99 +15,10 @@ export default function SubscriptionPlan(){
                 <Toggle variant="toggle-plan">Semanal</Toggle>
             </div>
 
-            <div className="flex grid-cols-3 gap-12 place-content-center mb-6">
-                <SubscriptionPlanCard image="/assets/dog-poop.png" price={100} size="CHICO" descriptionList={["Capacidad total de 9 litros", "Rinde para un perro pequeño (Chihuahua)", "Dos contenedores", "KKPAK extra $85 mxn"]}/>
-            <Card className="px-12 py-6">
-            <div className="grid justify-items-center my-6">
-                    <img className="h-24" src="/assets/standing-dog-poop.png"/>
-                </div>
-                <div className="relative mb-4">
-                <p className="text-neutral-black font-bold text-6xl">$200</p>
-                <p className="text-lg text-neutral-gray-three absolute bottom-0 right-24">pesos mensuales</p>
-                </div>
-                <p className="text-orange-one text-5xl font-bold mb-10">MEDIANO</p>
-
-              <div  className="my-6 text-lg">
-              <ul>
-                <div className="flex">
-                    <img className="w-10 h-8" src="/assets/caquita.png"/>
-                    <li > Capacidad total de 16 litros</li>
-                </div>
-                <p className="mb-4 pl-10 text-neutral-gray-two">(10 de heces y 6 de mezcla)</p>
-                    
-                    <div className="flex">
-                    <img className="w-10 h-8" src="/assets/caquita.png"/>
-                    <li className="mb-4">Rinde para un perro mediano (Beagle, pitbull)</li>
-                    </div>
-                   
-                   <div className="flex">
-                   <img className="w-10 h-8" src="/assets/caquita.png"/>
-                   <li className="mb-4">Tres contenedores</li>
-                   </div>
-
-                   <div className="flex mb-10">
-                   <img className="w-10 h-8" src="/assets/caquita.png"/>
-                   <li className="mb-4">KKPAK extra $85 mxn</li>
-                   </div>
-                </ul>
-              </div>
-                
-              <div className="mb-8 flex justify-items-stretch space-x-36">
-                    <p className="text-neutral-gray-two self-center text-lg">Número de paquetes</p>
-                    <Counter/>
-                </div>
-
-                <div>
-                <Button variant="primary" isFull>Añadir al carrito</Button>
-                <p className="text-center text-orange-one mt-4">Más información</p>
-                </div>
-            </Card>
-
-            <Card className="px-12 py-6">
-            <div className="grid justify-items-center my-6">
-                    <img className="h-24" src="/assets/sit-dog-poop.png"/>
-                </div>
-                <div className="relative mb-4">
-                <p className="text-neutral-black font-bold text-6xl">$300</p>
-                <p className="text-lg text-neutral-gray-three absolute bottom-0 right-28">pesos mensuales</p>
-                </div>
-                <p className="text-orange-one text-5xl font-bold mb-10">GRANDE</p>
-
-              <div  className="my-6 text-lg">
-              <ul>
-                <div className="flex">
-                    <img className="w-10 h-8" src="/assets/caquita.png"/>
-                    <li > Capacidad total de 30 litros</li>
-                </div>
-                <p className="mb-4 pl-10 text-neutral-gray-two">(20 de heces y 10 de mezcla)</p>
-                    
-                    <div className="flex">
-                    <img className="w-10 h-8" src="/assets/caquita.png"/>
-                    <li className="mb-4">Rinde para un perro grande (Labrador, pastor)</li>
-                    </div>
-                   
-                   <div className="flex">
-                   <img className="w-10 h-8" src="/assets/caquita.png"/>
-                   <li className="mb-4">Tres contenedores</li>
-                   </div>
-
-                   <div className="flex mb-10">
-                   <img className="w-10 h-8" src="/assets/caquita.png"/>
-                   <li className="mb-4">KKPAK extra $85 mxn</li>
-                   </div>
-                </ul>
-              </div>
-                
-                <div className="mb-8 flex justify-items-stretch space-x-36">
-                    <p className="text-neutral-gray-two self-center text-lg">Número de paquetes</p>
-                    <Counter/>
-                </div>
-
-                <div>
-                <Button variant="primary" isFull>Añadir al carrito</Button>
-                <p className="text-center text-orange-one mt-4">Más información</p>
-                </div>
-            </Card>
+            <div className="grid grid-cols-3 w-10/12 mx-auto gap-12 mb-6">
+                <SubscriptionPlanCard onAddToCartClick={() => alert("Added package S")} image="/assets/dog-poop.png" price={100} size="CHICO" packageDescription={"Recomendado para un perro talla chica, por ejemplo un Chihuahua"} descriptionList={["6 litros de...", "3 litros de mezcla secante", "La inscripción tiene un costo de $200 MXN", "KKPAK extra $85 mxn"]}/>
+                <SubscriptionPlanCard onAddToCartClick={() => alert("Added package M")} image="/assets/standing-dog-poop.png" price={200} size="MEDIANO" packageDescription={"Recomendado para un perro talla mediana, por ejemplo un Poodle"} descriptionList={["10 litros de...", "6 litros de mezcla secante", "La inscripción tiene un costo de $100 MXN", "KKPAK extra $85 mxn"]}/>
+                <SubscriptionPlanCard onAddToCartClick={() => alert("Added package L")} image="/assets/sit-dog-poop.png" price={300} size="GRANDE" packageDescription={"Recomendado para un perro talla grande, por ejemplo un Doberman"}  descriptionList={["20 litros de...", "10 litros de mezcla secante", "La inscripción tiene un costo de $100 MXN", "KKPAK extra $85 mxn"]}/>
             </div>
         
         <div className="text-xl flex justify-center">
