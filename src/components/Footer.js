@@ -25,7 +25,7 @@ export default function Footer(){
 
         <div className="text-neutral-gray-two ">
           <p className="font-bold">Redes sociales</p>
-          <div className="flex mt-6 px-44 text-green-three">
+          <div className="flex mt-6 px-42 text-green-three">
             <FaInstagram size="1.5em" />
             <FaWhatsapp className="mx-3" size="1.5em" />
           </div>
