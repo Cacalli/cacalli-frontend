@@ -1,4 +1,4 @@
-import SubscriptionPlan from "../components/Subscription plan/SubscriptionPlan";
+import SubscriptionPlan from "../components/SubscriptionPlan/SubscriptionPlan";
 
 export default function Prices(){
     return(
