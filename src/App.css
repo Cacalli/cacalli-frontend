@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 
 /*
@@ -9,7 +9,7 @@
 */
 *, *::before, *::after {
   box-sizing: border-box;
-  text-align: center;
+ 
 }
 /*
   2. Remove default margin

@@ -1,10 +1,16 @@
-import Button from "../components/Button";
+import Button from "../components/Button/Button";
+import Coverage from "../components/Coverage/Coverage";
+import HomeContent from "../components/HomeContent";
+import SubscriptionPlan from "../components/Subscription plan/SubscriptionPlan";
+import About from "./About";
 
 export default function Home(){
     return(
         <div>
-            <span>Cacalli home</span>
-            
+           
+            <HomeContent/>
+            <Coverage/>
+            <About/>
         </div>
     )
 }

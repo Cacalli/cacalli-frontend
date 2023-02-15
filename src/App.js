@@ -12,6 +12,10 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import NotFound from "./pages/NotFound";
+import JoinUs from "./pages/JoinUs";
+import Login from "./pages/Login";
+
 
 
 
@@ -20,10 +24,12 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<Root />}>
         <Route index element={<Home/>}/>
-        <Route path='Quienes-somos' element= {<About/>} />
-        <Route path='precios' element={<Prices/>} />
-        <Route path='contact' element={<Contact/>} />
-        {/* <Route path='*' element={<NotFound/>}/> */}
+        <Route path='quienes-somos' element={<About/>} />
+        <Route path='plan-suscripcion' element={<Prices/>} />
+        <Route path='contacto' element={<Contact/>} />
+        <Route path='unete' element={<JoinUs/>}/>
+        <Route path="ingresa" element={<Login/>}/>
+        <Route path='*' element={<NotFound/>}/>
       </Route>
     )
   );

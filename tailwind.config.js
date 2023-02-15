@@ -29,7 +29,6 @@ module.exports = {
     fontFamily:{
       "lovelo": ["lovelo"]
     }
-
   },
   plugins: [],
 };
