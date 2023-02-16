@@ -17,6 +17,9 @@ export default function Header(){
                     <Link to="plan-suscripcion">
                     <Button variant="secondary" inverse>Precios</Button>
                     </Link>
+                    <Link to="">
+                    <Button variant="secondary" inverse>Calcula tu plan</Button>
+                    </Link>
                     <Link to="contacto">
                     <Button variant="secondary" inverse>Contacto</Button>
                     </Link>
