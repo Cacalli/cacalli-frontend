@@ -5,7 +5,7 @@ export default function AboutSection() {
     <div>
       <img className="w-full mt-3" src="/assets/landscape.png"/>
       <div className=" w-10/12 mx-auto mt-16">
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-2 gap-14">
         <div>
           <p className="text-green-one font-bold text-6xl my-8 font-lovelo">
             ¿QUIÉNES SOMOS?
