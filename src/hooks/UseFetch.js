@@ -2,13 +2,13 @@ import { useState, useEffect } from "react"
 
 export default function useFetch(url){
 
-    const [load, setLoad] = useState(null)
+    const [content, setContent] = useState(null)
 
         useEffect( () => {
             fetch(url)
             .then(data=>data.json())
-            .then(data=>setLoad(data))
+            .then(data=>setContent(data))
         },[])
     
-    return{load}
+    return{content}
 }
