@@ -1,9 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Button from "./components/Button/Button";
 
 import Prices from "./pages/Prices";
-import ReinventingCycles from "./pages/ReinventingCycles";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
@@ -15,6 +12,10 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import NotFound from "./pages/NotFound";
+import JoinUs from "./pages/JoinUs";
+import Login from "./pages/Login";
+
 
 
 
@@ -23,11 +24,12 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<Root />}>
         <Route index element={<Home/>}/>
-        <Route path='Quienes-somos' element= {<About/>} />
-        <Route path='reinventando-ciclos' element={<ReinventingCycles/>} />
-        <Route path='precios' element={<Prices/>} />
-        <Route path='contact' element={<Contact/>} />
-        {/* <Route path='*' element={<NotFound/>}/> */}
+        <Route path='quienes-somos' element={<About/>} />
+        <Route path='plan-suscripcion' element={<Prices/>} />
+        <Route path='contacto' element={<Contact/>} />
+        <Route path='unete' element={<JoinUs/>}/>
+        <Route path="ingresa" element={<Login/>}/>
+        <Route path='*' element={<NotFound/>}/>
       </Route>
     )
   );
