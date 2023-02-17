@@ -1,7 +1,10 @@
+import useFetch from "../../hooks/UseFetch";
 import Toggle from "../Toggle/Toggle";
 import SubscriptionPlanCard from "./SubscriptionPlanCard";
 
 export default function SubscriptionPlan(){
+    const {load} =useFetch("https://rickandmortyapi.com/api/character/?page=19")
+    console.log(load)
     return(
         <div>
             <div className="flex justify-center mb-4">
