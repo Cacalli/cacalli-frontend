@@ -9,7 +9,6 @@ export default function Header(){
             <img className="w-30 h-14 py-2" src="/assets/cacalliName.png"/>
             </Link>
             </div>
-          
                 <nav className="flex mx-8">
 
                     <Link to="quienes-somos">
@@ -18,14 +17,18 @@ export default function Header(){
                     <Link to="plan-suscripcion">
                     <Button variant="secondary" inverse>Precios</Button>
                     </Link>
+                    <Link to="calcula-plan">
+                    <Button variant="secondary" inverse>Calcula tu plan</Button>
+                    </Link>
                     <Link to="contacto">
                     <Button variant="secondary" inverse>Contacto</Button>
                     </Link>
                     <NavLink to="unete">
                     <Button variant="primary">¡Únete!</Button>
                     </NavLink>
-                   
+                    <NavLink to="ingresa">
                     <Button variant="secondary">Ingresa</Button>
+                    </NavLink>
                 </nav>
            
         </header>
