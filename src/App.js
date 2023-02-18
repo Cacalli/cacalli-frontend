@@ -15,6 +15,7 @@ import {
 import NotFound from "./pages/NotFound";
 import JoinUs from "./pages/JoinUs";
 import Login from "./pages/Login";
+import Calculator from "./components/Calculator/Calculator";
 
 
 
@@ -29,6 +30,7 @@ function App() {
         <Route path='contacto' element={<Contact/>} />
         <Route path='unete' element={<JoinUs/>}/>
         <Route path="ingresa" element={<Login/>}/>
+        <Route path="calcula-plan" element={<Calculator/>}/>
         <Route path='*' element={<NotFound/>}/>
       </Route>
     )
