@@ -16,9 +16,9 @@ export default function SubscriptionPlanCard({
         <img className="h-24" src={image} />
       </div>
 
-      <div className="relative mb-4">
+      <div className="flex items-center align-baseline mb-4">
         <p className="text-neutral-black font-bold text-6xl">${price}</p>
-        <p className="text-lg text-neutral-gray-three absolute bottom-0 right-36">
+        <p className="text-lg text-neutral-gray-three pl-4">
           pesos mensuales
         </p>
       </div>
