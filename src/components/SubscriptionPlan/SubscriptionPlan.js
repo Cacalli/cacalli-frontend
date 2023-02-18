@@ -16,15 +16,21 @@ export default function SubscriptionPlan(){
             </div>
 
             <div className="grid grid-cols-3 w-10/12 mx-auto gap-12 mb-6">
-                <SubscriptionPlanCard onAddToCartClick={() => alert("Added package S")} image="/assets/dog-poop.png" price={100} size="CHICO" packageDescription={"Recomendado para un perro talla chica, por ejemplo un Chihuahua"} descriptionList={["6 litros de...", "3 litros de mezcla secante", "La inscripción tiene un costo de $200 MXN", "KKPAK extra $85 mxn"]}/>
-                <SubscriptionPlanCard onAddToCartClick={() => alert("Added package M")} image="/assets/standing-dog-poop.png" price={200} size="MEDIANO" packageDescription={"Recomendado para un perro talla mediana, por ejemplo un Poodle"} descriptionList={["10 litros de...", "6 litros de mezcla secante", "La inscripción tiene un costo de $100 MXN", "KKPAK extra $85 mxn"]}/>
-                <SubscriptionPlanCard onAddToCartClick={() => alert("Added package L")} image="/assets/sit-dog-poop.png" price={300} size="GRANDE" packageDescription={"Recomendado para un perro talla grande, por ejemplo un Doberman"}  descriptionList={["20 litros de...", "10 litros de mezcla secante", "La inscripción tiene un costo de $100 MXN", "KKPAK extra $85 mxn"]}/>
+                <SubscriptionPlanCard onAddToCartClick={() => alert("Added package S")} image="/assets/dog-poop.png"
+                 price={100} size="CHICO" packageDescription={"Recomendado para un perro talla chica, por ejemplo un Chihuahua"} 
+                 descriptionList={["6 litros de...", "3 litros de mezcla secante", "La inscripción tiene un costo de $200 MXN", "KKPAK extra $85 mxn"]}/>
+                <SubscriptionPlanCard onAddToCartClick={() => alert("Added package M")} image="/assets/standing-dog-poop.png"
+                 price={200} size="MEDIANO" packageDescription={"Recomendado para un perro talla mediana, por ejemplo un Poodle"} 
+                 descriptionList={["10 litros de...", "6 litros de mezcla secante", "La inscripción tiene un costo de $100 MXN", "KKPAK extra $85 mxn"]}/>
+                <SubscriptionPlanCard onAddToCartClick={() => alert("Added package L")} image="/assets/sit-dog-poop.png"
+                 price={300} size="GRANDE" packageDescription={"Recomendado para un perro talla grande, por ejemplo un Doberman"}  
+                 descriptionList={["20 litros de...", "10 litros de mezcla secante", "La inscripción tiene un costo de $100 MXN", "KKPAK extra $85 mxn"]}/>
             </div>
         
         <div className="text-xl flex justify-center">
             <p className="text-neutral-gray-two">¿Aún no sabes cuál seleccionar?</p>
             <p className="text-green-one pl-2">Calcula tu KKPAK ideal</p>
-        </div>
+        </div>v
        
         </div>
     )
