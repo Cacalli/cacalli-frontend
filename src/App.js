@@ -1,6 +1,4 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Button from "./components/Button/Button";
 
 import Prices from "./pages/Prices";
 import About from "./pages/About";
