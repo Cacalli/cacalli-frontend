@@ -40,7 +40,7 @@ console.log(tempArray)
             </div>
 
             <div className="grid card-wrapper mx-8 gap-12 mb-6">
-                <SubscriptionPlanCard onAddToCartClick={() => alert("Added package S")} image="/assets/dog-poop.png"
+                <SubscriptionPlanCard onAddToCartClick={onAddToCartClick} image="/assets/dog-poop.png"
                  price={100} size="CHICO" packageDescription={"Recomendado para un perro talla chica, por ejemplo un Chihuahua"} 
                  descriptionList={["6 litros de...", "3 litros de mezcla secante", "La inscripción tiene un costo de $200 MXN", "KKPAK extra $85 mxn"]}/>
                 <SubscriptionPlanCard onAddToCartClick={onAddToCartClick} inscriptionPrice="200" image="/assets/standing-dog-poop.png"
