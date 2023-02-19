@@ -10,12 +10,19 @@ export default function SubscriptionPlan(){
     const [cartItems,setCartItems] =useOutletContext([])
     const onAddToCartClick=(size, price, inscriptionPrice)=>{
        const tempArray=[...cartItems]
-       tempArray.push({
-        size:size,
-        price:price,
-        inscriptionPrice: inscriptionPrice,
-       })
-       console.log(tempArray)
+       if(!tempArray.find(item=>item.price===price)){
+        tempArray.push({
+            quantity:1,
+            size:size,
+            price:price,
+            inscriptionPrice: inscriptionPrice,
+           })
+       }else{
+        const index= tempArray.findIndex(item => item.price === price )
+            tempArray[index] = {...tempArray[index], quantity: tempArray[index].quantity + 1}
+       }
+       
+console.log(tempArray)
        setCartItems(tempArray)
     }
 
