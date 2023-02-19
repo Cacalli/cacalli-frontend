@@ -2,10 +2,10 @@ import Button from "../Button/Button";
 
 export default function Calculator() {
   return (
-    <div className="mt-3 mb-44">
-      <p className="text-green-one font-bold text-7xl text-center mb-20">
+    <div className="mt-4 mb-44">
+      <h2 className="text-green-one font-semibold text-5xl text-center mb-20">
         CALCULA TU PLAN IDEAL
-      </p>
+      </h2>
 
       <div className="pl-64 text-neutral-gray-two mb-9">
         <p>
