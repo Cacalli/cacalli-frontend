@@ -24,11 +24,11 @@ module.exports = {
       "neutral-white": "#FFFEFC",
       //icons
       "icon-hover": "#AB6B0B",
-      "icon-destructive": "#EB5757",
+      "red-destructive": "#EB5757",
     },
     fontFamily:{
       "lovelo": ["lovelo"]
-    }
+    },
   },
   plugins: [],
 };
