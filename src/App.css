@@ -83,3 +83,6 @@ h6 {
   width: min(1100px, 96%);
 margin: 0 auto;
 }
+.card-wrapper{
+  grid-template-columns: repeat(auto-fit,minmax(360px, 1fr));
+}
