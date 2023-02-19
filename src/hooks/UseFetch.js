@@ -8,7 +8,7 @@ export default function useFetch(url){
             fetch(url)
             .then(data=>data.json())
             .then(data=>setContent(data))
-        },[])
+        },[url])
     
     return{content}
 }
