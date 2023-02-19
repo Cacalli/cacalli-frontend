@@ -16,6 +16,7 @@ import NotFound from "./pages/NotFound";
 import JoinUs from "./pages/JoinUs";
 import Login from "./pages/Login";
 import Calculator from "./components/Calculator/Calculator";
+import Cart from "./pages/Cart";
 
 
 
@@ -31,6 +32,7 @@ function App() {
         <Route path='unete' element={<JoinUs/>}/>
         <Route path="ingresa" element={<Login/>}/>
         <Route path="calcula-plan" element={<Calculator/>}/>
+        <Route path="carrito" element={<Cart/>}/>
         <Route path='*' element={<NotFound/>}/>
       </Route>
     )

@@ -1,10 +1,31 @@
+import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import useFetch from "../../hooks/UseFetch";
 import Toggle from "../Toggle/Toggle";
 import SubscriptionPlanCard from "./SubscriptionPlanCard";
 
 export default function SubscriptionPlan(){
-    const {content} =useFetch("https://rickandmortyapi.com/api/character/?page=19")
-    console.log(content)
+    // const {content} =useFetch("https://rickandmortyapi.com/api/character/?page=19")
+    // console.log(content)
+    const [cartItems,setCartItems] =useOutletContext([])
+    const onAddToCartClick=(size, price, inscriptionPrice)=>{
+       const tempArray=[...cartItems]
+       if(!tempArray.find(item=>item.price===price)){
+        tempArray.push({
+            quantity:1,
+            size:size,
+            price:price,
+            inscriptionPrice: inscriptionPrice,
+           })
+       }else{
+        const index= tempArray.findIndex(item => item.price === price )
+            tempArray[index] = {...tempArray[index], quantity: tempArray[index].quantity + 1}
+       }
+       
+console.log(tempArray)
+       setCartItems(tempArray)
+    }
+
     return(
         <div>
             <div className="flex justify-center mb-4">
@@ -19,13 +40,13 @@ export default function SubscriptionPlan(){
             </div>
 
             <div className="grid card-wrapper mx-8 gap-12 mb-6">
-                <SubscriptionPlanCard onAddToCartClick={() => alert("Added package S")} image="/assets/dog-poop.png"
+                <SubscriptionPlanCard onAddToCartClick={onAddToCartClick} image="/assets/dog-poop.png"
                  price={100} size="CHICO" packageDescription={"Recomendado para un perro talla chica, por ejemplo un Chihuahua"} 
                  descriptionList={["6 litros de...", "3 litros de mezcla secante", "La inscripción tiene un costo de $200 MXN", "KKPAK extra $85 mxn"]}/>
-                <SubscriptionPlanCard onAddToCartClick={() => alert("Added package M")} image="/assets/standing-dog-poop.png"
+                <SubscriptionPlanCard onAddToCartClick={onAddToCartClick} inscriptionPrice="200" image="/assets/standing-dog-poop.png"
                  price={200} size="MEDIANO" packageDescription={"Recomendado para un perro talla mediana, por ejemplo un Poodle"} 
                  descriptionList={["10 litros de...", "6 litros de mezcla secante", "La inscripción tiene un costo de $100 MXN", "KKPAK extra $85 mxn"]}/>
-                <SubscriptionPlanCard onAddToCartClick={() => alert("Added package L")} image="/assets/sit-dog-poop.png"
+                <SubscriptionPlanCard onAddToCartClick={onAddToCartClick} inscriptionPrice="300" image="/assets/sit-dog-poop.png"
                  price={300} size="GRANDE" packageDescription={"Recomendado para un perro talla grande, por ejemplo un Doberman"}  
                  descriptionList={["20 litros de...", "10 litros de mezcla secante", "La inscripción tiene un costo de $100 MXN", "KKPAK extra $85 mxn"]}/>
             </div>

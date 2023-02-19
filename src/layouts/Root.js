@@ -1,18 +1,17 @@
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import { Outlet } from "react-router-dom"
-import Coverage from "../components/Coverage/Coverage"
-import About from "../pages/About"
-import Prices from "../pages/Prices"
+import { useState } from "react";
 
 
 
 export default function Root(){
+    const [cartItems, setCartItems]= useState([]);
     return(
         <div>
             <Header/>
                 <main>
-                <Outlet/>
+                <Outlet context={[cartItems, setCartItems]}/>
                 
                 </main>
                

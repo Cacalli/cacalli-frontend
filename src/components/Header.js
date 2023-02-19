@@ -29,6 +29,9 @@ export default function Header(){
                     <NavLink to="ingresa">
                     <Button variant="secondary">Ingresa</Button>
                     </NavLink>
+                    <NavLink to="carrito">
+                    <Button variant="secondary">CARRITO</Button>
+                    </NavLink>
                 </nav>
            
         </header>

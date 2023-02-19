@@ -5,11 +5,13 @@ export default function SubscriptionPlanCard({
   image,
   price,
   size,
+  inscriptionPrice,
   descriptionList,
   packageDescription,
-  onAddToCartClick = () => {},
+  onAddToCartClick,
 }) {
 
+  
   return (
     <Card className="px-12 py-6 h-full">
       <div className="grid justify-items-center my-6">
@@ -38,7 +40,7 @@ export default function SubscriptionPlanCard({
         </ul>
       </div>
 
-      <Button onClick={onAddToCartClick} variant="primary" isFull>
+      <Button onClick={()=>{onAddToCartClick(size,price, inscriptionPrice)}} variant="primary" isFull>
         Añadir al carrito
       </Button>
     </Card>
