@@ -1,11 +1,21 @@
+import { useState } from "react";
+import { redirect } from "react-router-dom";
 import Button from "../Button/Button";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Calculator() {
+  const [pet, setPet]=useState("Perro")
+
+  const [petName, setPetName]=useState("")
+  const [size, setSize]= useState("")
+  const [addAnotherPet, setAddAnotherPet]= useState("")
+  let navigate = useNavigate();
   return (
-    <div className="mt-3 mb-44">
-      <p className="text-green-one font-bold text-7xl text-center mb-20">
+    <div className="mt-4 mb-44">
+      <h2 className="text-green-one font-semibold text-5xl text-center mb-20">
         CALCULA TU PLAN IDEAL
-      </p>
+      </h2>
 
       <div className="pl-64 text-neutral-gray-two mb-9">
         <p>
@@ -22,18 +32,18 @@ export default function Calculator() {
           <p className=" text-icon-hover text-base mb-2.5">Nombre</p>
           <input
             type="text"
-            value=""
+            value={petName}
             className="border border-orange-two px-3 py-2 w-60 rounded"
             placeholder="¿Cómo se llama tu mascota?"
+            onChange={(e)=> setPetName(e.target.value)}
           />
         </div>
-
         <div>
           <p className=" text-icon-hover mb-2.5">Tipo de mascota</p>
-          <Button className="py-1 px-2" variant="primary">
+          <Button onClick={()=>{setPet("Perro")}} className="py-1 px-2 mx-2" variant={pet==="Perro" ? "primary" : ""}>
             Perro
           </Button>
-          <Button>Gato</Button>
+          <Button onClick={()=>{setPet("Gato")}} className="py-1 px-2" variant={pet==="Gato" ? "primary" : ""}>Gato</Button>
         </div>
       </div>
       <p className="text-icon-hover pl-64 mb-10">
@@ -41,32 +51,32 @@ export default function Calculator() {
       </p>
 
       <div className="flex pl-64 mb-16 items-end space-x-5 text-center text-neutral-gray-three">
-        <button className="flex flex-col items-center space-y-2">
-          <img src="/assets/xsmall-dog-icon.png" />
+        <Button onClick={()=>{setSize("Muy chico")}} variant={size==="Muy chico" ? "tertiary" : ""} className="flex flex-col items-center space-y-2 border border-solid border-transparent rounded p-1">
+          <img className="h-20" src="/assets/xsmall-dog-icon.png" />
           <p>Muy chico</p>
-        </button>
+        </Button>
 
-        <button className="flex flex-col items-center space-y-2">
+        <Button onClick={()=>{setSize("Chico")}} variant={size==="Chico" ? "tertiary" : ""} className="flex flex-col items-center space-y-2 border border-solid border-transparent rounded p-1">
           <img className="" src="/assets/small-dog-icon.png" />
           <p>Chico</p>
-        </button>
+        </Button>
 
-        <button className="flex flex-col items-center space-y-2">
+        <Button onClick={()=>{setSize("Mediano")}} variant={size==="Mediano" ? "tertiary" : ""} className="flex flex-col items-center space-y-2 border border-solid rounded p-1">
           <img className="" src="/assets/medium-dog-icon.png" />
           <p>Mediano</p>
-        </button>
-        <button className="flex flex-col items-center space-y-2 drop-shadow-lg">
+        </Button>
+        <Button onClick={()=>{setSize("Grande")}} variant={size==="Grande" ? "tertiary" : ""} className="flex flex-col items-center space-y-2 border border-solid rounded p-1 " >
           <img className="" src="/assets/large-dog-icon.png" />
           <p>Grande</p>
-        </button>
-        <button className="flex flex-col items-center space-y-2">
+        </Button>
+        <Button onClick={()=>{setSize("Muy grande")}} variant={size==="Muy grande" ? "tertiary" : ""} className="flex flex-col items-center space-y-2 border border-solid rounded p-1">
           <img src="/assets/xlarge-dog-icon.png" />
           <p>Muy grande</p>
-        </button>
+        </Button>
       </div>
       <div className="pl-64 space-x-5">
-        <Button variant="tertiary">Agregar otra mascota</Button>
-        <Button variant="primary">Confirmar</Button>
+        <Button onClick={()=>{setAddAnotherPet("Mascota añadida")}} variant={addAnotherPet==="Mascota añadida" ? "tertiary" : "primary"}>Agregar otra mascota</Button>
+        <Button onClick={()=>{return navigate("/plan-suscripcion")}} variant="primary">Confirmar</Button>
       </div>
     </div>
   );
