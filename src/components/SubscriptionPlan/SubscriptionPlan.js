@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { Link, NavLink, useOutletContext } from "react-router-dom";
 import useFetch from "../../hooks/UseFetch";
 import Toggle from "../Toggle/Toggle";
 import SubscriptionPlanCard from "./SubscriptionPlanCard";
@@ -57,7 +57,9 @@ export default function SubscriptionPlan(){
         
         <div className="text-xl flex justify-center">
             <p className="text-neutral-gray-two">¿Aún no sabes cuál seleccionar?</p>
+            <Link to="/calcula-plan">
             <p className="text-green-one pl-2">Calcula tu KKPAK ideal</p>
+                </Link> 
         </div>
        <div className="fixed top-0 right-0">
        {showFlag ? <div className="fixed top-0 right-0">FLAG</div> : null}
