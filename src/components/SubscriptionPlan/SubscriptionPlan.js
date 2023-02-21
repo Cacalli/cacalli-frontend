@@ -8,6 +8,7 @@ export default function SubscriptionPlan(){
     // const {content} =useFetch("https://rickandmortyapi.com/api/character/?page=19")
     // console.log(content)
     const [cartItems,setCartItems] =useOutletContext([])
+    const [showFlag, setShowFlag]= useState(false)
     const onAddToCartClick=(size, price, inscriptionPrice)=>{
        const tempArray=[...cartItems]
        if(!tempArray.find(item=>item.price===price)){
@@ -22,8 +23,11 @@ export default function SubscriptionPlan(){
             tempArray[index] = {...tempArray[index], quantity: tempArray[index].quantity + 1}
        }
        
-console.log(tempArray)
        setCartItems(tempArray)
+       setShowFlag(true); 
+       setTimeout(function() { 
+            setShowFlag(false); 
+        }, 5000);
     }
 
     return(
@@ -54,8 +58,10 @@ console.log(tempArray)
         <div className="text-xl flex justify-center">
             <p className="text-neutral-gray-two">¿Aún no sabes cuál seleccionar?</p>
             <p className="text-green-one pl-2">Calcula tu KKPAK ideal</p>
-        </div>v
-       
+        </div>
+       <div className="fixed top-0 right-0">
+       {showFlag ? <div className="fixed top-0 right-0">FLAG</div> : null}
+       </div>
         </div>
     )
 } 
