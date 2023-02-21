@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 
 /*
@@ -9,7 +9,7 @@
 */
 *, *::before, *::after {
   box-sizing: border-box;
-  text-align: center;
+ 
 }
 /*
   2. Remove default margin
@@ -33,6 +33,7 @@ body {
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  font-family: Inter;
 }
 /*
   6. Improve media defaults
@@ -76,4 +77,12 @@ h6 {
 #__next {
   isolation: isolate;
 
+}
+
+.main-wrapper{
+  width: min(1100px, 96%);
+margin: 0 auto;
+}
+.card-wrapper{
+  grid-template-columns: repeat(auto-fit,minmax(360px, 1fr));
 }
