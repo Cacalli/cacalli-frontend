@@ -8,7 +8,7 @@ export default function Counter(){
     
  
     return(
-        <div className="flex gap-4 font-bold text-3xl">
+        <div className="flex gap-4 font-bold text-xl">
         <button disabled={counter <= 0} onClick={substract} className="text-neutral-gray-two">-</button>
         <p className="text-orange-one">{counter}</p>
         <button onClick={()=>{setCounter(counter + 1)}} className="text-neutral-gray-two">+</button>
