@@ -4,11 +4,32 @@ import Button from "../components/Button/Button";
 
 
 export default function Cart() {
-  const [cartItems, setCartItems] = useOutletContext();
-  const [counter, setCounter]= useState(0)
-  const substract = () => {
-    setCounter(counter - 1)
+  const [cartItems, setCartItems] = useOutletContext([]);
+
+const modifyQuantity=(action, item)=>{
+  
+  const total = cartItems.reduce((acum,current) => { 
+    return current.quantity + acum
+  },0)
+
+  const newCartItems = [...cartItems]
+
+ const index= cartItems.findIndex((pack) => pack.price=== item.price)
+ if (action === "substract") {
+  //substract <0 delete element
+ }else{
+  newCartItems[index].quantity = newCartItems[index].quantity + 1
+ }
+ setCartItems(newCartItems)
+// console.log("indexxxx",index)
+
+// index.quantity +=1 
+//   const newCartItems= {
+//     quantity: index.quantity}
+
+// setCartItems(newCartItems)
 }
+
 
   const getTotal = () => {
     const sumWithInitial = cartItems.reduce(
@@ -49,9 +70,9 @@ export default function Cart() {
                 <div>
                   <p className="pb-6 text-green-one">Cantidad:</p>
                   <p className="text-neutral-gray-two">
-                    <Button disabled={counter <= 0} onClick={substract}>-</Button>
+                    <Button onClick={()=>{modifyQuantity("substract", item)}}>-</Button>
                     {item.quantity} 
-                    <Button onClick={()=>{setCounter({counter} + 1)}}>+</Button>
+                    <Button onClick={()=>{modifyQuantity("add", item)}}>+</Button>
                   </p>
                 </div>
                 <div>
