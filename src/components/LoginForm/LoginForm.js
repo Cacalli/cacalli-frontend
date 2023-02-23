@@ -6,14 +6,14 @@ export default function LoginForm() {
   const [login, setLogin] = useState("");
 
   useEffect(() => {
-    const body = { email: "primera@kkli.com", password: "etss" };
+    const body = { email: 'primera@kkli.com', password: 'etss' };
 
-    fetch("ec2-34-227-93-62.compute-1.amazonaws.com/user/auth", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    fetch('ec2-34-227-93-62.compute-1.amazonaws.com/user/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify(body),
     })
-      .then((result) => result.json())
+      .then((response) => response.json())
       .then((data) => {
         
         console.log(data)
