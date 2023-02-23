@@ -57,6 +57,7 @@ export default function SubscriptionPlan() {
       <div className="grid card-wrapper mx-8 gap-12 mb-6">
         <SubscriptionPlanCard
           onAddToCartClick={onAddToCartClick}
+          inscriptionPrice="100"
           image="/assets/dog-poop.png"
           price={100}
           size="CHICO"
