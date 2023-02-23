@@ -6,16 +6,17 @@ export default function LoginForm() {
   const [login, setLogin] = useState("");
 
   useEffect(() => {
-    const data = { email: "primera@kkli.com", password: "etss" };
+    const body = { email: "primera@kkli.com", password: "etss" };
 
     fetch("ec2-34-227-93-62.compute-1.amazonaws.com/user/auth", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify(body),
     })
       .then((result) => result.json())
       .then((data) => {
-        setLogin(data.payload);
+        
+        console.log(data)
         //   setBackupUsers(data.results)
       })
       .catch((error) => {
@@ -24,9 +25,6 @@ export default function LoginForm() {
       
   }, []);
 
-  const showingData = () => {
-    console.log(login);
-  };
   return (
     <div className="flex justify-center gap-28">
       <img className="h-auto" src="/assets/landscape-login.png" />
@@ -47,7 +45,7 @@ export default function LoginForm() {
             type="password"
           />
         </form>
-        <Button onClick={showingData(login)} variant="primary" isFull>
+        <Button  variant="primary" isFull>
           Inicia sesión
         </Button>
 
