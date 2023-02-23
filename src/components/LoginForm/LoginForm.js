@@ -3,12 +3,13 @@ import { Link, NavLink } from "react-router-dom";
 import Button from "../Button/Button";
 
 export default function LoginForm() {
-  const [login, setLogin] = useState("");
+const [email, setEmail]= useState("");
+const [password, setPassword]= useState("");
+const [login, setLogin] = useState("");
 
-  useEffect(() => {
-    const body = { email: 'primera@kkli.com', password: 'etss' };
-
-    fetch('ec2-34-227-93-62.compute-1.amazonaws.com/user/auth', {
+const handleLoginClick=()=>{
+  const body = {email: email, password: password}
+  fetch('http://ec2-34-227-93-62.compute-1.amazonaws.com/user/auth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify(body),
@@ -16,14 +17,14 @@ export default function LoginForm() {
       .then((response) => response.json())
       .then((data) => {
         
+        // setLogin(data)
         console.log(data)
-        //   setBackupUsers(data.results)
       })
       .catch((error) => {
         console.error(error);
       });
-      
-  }, []);
+}
+// 'primera@kkli.com' 'etss'
 
   return (
     <div className="flex justify-center gap-28">
@@ -35,17 +36,21 @@ export default function LoginForm() {
         </p>
         <form className="grid gap-4 mb-6">
           <input
+          onChange={(e)=>{setEmail(e.target.value)}}
+          value={email}
             className="w-96 mb-6 border border-neutral-gray-four rounded px-2 py-2"
             placeholder="email"
             type="email"
           />
           <input
+          onChange={(e)=>{setPassword(e.target.value)}}
+          value={password}
             className="w-96 mb-6 border border-neutral-gray-four rounded px-2 py-2"
             placeholder="contraseña"
             type="password"
           />
         </form>
-        <Button  variant="primary" isFull>
+        <Button onClick={handleLoginClick} variant="primary" isFull>
           Inicia sesión
         </Button>
 
