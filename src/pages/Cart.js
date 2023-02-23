@@ -1,35 +1,22 @@
-import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import Button from "../components/Button/Button";
-
 
 export default function Cart() {
   const [cartItems, setCartItems] = useOutletContext([]);
 
-const modifyQuantity=(action, item)=>{
-  
-  const total = cartItems.reduce((acum,current) => { 
-    return current.quantity + acum
-  },0)
+  const modifyQuantity = (action, item) => {
+    const newCartItems = [...cartItems];
 
-  const newCartItems = [...cartItems]
-
- const index= cartItems.findIndex((pack) => pack.price=== item.price)
- if (action === "substract") {
-  //substract <0 delete element
- }else{
-  newCartItems[index].quantity = newCartItems[index].quantity + 1
- }
- setCartItems(newCartItems)
-// console.log("indexxxx",index)
-
-// index.quantity +=1 
-//   const newCartItems= {
-//     quantity: index.quantity}
-
-// setCartItems(newCartItems)
-}
-
+    const index = cartItems.findIndex((pack) => pack.price === item.price);
+    if (action === "substract" && newCartItems[index].quantity >= 2) {
+      newCartItems[index].quantity = newCartItems[index].quantity - 1;
+    } else if (action === "substract" && newCartItems[index].quantity < 2) {
+      newCartItems.splice(index, 1);
+    } else {
+      newCartItems[index].quantity = newCartItems[index].quantity + 1;
+    }
+    setCartItems(newCartItems);
+  };
 
   const getTotal = () => {
     const sumWithInitial = cartItems.reduce(
@@ -70,9 +57,21 @@ const modifyQuantity=(action, item)=>{
                 <div>
                   <p className="pb-6 text-green-one">Cantidad:</p>
                   <p className="text-neutral-gray-two">
-                    <Button onClick={()=>{modifyQuantity("substract", item)}}>-</Button>
-                    {item.quantity} 
-                    <Button onClick={()=>{modifyQuantity("add", item)}}>+</Button>
+                    <Button
+                      onClick={() => {
+                        modifyQuantity("substract", item);
+                      }}
+                    >
+                      -
+                    </Button>
+                    {item.quantity}
+                    <Button
+                      onClick={() => {
+                        modifyQuantity("add", item);
+                      }}
+                    >
+                      +
+                    </Button>
                   </p>
                 </div>
                 <div>
@@ -85,7 +84,15 @@ const modifyQuantity=(action, item)=>{
         })}
       <div className="flex justify-end space-x-24 items-center text-orange-one font-bold mt-6 text-xl">
         <p>Total: {getTotal()}</p>
-        <Button onClick={()=>{alert("pagar")}} variant="primary" inverse>Pagar</Button>
+        <Button
+          onClick={() => {
+            alert("pagar");
+          }}
+          variant="primary"
+          inverse
+        >
+          Pagar
+        </Button>
       </div>
     </div>
   );
