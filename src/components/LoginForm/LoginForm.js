@@ -17,7 +17,11 @@ export default function LoginForm() {
       .then((data) => {
         setLogin(data.payload);
         //   setBackupUsers(data.results)
+      })
+      .catch((error) => {
+        console.error(error);
       });
+      
   }, []);
 
   const showingData = () => {

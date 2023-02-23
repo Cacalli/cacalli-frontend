@@ -5,30 +5,22 @@ import Button from "../components/Button/Button";
 
 export default function Cart() {
   const [cartItems, setCartItems] = useOutletContext([]);
-  console.log(cartItems.length)
+
 const modifyQuantity=(action, item)=>{
-
-
-  const cartItems = [
-    {size: "Chico", price: "100", inscritpionPrice:"100", quantity:1 },
-    {size: "Mediano", price: "200", inscritpionPrice:"200", quantity:1},
-    {size: "Grande", price: "300", inscritpionPrice:"300", quantity:1 },
-  ]
-
-  const newCartItems= cartItems.map((quantity) => {
-    if(cartItems.price == 200){
-      item.quantity+= 1
-      return quantity
-    }
-    return newCartItems()
-  })
-
+  
   const total = cartItems.reduce((acum,current) => { 
     return current.quantity + acum
   },0)
 
-  total()
-//   const index= cartItems.find((pack) => pack.price=== item.price)
+  const newCartItems = [...cartItems]
+
+ const index= cartItems.findIndex((pack) => pack.price=== item.price)
+ if (action === "substract") {
+  //substract <0 delete element
+ }else{
+  newCartItems[index].quantity = newCartItems[index].quantity + 1
+ }
+ setCartItems(newCartItems)
 // console.log("indexxxx",index)
 
 // index.quantity +=1 
@@ -37,8 +29,6 @@ const modifyQuantity=(action, item)=>{
 
 // setCartItems(newCartItems)
 }
-
-
 
 
   const getTotal = () => {
