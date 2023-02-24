@@ -27,7 +27,7 @@ export default function LoginForm() {
         }
       })
       .catch((error) => {
-        console.error(error);
+        throw new Error("Hay un problema al iniciar sesión, verifica los datos")
       });
   };
   // 'primera@kkli.com' 'etss'

@@ -2,6 +2,8 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import { ErrorMessage, Formik } from "formik";
 import * as Yup from "yup";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateAccount() {
   const createAccountSchema = Yup.object().shape({
@@ -11,6 +13,42 @@ export default function CreateAccount() {
       .required("Required"),
     email: Yup.string().email("Invalid email").required("Required"),
   });
+
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [phone, setPhone] = useState("");
+  const [login, setLogin] = useState("");
+
+  let navigate = useNavigate();
+
+  const handleCreateAccount = ({name, email, phone, password}) => {
+    const body = {firstName: name, email, phone, password };
+    fetch("http://ec2-34-227-93-62.compute-1.amazonaws.com/user", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        // if (data.ok === true && data.payload != null) {
+        //   localStorage.setItem("token", data.payload);
+        //   console.log("creaste tu cuenta");
+        //   navigate("/dashboard-usuario");
+        // }
+      })
+      .catch((error) => {
+        throw new Error("No podemos crear tu cuenta por ahora :(")
+      });
+  };
+
+  // {
+  //   "email": "dos@kkli.com", 
+  //   "password": "etss", 
+  //   "firstName": "persona",
+  //   "phone": "5555555555",
+  // }
 
   return (
     <div className="flex justify-center gap-28">
@@ -27,7 +65,7 @@ export default function CreateAccount() {
             confirmPassword: "",
           }}
           validationSchema={createAccountSchema}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={(values) => handleCreateAccount(values)}
           className="grid gap-4 mb-6"
         >
           {({ values, errors, handleChange, handleSubmit }) => (
@@ -37,8 +75,8 @@ export default function CreateAccount() {
                 helperText={errors.name}
                 variant={errors.name ? "destructive" : undefined}
                 required
-                value={values.name}
                 onChange={handleChange}
+                value={values.name}
                 placeholder="Nombre"
               />
               <Input
@@ -47,23 +85,23 @@ export default function CreateAccount() {
                 variant={errors.email ? "destructive" : undefined}
                 required
                 type="email"
-                value={values.email}
                 onChange={handleChange}
+                value={values.email}
                 placeholder="Email"
               />
               <Input
                 name="phone"
                 required
-                value={values.phone}
                 onChange={handleChange}
+                value={values.phone}
                 placeholder="Teléfono celular"
               />
               <Input
                 name="password"
                 required
                 type="password"
-                value={values.password}
                 onChange={handleChange}
+                value={values.password}
                 placeholder="Crear contraseña"
               />
               <Input
