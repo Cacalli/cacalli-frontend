@@ -6,9 +6,9 @@ import { useState } from "react";
 export default function Root() {
   const [cartItems, setCartItems] = useState([]);
   return (
-    <div>
+    <div className="flex flex-col h-screen min-h-screen">
       <Header />
-      <main>
+      <main className="flex-1">
         <Outlet context={[cartItems, setCartItems]} />
       </main>
 
