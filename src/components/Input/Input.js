@@ -11,9 +11,10 @@ export default function Input({
   ...restProps
 }) {
   const classes = {
+    inputContainer: "flex flex-col space-y-2 mb-6 w-full",
     input: classNames(
       className,
-      "w-96 border border-red-destructive rounded px-2 py-2",
+      "border rounded px-2 py-2",
       {
         "border-red-destructive": variant=="destructive",
         "border-neutral-gray-two": variant=="default",
@@ -21,7 +22,7 @@ export default function Input({
     ),
   };
   return (
-    <div className="flex flex-col space-y-2 mb-6">
+    <div className={classes.inputContainer}>
       <input
         placeholder={placeholder}
         type={type}

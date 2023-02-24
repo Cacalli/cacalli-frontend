@@ -3,7 +3,7 @@ import Input from "../Input/Input";
 import { ErrorMessage, Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function CreateAccount() {
   const createAccountSchema = Yup.object().shape({
@@ -51,11 +51,11 @@ export default function CreateAccount() {
   // }
 
   return (
-    <div className="flex justify-center gap-28">
+    <div className="flex justify-center gap-28 mt-6">
       <img className="h-auto" src="/assets/landscape-login.png" />
 
-      <div className="ml-8">
-        <p className="font-bold text-2xl mb-6">Crea tu cuenta</p>
+      <div className="ml-8 w-96">
+        <p className="font-bold text-neutral-gray-two text-2xl mb-6">Crea tu cuenta</p>
         <Formik
           initialValues={{
             name: "",
@@ -112,9 +112,11 @@ export default function CreateAccount() {
                 onChange={handleChange}
                 placeholder="Confirmar contraseña"
               />
+              <Link to="/completa-registro">
               <Button type="submit" variant="primary" isFull>
                 Crear cuenta
               </Button>
+              </Link>
             </form>
           )}
         </Formik>
