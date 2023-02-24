@@ -7,7 +7,7 @@ export default function AboutSection() {
       <div className=" w-10/12 mx-auto mt-16">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-14">
         <div>
-          <p className="text-green-one font-bold text-6xl my-8 font-lovelo">
+          <p className="text-green-one font-bold text-6xl my-8 font-josefin-sans">
             ¿QUIÉNES SOMOS?
           </p>
           <p className="text-xl text-neutral-gray-two">
