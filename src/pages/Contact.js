@@ -1,5 +1,9 @@
+import ContactContent from "../components/Contact/ContactContent";
+
 export default function Contact(){
     return(
-        <span>Contacto</span>
+       <div>
+       <ContactContent/>
+       </div>
     )
 }
