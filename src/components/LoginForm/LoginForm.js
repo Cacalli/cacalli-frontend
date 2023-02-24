@@ -60,10 +60,11 @@ export default function LoginForm() {
             type="password"
           />
         </form>
+        <Link to="/dashboard-usuario">
         <Button onClick={handleLoginClick} variant="primary" isFull>
           Inicia sesión
         </Button>
-
+        </Link>
         <div className="flex mt-6 justify-center">
           <p className="text-neutral-gray-three">¿Aún no estás registrado?</p>
           <Link to="/unete">

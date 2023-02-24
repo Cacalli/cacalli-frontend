@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import UserDashboardContent from "../components/UserDashboardContent/UserDashboardContent";
 
   /* Token: {localStorage.getItem("token")} */
@@ -5,14 +6,7 @@ import UserDashboardContent from "../components/UserDashboardContent/UserDashboa
 
 const UserDashboard = () => {
   return (
-    <UserDashboardContent
-      image="assets/user-profile.png"
-      userName="Diego Doe"
-      phone="55555"
-      address="Av. México 45, Hipódromo
-56789, CDMX"
-      email="diego@user.co"
-    />
+    <Outlet/>
   );
 };
 

@@ -18,6 +18,9 @@ import Login from "./pages/Login";
 import Calculator from "./components/Calculator/Calculator";
 import Cart from "./pages/Cart";
 import UserDashboard from "./pages/UserDashboard";
+import CreateAccountCompleteRegistry from "./components/Create account/CreateAccountCompleteRegistry";
+import UserDashboardContent from "./components/UserDashboardContent/UserDashboardContent";
+
 
 function App() {
   const router = createBrowserRouter(
@@ -31,7 +34,10 @@ function App() {
         <Route path="ingresa" element={<Login />} />
         <Route path="calcula-plan" element={<Calculator />} />
         <Route path="carrito" element={<Cart />} />
-        <Route path="dashboard-usuario" element={<UserDashboard />} />
+        <Route path="/dashboard" element={<UserDashboard />}>
+        <Route index element={<UserDashboardContent />} />
+        <Route path="completa-registro" element={<CreateAccountCompleteRegistry />}/>
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Route>
     )
