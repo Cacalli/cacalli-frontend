@@ -3,8 +3,9 @@ import { useState } from "react";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import * as Yup from "yup";
+import { Link } from "react-router-dom";
 
-export default function CreateAccountCompleteRegistry({ userName }) {
+export default function CreateAccountCompleteRegistry({ firstName }) {
   const completeRegistrySchema = Yup.object().shape({
     city: Yup.string(),
     state: Yup.string(),
@@ -19,7 +20,7 @@ export default function CreateAccountCompleteRegistry({ userName }) {
   const handleCompleteRegistry = ({city, state, zipCode,street,town,recolectionDay,recolectionHour,instructions}) => {
     const body = { };
     fetch("http://ec2-34-227-93-62.compute-1.amazonaws.com/user", {
-      method: "POST",
+      method: "GET",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     })
@@ -29,7 +30,7 @@ export default function CreateAccountCompleteRegistry({ userName }) {
         // if (data.ok === true && data.payload != null) {
         //   localStorage.setItem("token", data.payload);
         //   console.log("creaste tu cuenta");
-        //   navigate("/dashboard-usuario");
+        //   navigate("/dashboard");
         // }
       })
       .catch((error) => {
@@ -41,7 +42,7 @@ export default function CreateAccountCompleteRegistry({ userName }) {
     <div className="flex flex-col mx-auto py-6  w-8/12">
       <div className="text-2xl mb-6">
         <p className="font-bold text-neutral-gray-two">
-          ¡Bienvenido a Cacalli, {userName}!
+          ¡Bienvenido a Cacalli, {firstName}!
         </p>
         <p className="text-neutral-gray-three">
           Te invitamos a completar tu registro para poder brindarte servicio
@@ -139,9 +140,11 @@ export default function CreateAccountCompleteRegistry({ userName }) {
                 placeholder="Instrucciones de recolección"
               ></textarea>
             </div>
-            <Button variant="primary" isfull>
+         <Link to="/dashboard">
+         <Button variant="primary" isfull>
               Finalizar registro
             </Button>
+         </Link>
           </form>
         )}
       </Formik>

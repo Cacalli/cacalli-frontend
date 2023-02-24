@@ -60,7 +60,7 @@ export default function LoginForm() {
             type="password"
           />
         </form>
-        <Link to="/dashboard-usuario">
+        <Link to="/dashboard">
         <Button onClick={handleLoginClick} variant="primary" isFull>
           Inicia sesión
         </Button>

@@ -112,7 +112,7 @@ export default function CreateAccount() {
                 onChange={handleChange}
                 placeholder="Confirmar contraseña"
               />
-              <Link to="/completa-registro">
+              <Link to="/dashboard">
               <Button type="submit" variant="primary" isFull>
                 Crear cuenta
               </Button>
