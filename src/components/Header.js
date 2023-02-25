@@ -14,6 +14,7 @@ export default function Header() {
         </Link>
       </div>
       <nav className="md:flex hidden mx-8 items-center">
+        <p>Heeeeeeeeeeeeeeeeeeeeeeeeeeeeyyyyyyyyyyyyyyyyyyyyyyy!!!!!!</p>
         <Link to="quienes-somos">
           <Button variant="secondary" inverse>
             Quiénes somos
