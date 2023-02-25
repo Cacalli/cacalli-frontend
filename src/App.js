@@ -20,6 +20,7 @@ import Cart from "./pages/Cart";
 import UserDashboard from "./pages/UserDashboard";
 import CreateAccountCompleteRegistry from "./components/Create account/CreateAccountCompleteRegistry";
 import UserDashboardContent from "./components/UserDashboardContent/UserDashboardContent";
+import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         <Route index element={<UserDashboardContent />} />
         <Route path="completa-registro" element={<CreateAccountCompleteRegistry />}/>
         </Route>
+        <Route path="/admin" element={<AdminDashboard />}>     </Route>
         <Route path="*" element={<NotFound />} />
       </Route>
     )
