@@ -2,10 +2,14 @@ import { useOutletContext } from "react-router-dom";
 import Button from "../components/Button/Button";
 
 export default function Cart() {
-  const [cartItems, setCartItems] = useOutletContext([]);
+  const {
+    cartItems: [cartItems, setCartItems],
+    token: [token, setToken],
+  } = useOutletContext();
 
   const modifyQuantity = (action, item) => {
     const newCartItems = [...cartItems];
+
 
     const index = cartItems.findIndex((pack) => pack.price === item.price);
     if (action === "substract" && newCartItems[index].quantity >= 2) {

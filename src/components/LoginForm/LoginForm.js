@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useOutletContext } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [login, setLogin] = useState("");
+  const {
+    token: [token, setToken],
+  } = useOutletContext();
 
   let navigate = useNavigate();
 
@@ -21,7 +23,7 @@ export default function LoginForm() {
       .then((data) => {
         console.log(data);
         if (data.ok === true && data.payload != null) {
-          localStorage.setItem("token", data.payload);
+         setToken("prueba");
           console.log("success!");
           navigate("/dashboard-usuario");
         }
