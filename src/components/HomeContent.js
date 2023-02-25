@@ -2,7 +2,7 @@ import Button from "./Button/Button";
 
 export default function HomeContent() {
   return (
-    <div className="mt-14 relative md:min-h-screen md:py-52 md:block flex flex-col">
+    <div className="mt-14 relative md:pt-52 md:block flex flex-col">
       <div className="md:absolute w-full md:h-full md:top-0 md:left-0 md:z-0 h-60 order-last" style={{
       backgroundImage: "url(/assets/front-view-cute-dogs-in-costumes.jpg)",
       backgroundPosition: "center",

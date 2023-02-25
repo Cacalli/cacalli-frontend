@@ -3,7 +3,7 @@ import {FaInstagram, FaWhatsapp} from 'react-icons/fa';
 
 export default function Footer(){
   return (
-    <footer className="bg-blue-200 text-black justify-center py-14">
+    <footer className="flex-none bg-blue-200 text-black justify-center py-14">
       <div className="mb-6 grid grid-cols-1 md:grid-cols-4 md:px-32 align-center  gap-4  ">
         <Link className="">
           <img className="w-58 h-48 md:mx-0 mx-auto" src="/assets/logoCacalli.png" />

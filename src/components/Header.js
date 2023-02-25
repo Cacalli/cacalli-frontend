@@ -4,7 +4,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 
 export default function Header() {
   return (
-    <header className="flex justify-between mt-5">
+    <header className="flex flex-none justify-between mt-5">
       <div className="px-14 md:flex-none flex-1">
         <Link to="/">
           <img
