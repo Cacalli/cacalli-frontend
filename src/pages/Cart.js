@@ -33,7 +33,10 @@ export default function Cart() {
     return sumWithInitial;
   };
   const completePayment = () => {
-    //const body = {};
+    const body = cartItems.map((item) => {
+      return { ...item, period: 1 };
+    });
+    console.log(body);
 
     fetch("https://cacalli.mx/user/subscription", {
       method: "POST",
@@ -41,7 +44,7 @@ export default function Cart() {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       },
-      //body: JSON.stringify(body),
+      body: JSON.stringify(body),
     })
       .then((response) => response.json())
       .then((data) => {
