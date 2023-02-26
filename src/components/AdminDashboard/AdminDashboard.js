@@ -28,7 +28,7 @@ export default function AdminDashboard() {
         >
           Zonas
         </Button>
-        <select className="">
+        <select className="text-neutral-gray-two">
           <option selected>Elige una opción</option>
           <option>Nombre</option>
           <option>Dirección</option>

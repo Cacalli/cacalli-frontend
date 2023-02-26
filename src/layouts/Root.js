@@ -5,11 +5,17 @@ import { useState } from "react";
 
 export default function Root() {
   const [cartItems, setCartItems] = useState([]);
+  const [token, setToken]= useState([]);
   return (
     <div className="flex flex-col h-screen min-h-screen">
       <Header />
       <main className="flex-1">
-        <Outlet context={[cartItems, setCartItems]} />
+        <Outlet
+          context={{
+            cartItems: [cartItems, setCartItems],
+            token: [token, setToken],
+          }}
+        />
       </main>
 
       <Footer />
