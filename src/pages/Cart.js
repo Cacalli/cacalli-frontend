@@ -1,4 +1,4 @@
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useNavigate } from "react-router-dom";
 import Button from "../components/Button/Button";
 
 export default function Cart() {
@@ -7,9 +7,10 @@ export default function Cart() {
     token: [token, setToken],
   } = useOutletContext();
 
+  let navigate = useNavigate();
+
   const modifyQuantity = (action, item) => {
     const newCartItems = [...cartItems];
-
 
     const index = cartItems.findIndex((pack) => pack.price === item.price);
     if (action === "substract" && newCartItems[index].quantity >= 2) {
@@ -31,7 +32,25 @@ export default function Cart() {
 
     return sumWithInitial;
   };
+  const completePayment = () => {
+    //const body = {};
 
+    fetch("https://cacalli.mx/user/subscription", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      //body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        throw new Error("Hay un problema para completar el pago D:");
+      });
+  };
   return (
     <div className="py-8 w-8/12 mx-auto">
       <h2 className="font-bold text-orange-one text-2xl text-center mb-6">
@@ -90,7 +109,7 @@ export default function Cart() {
         <p>Total: {getTotal()}</p>
         <Button
           onClick={() => {
-            alert("pagar");
+            completePayment();
           }}
           variant="primary"
           inverse
