@@ -21,6 +21,8 @@ import UserDashboard from "./pages/UserDashboard";
 import CreateAccountCompleteRegistry from "./components/Create account/CreateAccountCompleteRegistry";
 import UserDashboardContent from "./components/UserDashboardContent/UserDashboardContent";
 import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
+import SuccessPayment from "./pages/SucessPayment";
+import DeclinePayment from "./pages/DeclinePayment";
 
 function App() {
   const router = createBrowserRouter(
@@ -34,12 +36,14 @@ function App() {
         <Route path="ingresa" element={<Login />} />
         <Route path="calcula-plan" element={<Calculator />} />
         <Route path="carrito" element={<Cart />} />
-        <Route path="dashboard" element={<UserDashboard />}>
+        <Route path="/dashboard" element={<UserDashboard />}>
           <Route index element={<UserDashboardContent />} />
           <Route
             path="completa-registro"
             element={<CreateAccountCompleteRegistry />}
           />
+          <Route path="pago-exitoso" element={<SuccessPayment/>}/>
+          <Route path="pago-fallido" element={<DeclinePayment/>}/>
         </Route>
         <Route path="/admin" element={<AdminDashboard />}>
           {" "}
