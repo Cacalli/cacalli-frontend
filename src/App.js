@@ -22,7 +22,6 @@ import CreateAccountCompleteRegistry from "./components/Create account/CreateAcc
 import UserDashboardContent from "./components/UserDashboardContent/UserDashboardContent";
 import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 
-
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -35,11 +34,16 @@ function App() {
         <Route path="ingresa" element={<Login />} />
         <Route path="calcula-plan" element={<Calculator />} />
         <Route path="carrito" element={<Cart />} />
-        <Route path="/dashboard" element={<UserDashboard />}>
-        <Route index element={<UserDashboardContent />} />
-        <Route path="completa-registro" element={<CreateAccountCompleteRegistry />}/>
+        <Route path="dashboard" element={<UserDashboard />}>
+          <Route index element={<UserDashboardContent />} />
+          <Route
+            path="completa-registro"
+            element={<CreateAccountCompleteRegistry />}
+          />
         </Route>
-        <Route path="/admin" element={<AdminDashboard />}>     </Route>
+        <Route path="/admin" element={<AdminDashboard />}>
+          {" "}
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Route>
     )

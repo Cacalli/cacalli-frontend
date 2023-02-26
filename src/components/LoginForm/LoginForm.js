@@ -14,7 +14,7 @@ export default function LoginForm() {
 
   const handleLoginClick = () => {
     const body = { email: email, password: password };
-    fetch("http://ec2-34-227-93-62.compute-1.amazonaws.com/user/auth", {
+    fetch("https://cacalli.mx/user/auth", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -23,13 +23,15 @@ export default function LoginForm() {
       .then((data) => {
         console.log(data);
         if (data.ok === true && data.payload != null) {
-         setToken("prueba");
+          setToken(data.payload);
           console.log("success!");
-          navigate("/dashboard-usuario");
+          navigate("/dashboard");
         }
       })
       .catch((error) => {
-        throw new Error("Hay un problema al iniciar sesión, verifica los datos")
+        throw new Error(
+          "Hay un problema al iniciar sesión, verifica los datos"
+        );
       });
   };
   // 'primera@kkli.com' 'etss'
@@ -63,9 +65,9 @@ export default function LoginForm() {
           />
         </form>
         <Link to="/dashboard">
-        <Button onClick={handleLoginClick} variant="primary" isFull>
-          Inicia sesión
-        </Button>
+          <Button onClick={handleLoginClick} variant="primary" isFull>
+            Inicia sesión
+          </Button>
         </Link>
         <div className="flex mt-6 justify-center">
           <p className="text-neutral-gray-three">¿Aún no estás registrado?</p>
