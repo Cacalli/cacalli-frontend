@@ -1,8 +1,13 @@
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useNavigate } from "react-router-dom";
 import Button from "../components/Button/Button";
 
 export default function Cart() {
-  const [cartItems, setCartItems] = useOutletContext([]);
+  const {
+    cartItems: [cartItems, setCartItems],
+    token: [token, setToken],
+  } = useOutletContext();
+
+  let navigate = useNavigate();
 
   const modifyQuantity = (action, item) => {
     const newCartItems = [...cartItems];
@@ -27,7 +32,29 @@ export default function Cart() {
 
     return sumWithInitial;
   };
+  const completePayment = () => {
+    const body = cartItems.map((item) => {
+      return { ...item, period: 1 };
+    });
+    console.log(body);
 
+    fetch("https://cacalli.mx/user/subscription", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("data: ", data);
+        window.location.replace(data.payload);
+      })
+      .catch((error) => {
+        throw new Error("Hay un problema para completar el pago D:");
+      });
+  };
   return (
     <div className="py-8 w-8/12 mx-auto">
       <h2 className="font-bold text-orange-one text-2xl text-center mb-6">
@@ -86,7 +113,7 @@ export default function Cart() {
         <p>Total: {getTotal()}</p>
         <Button
           onClick={() => {
-            alert("pagar");
+            completePayment();
           }}
           variant="primary"
           inverse

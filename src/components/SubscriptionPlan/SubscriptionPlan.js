@@ -7,7 +7,11 @@ import SubscriptionPlanCard from "./SubscriptionPlanCard";
 export default function SubscriptionPlan() {
   // const {content} =useFetch("https://rickandmortyapi.com/api/character/?page=19")
   // console.log(content)
-  const [cartItems, setCartItems] = useOutletContext([]);
+    const {
+    cartItems: [cartItems, setCartItems],
+    token: [token, setToken],
+  } = useOutletContext();
+  
   const [showFlag, setShowFlag] = useState(false);
   const onAddToCartClick = (size, price, inscriptionPrice) => {
     const tempArray = [...cartItems];

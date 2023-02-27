@@ -1,18 +1,30 @@
 import { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useOutletContext } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [login, setLogin] = useState("");
+  const {
+    token: [token, setToken],
+  } = useOutletContext();
 
   let navigate = useNavigate();
 
+  // const rol= ("admin","commonUser")
+
+  // if (rol === "admin") {
+  //   navigate("/admin")
+  // }else{
+  //   navigate("/dashboard")
+  // }
+
+  // if(currentUser.rol=== "admin") name='Admin'
+  // if(currentUser.rol=== "commonUser") name='user'
   const handleLoginClick = () => {
     const body = { email: email, password: password };
-    fetch("http://ec2-34-227-93-62.compute-1.amazonaws.com/user/auth", {
+    fetch("https://cacalli.mx/user/auth", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -21,13 +33,15 @@ export default function LoginForm() {
       .then((data) => {
         console.log(data);
         if (data.ok === true && data.payload != null) {
-          localStorage.setItem("token", data.payload);
+          setToken(data.payload);
           console.log("success!");
-          navigate("/dashboard-usuario");
+          navigate("/dashboard");
         }
       })
       .catch((error) => {
-        throw new Error("Hay un problema al iniciar sesión, verifica los datos")
+        throw new Error(
+          "Hay un problema al iniciar sesión, verifica los datos"
+        );
       });
   };
   // 'primera@kkli.com' 'etss'
@@ -61,9 +75,9 @@ export default function LoginForm() {
           />
         </form>
         <Link to="/dashboard">
-        <Button onClick={handleLoginClick} variant="primary" isFull>
-          Inicia sesión
-        </Button>
+          <Button onClick={handleLoginClick} variant="primary" isFull>
+            Inicia sesión
+          </Button>
         </Link>
         <div className="flex mt-6 justify-center">
           <p className="text-neutral-gray-three">¿Aún no estás registrado?</p>
