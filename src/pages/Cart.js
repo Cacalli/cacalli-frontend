@@ -48,7 +48,8 @@ export default function Cart() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log("data: ", data);
+        window.location.replace(data.payload);
       })
       .catch((error) => {
         throw new Error("Hay un problema para completar el pago D:");
