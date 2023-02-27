@@ -25,6 +25,7 @@ import SuccessPayment from "./pages/SucessPayment";
 import DeclinePayment from "./pages/DeclinePayment";
 
 function App() {
+  window.localStorage.clear();
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Root />}>
