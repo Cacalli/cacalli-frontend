@@ -53,6 +53,8 @@ export default function Cart() {
           setToken(data.payload);
           console.log("success!");
           navigate("/pago-exitoso");
+        } else{
+          navigate("/pago-fallido");
         }
       })
       .catch((error) => {
