@@ -34,7 +34,7 @@ export default function LoginForm() {
         console.log(data);
         if (data.ok === true && data.payload != null) {
           setToken(data.payload);
-          console.log("success!");
+          window.localStorage.setItem("cacalliToken", data.payload);
           navigate("/dashboard");
         }
       })
