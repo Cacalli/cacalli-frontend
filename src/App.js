@@ -43,8 +43,8 @@ function App() {
             element={<CreateAccountCompleteRegistry />}
           />
         </Route>
-        <Route path="pago-exitoso" element={<SuccessPayment/>}/>
-        <Route path="pago-fallido" element={<DeclinePayment/>}/>
+        <Route path="pago-exitoso" element={<SuccessPayment />} />
+        <Route path="pago-fallido" element={<DeclinePayment />} />
         <Route path="/admin" element={<AdminDashboard />}>
         </Route>
         <Route path="*" element={<NotFound />} />
