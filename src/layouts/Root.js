@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function Root() {
   const [cartItems, setCartItems] = useState([]);
-  const [token, setToken]= useState([]);
+  const [token, setToken] = useState("");
   return (
     <div className="flex flex-col h-screen min-h-screen">
       <Header />

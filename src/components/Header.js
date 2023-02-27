@@ -34,12 +34,18 @@ export default function Header() {
             Contacto
           </Button>
         </Link>
-        <NavLink to="unete">
-          <Button variant="primary">¡Únete!</Button>
-        </NavLink>
-        <NavLink to="ingresa">
-          <Button variant="secondary">Ingresa</Button>
-        </NavLink>
+
+        {!window.localStorage.getItem("cacalliToken") ? (
+          <>
+            <NavLink to="unete">
+              <Button variant="primary">¡Únete!</Button>
+            </NavLink>
+            <NavLink to="ingresa">
+              <Button variant="secondary">Ingresa</Button>
+            </NavLink>
+          </>
+        ) : null}
+
         <NavLink to="carrito">
           <Button variant="secondary">
             <AiOutlineShoppingCart size="1.5em" />
