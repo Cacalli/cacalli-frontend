@@ -49,6 +49,11 @@ export default function Cart() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        if (data.ok === true && data.payload != null) {
+          setToken(data.payload);
+          console.log("success!");
+          navigate("/pago-exitoso");
+        }
       })
       .catch((error) => {
         throw new Error("Hay un problema para completar el pago D:");
