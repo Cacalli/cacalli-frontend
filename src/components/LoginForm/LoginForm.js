@@ -12,16 +12,6 @@ export default function LoginForm() {
 
   let navigate = useNavigate();
 
-  // const rol= ("admin","commonUser")
-
-  // if (rol === "admin") {
-  //   navigate("/admin")
-  // }else{
-  //   navigate("/dashboard")
-  // }
-
-  // if(currentUser.rol=== "admin") name='Admin'
-  // if(currentUser.rol=== "commonUser") name='user'
   const handleLoginClick = () => {
     const body = { email: email, password: password };
     fetch("https://cacalli.mx/user/auth", {
@@ -33,17 +23,17 @@ export default function LoginForm() {
       .then((data) => {
         console.log(data);
         if (data.ok === true && data.payload != null) {
-          setToken(data.payload);
+          const rol= ("admin")
+          setToken(data.payload)
+          if (rol === "admin") {
+            navigate("/admin")
+          }else{
+            navigate("/dashboard")
+          }
           window.localStorage.setItem("cacalliToken", data.payload);
-          navigate("/dashboard");
         }
       })
-      .catch((error) => {
-        throw new Error(
-          "Hay un problema al iniciar sesión, verifica los datos"
-        );
-      });
-  };
+    }
   // 'primera@kkli.com' 'etss'
 
   return (
