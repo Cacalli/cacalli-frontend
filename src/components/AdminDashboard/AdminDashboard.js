@@ -28,8 +28,8 @@ export default function AdminDashboard() {
         >
           Zonas
         </Button>
-        <select className="text-neutral-gray-two">
-          <option selected>Elige una opción</option>
+        <select className="text-neutral-gray-two" value="" onChange={()=>{console.log("change")}}>
+          <option>Elige una opción</option>
           <option>Nombre</option>
           <option>Dirección</option>
           <option>Teléfono</option>
@@ -42,7 +42,7 @@ export default function AdminDashboard() {
         </select>
       </div>
       <div>
-        <table class="table-fixed text-left border-collapse w-full shadow-md rounded-lg overflow-hidden">
+        <table className="table-fixed text-left border-collapse w-full shadow-md rounded-lg overflow-hidden">
           <thead className=" bg-orange-one ">
             <tr className="text-neutral-white p-3 bg">
               <th className="p-3">Nombre</th>
