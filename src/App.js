@@ -25,6 +25,7 @@ import SuccessPayment from "./pages/SucessPayment";
 import DeclinePayment from "./pages/DeclinePayment";
 
 function App() {
+  window.localStorage.clear();
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Root />}>
@@ -36,7 +37,7 @@ function App() {
         <Route path="ingresa" element={<Login />} />
         <Route path="calcula-plan" element={<Calculator />} />
         <Route path="carrito" element={<Cart />} />
-        <Route path="/dashboard" element={<UserDashboard />}>
+        <Route path="dashboard" element={<UserDashboard />}>
           <Route index element={<UserDashboardContent />} />
           <Route
             path="completa-registro"
@@ -45,7 +46,8 @@ function App() {
         </Route>
         <Route path="pago-exitoso" element={<SuccessPayment />} />
         <Route path="pago-fallido" element={<DeclinePayment />} />
-        <Route path="/admin" element={<AdminDashboard />}></Route>
+        <Route path="admin" element={<AdminDashboard />}>
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Route>
     )

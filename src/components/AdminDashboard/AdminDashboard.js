@@ -1,8 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import Button from "../Button/Button";
 
 export default function AdminDashboard() {
   const [filter, setFilter] = useState("Usuario");
+  const {
+    token: [token, setToken],
+  } = useOutletContext();
+
+  const [users, setUsers] = useState([])
+useEffect(()=>{
+  fetch("https://cacalli.mx/user/all", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.table(data.payload)
+      setUsers(data.payload);
+    })
+    .catch((error) => {
+      throw new Error("Hay un problema para completar el pago D:");
+    });
+}, [])
 
   return (
     <div className="flex flex-1 mt-10 mx-10 ">
@@ -28,8 +51,8 @@ export default function AdminDashboard() {
         >
           Zonas
         </Button>
-        <select className="text-neutral-gray-two">
-          <option selected>Elige una opción</option>
+        <select className="text-neutral-gray-two" value="" onChange={()=>{console.log("change")}}>
+          <option>Elige una opción</option>
           <option>Nombre</option>
           <option>Dirección</option>
           <option>Teléfono</option>
@@ -42,7 +65,7 @@ export default function AdminDashboard() {
         </select>
       </div>
       <div>
-        <table class="table-fixed text-left border-collapse w-full shadow-md rounded-lg overflow-hidden">
+        <table className="table-fixed text-left border-collapse w-full shadow-md rounded-lg overflow-hidden">
           <thead className=" bg-orange-one ">
             <tr className="text-neutral-white p-3 bg">
               <th className="p-3">Nombre</th>
@@ -57,17 +80,20 @@ export default function AdminDashboard() {
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b border-b-orange-two text-green-two">
-              <td className="p-3">Mr. Bones</td>
-              <td className="p-3">Malcolm Lockyer</td>
-              <td className="p-3">55555555</td>
-              <td className="p-3">aaaa@kkli.com</td>
-              <td className="p-3">14/02/2000</td>
-              <td className="p-3">M</td>
-              <td className="p-3">Semanal</td>
-              <td className="p-3">No</td>
-              <td className="p-3">31/31/31</td>
+              {users && 
+           users.map(user => {
+            return   <tr key={user.id} className="border-b border-b-orange-two text-green-two">
+            <td className="p-3">{user.firstName}</td>
+            <td className="p-3">{user.address.street} {user.address.zipCode}</td>
+            <td className="p-3">{user.phone}</td>
+            <td className="p-3">{user.email}</td>
+            <td className="p-3">3/03/23</td>
+            <td className="p-3">M</td>
+            <td className="p-3">Semanal</td>
+            <td className="p-3">No</td>
+            <td className="p-3">31/31/31</td>
             </tr>
+           })}
           </tbody>
         </table>
       </div>
