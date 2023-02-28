@@ -23,13 +23,15 @@ export default function LoginForm() {
       .then((data) => {
         console.log(data);
         if (data.ok === true && data.payload != null) {
-          const rol= ("admin")
+        
           setToken(data.payload)
-          if (rol === "admin") {
-            navigate("/admin")
-          }else{
-            navigate("/dashboard")
-          }
+          setTimeout(() => {
+            if (data.role === "admin") {
+              navigate("/admin")
+            }else{
+              navigate("/dashboard")
+            }
+          }, 1000);
           window.localStorage.setItem("cacalliToken", data.payload);
         }
       })
