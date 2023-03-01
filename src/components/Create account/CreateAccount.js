@@ -11,11 +11,18 @@ export default function CreateAccount() {
       .min(2, "Too Short!")
       .max(50, "Too Long!")
       .required("Campo requerido"),
-    email: Yup.string().email("email inválido").required('Campo requerido'),
-    password: Yup.string().required()
-    .min(4, 'La contraseña debe contener 4 caracteres mínimo.')
-    .matches(/[a-zA-Z]/, "La contraseña acepta caracteres del alfabeto latino."),
-   confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Las contraseñas deben coincidir')
+    email: Yup.string().email("email inválido").required("Campo requerido"),
+    password: Yup.string()
+      .required()
+      .min(4, "La contraseña debe contener 4 caracteres mínimo.")
+      .matches(
+        /[a-zA-Z]/,
+        "La contraseña acepta caracteres del alfabeto latino."
+      ),
+    confirmPassword: Yup.string().oneOf(
+      [Yup.ref("password"), null],
+      "Las contraseñas deben coincidir"
+    ),
   });
 
   const {
@@ -24,8 +31,8 @@ export default function CreateAccount() {
 
   let navigate = useNavigate();
 
-  const handleCreateAccount = ({name, email, phone, password}) => {
-    const body = {firstName: name, email, phone, password };
+  const handleCreateAccount = ({ name, email, phone, password }) => {
+    const body = { firstName: name, email, phone, password };
     fetch("http://localhost:3000/unete", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -43,15 +50,15 @@ export default function CreateAccount() {
         //  }
       })
       .catch((error) => {
-        throw new Error("No podemos crear tu cuenta por ahora :(")
+        throw new Error("No podemos crear tu cuenta por ahora :(");
       });
 
-      console.log("cuenta creada", createAccountSchema.name)
+    console.log("cuenta creada", createAccountSchema.name);
   };
 
   // {
-  //   "email": "dos@kkli.com", 
-  //   "password": "etss", 
+  //   "email": "dos@kkli.com",
+  //   "password": "etss",
   //   "firstName": "persona",
   //   "phone": "5555555555",
   // }
@@ -61,7 +68,9 @@ export default function CreateAccount() {
       <img className="h-auto" src="/assets/landscape-login.png" />
 
       <div className="ml-8 w-96">
-        <p className="font-bold text-neutral-gray-two text-2xl mb-6">Crea tu cuenta</p>
+        <p className="font-bold text-neutral-gray-two text-2xl mb-6">
+          Crea tu cuenta
+        </p>
         <Formik
           initialValues={{
             name: "",
@@ -123,9 +132,14 @@ export default function CreateAccount() {
                 placeholder="Confirmar contraseña"
               />
               <Link to="/dashboard">
-              <Button onClick={handleCreateAccount} type="submit" variant="primary" isFull>
-                Crear cuenta
-              </Button>
+                <Button
+                  onClick={handleCreateAccount}
+                  type="submit"
+                  variant="primary"
+                  isFull
+                >
+                  Crear cuenta
+                </Button>
               </Link>
             </form>
           )}
