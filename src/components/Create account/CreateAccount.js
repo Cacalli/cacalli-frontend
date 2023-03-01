@@ -3,28 +3,30 @@ import Input from "../Input/Input";
 import { ErrorMessage, Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 
 export default function CreateAccount() {
   const createAccountSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
-      .required("Required"),
-    email: Yup.string().email("Invalid email").required("Required"),
+      .required("Campo requerido"),
+    email: Yup.string().email("email inválido").required('Campo requerido'),
+    password: Yup.string().required()
+    .min(4, 'La contraseña debe contener 4 caracteres mínimo.')
+    .matches(/[a-zA-Z]/, "La contraseña acepta caracteres del alfabeto latino."),
+   confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Las contraseñas deben coincidir')
   });
 
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [phone, setPhone] = useState("");
-  const [login, setLogin] = useState("");
+  const {
+    token: [token, setToken],
+  } = useOutletContext();
 
   let navigate = useNavigate();
 
   const handleCreateAccount = ({name, email, phone, password}) => {
     const body = {firstName: name, email, phone, password };
-    fetch("http://ec2-34-227-93-62.compute-1.amazonaws.com/user", {
+    fetch("http://localhost:3000/unete", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -32,15 +34,19 @@ export default function CreateAccount() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        // if (data.ok === true && data.payload != null) {
+        //  if (data.ok === true && data.payload != null) {
+        //   setToken(data.payload)
+        // console.log("Creaste tu cuenta",data.payload)
         //   localStorage.setItem("token", data.payload);
         //   console.log("creaste tu cuenta");
-        //   navigate("/dashboard-usuario");
-        // }
+        //  navigate("/dashboard");
+        //  }
       })
       .catch((error) => {
         throw new Error("No podemos crear tu cuenta por ahora :(")
       });
+
+      console.log("cuenta creada", createAccountSchema.name)
   };
 
   // {
@@ -100,6 +106,8 @@ export default function CreateAccount() {
                 name="password"
                 required
                 type="password"
+                helperText={errors.password}
+                variant={errors.password ? "destructive" : undefined}
                 onChange={handleChange}
                 value={values.password}
                 placeholder="Crear contraseña"
@@ -108,12 +116,14 @@ export default function CreateAccount() {
                 name="confirmPassword"
                 required
                 type="password"
+                helperText={errors.confirmPassword}
+                variant={errors.confirmPassword ? "destructive" : undefined}
                 value={values.confirmPassword}
                 onChange={handleChange}
                 placeholder="Confirmar contraseña"
               />
               <Link to="/dashboard">
-              <Button type="submit" variant="primary" isFull>
+              <Button onClick={handleCreateAccount} type="submit" variant="primary" isFull>
                 Crear cuenta
               </Button>
               </Link>
