@@ -49,15 +49,15 @@ export default function CreateAccount() {
         //  }
       })
       .catch((error) => {
-        throw new Error("No podemos crear tu cuenta por ahora :(")
+        throw new Error("No podemos crear tu cuenta por ahora :(");
       });
 
-      console.log("cuenta creada", createAccountSchema.name)
+    console.log("cuenta creada", createAccountSchema.name);
   };
 
   // {
-  //   "email": "dos@kkli.com", 
-  //   "password": "etss", 
+  //   "email": "dos@kkli.com",
+  //   "password": "etss",
   //   "firstName": "persona",
   //   "phone": "5555555555",
   // }
@@ -67,7 +67,9 @@ export default function CreateAccount() {
       <img className="h-auto" src="/assets/landscape-login.png" />
 
       <div className="ml-8 w-96">
-        <p className="font-bold text-neutral-gray-two text-2xl mb-6">Crea tu cuenta</p>
+        <p className="font-bold text-neutral-gray-two text-2xl mb-6">
+          Crea tu cuenta
+        </p>
         <Formik
           initialValues={{
             name: "",
@@ -131,9 +133,14 @@ export default function CreateAccount() {
                 placeholder="Confirmar contraseña"
               />
               <Link to="/dashboard">
-              <Button onClick={handleCreateAccount} type="submit" variant="primary" isFull>
-                Crear cuenta
-              </Button>
+                <Button
+                  onClick={handleCreateAccount}
+                  type="submit"
+                  variant="primary"
+                  isFull
+                >
+                  Crear cuenta
+                </Button>
               </Link>
             </form>
           )}
