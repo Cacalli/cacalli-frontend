@@ -11,18 +11,17 @@ export default function CreateAccount() {
       .min(2, "Too Short!")
       .max(50, "Too Long!")
       .required("Campo requerido"),
-    email: Yup.string().email("email inválido").required("Campo requerido"),
-    password: Yup.string()
-      .required()
-      .min(4, "La contraseña debe contener 4 caracteres mínimo.")
-      .matches(
-        /[a-zA-Z]/,
-        "La contraseña acepta caracteres del alfabeto latino."
-      ),
-    confirmPassword: Yup.string().oneOf(
-      [Yup.ref("password"), null],
-      "Las contraseñas deben coincidir"
-    ),
+    email: Yup.string().email("email inválido").required('Campo requerido'),
+    phone: Yup.number('El número debe ser de 10 dígitos')
+    .typeError("Esto no parece un número de teléfono")
+    .positive("Tu número de teléfono no debe ser negativo")
+    .integer("No incluyas puntos decimales")
+    .min(10)
+    .required('Ingresa tu número telefónico'),
+    password: Yup.string().required()
+    .min(4, 'La contraseña debe contener 4 caracteres mínimo.')
+    .matches(/[a-zA-Z]/, "La contraseña acepta caracteres del alfabeto latino."),
+   confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Las contraseñas deben coincidir')
   });
 
   const {
@@ -31,9 +30,9 @@ export default function CreateAccount() {
 
   let navigate = useNavigate();
 
-  const handleCreateAccount = ({ name, email, phone, password }) => {
-    const body = { firstName: name, email, phone, password };
-    fetch("http://localhost:3000/unete", {
+  const handleCreateAccount = ({name, email, phone, password}) => {
+    const body = {firstName: name, email, phone, password };
+    fetch("http://localhost:3000/user", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -107,7 +106,9 @@ export default function CreateAccount() {
               <Input
                 name="phone"
                 required
+                variant={errors.phone ? "destructive" : undefined}
                 onChange={handleChange}
+                helperText={errors.phone}
                 value={values.phone}
                 placeholder="Teléfono celular"
               />
