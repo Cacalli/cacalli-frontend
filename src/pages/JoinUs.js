@@ -1,4 +1,4 @@
-import CreateAccount from "../components/Create account/CreateAccount";
+import CreateAccount from "../components/CreateAccount/CreateAccount";
 
 export default function JoinUs(){
     return(

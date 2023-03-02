@@ -18,7 +18,7 @@ import Login from "./pages/Login";
 import Calculator from "./components/Calculator/Calculator";
 import Cart from "./pages/Cart";
 import UserDashboard from "./pages/UserDashboard";
-import CreateAccountCompleteRegistry from "./components/Create account/CreateAccountCompleteRegistry";
+import CreateAccountCompleteRegistry from "./components/CreateAccount/CreateAccountCompleteRegistry";
 import UserDashboardContent from "./components/UserDashboardContent/UserDashboardContent";
 import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import SuccessPayment from "./pages/SucessPayment";
