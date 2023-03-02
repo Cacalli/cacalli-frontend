@@ -1,6 +1,6 @@
 import Button from "../Button/Button";
 import Input from "../Input/Input";
-import { ErrorMessage, Formik } from "formik";
+import { ErrorMessage, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
@@ -32,7 +32,7 @@ export default function CreateAccount() {
 
   const handleCreateAccount = ({name, email, phone, password}) => {
     const body = {firstName: name, email, phone, password };
-    fetch("http://localhost:3000/user", {
+    fetch("https://cacalli.mx/user", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -40,19 +40,15 @@ export default function CreateAccount() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        //  if (data.ok === true && data.payload != null) {
-        //   setToken(data.payload)
-        // console.log("Creaste tu cuenta",data.payload)
-        //   localStorage.setItem("token", data.payload);
-        //   console.log("creaste tu cuenta");
-        //  navigate("/dashboard");
-        //  }
+         if (data.ok === true && data.payload != null) {
+          setToken(data.payload)
+          localStorage.setItem("token", data.payload);
+         navigate("/dashboard");
+         }
       })
       .catch((error) => {
         throw new Error("No podemos crear tu cuenta por ahora :(");
       });
-
-    console.log("cuenta creada", createAccountSchema.name);
   };
 
   // {
@@ -79,11 +75,11 @@ export default function CreateAccount() {
             confirmPassword: "",
           }}
           validationSchema={createAccountSchema}
-          onSubmit={(values) => handleCreateAccount(values)}
+          onSubmit={handleCreateAccount}
           className="grid gap-4 mb-6"
         >
-          {({ values, errors, handleChange, handleSubmit }) => (
-            <form noValidate onSubmit={handleSubmit}>
+          {({ values, errors, handleChange }) => (
+            <Form noValidate>
               <Input
                 name="name"
                 helperText={errors.name}
@@ -132,17 +128,15 @@ export default function CreateAccount() {
                 onChange={handleChange}
                 placeholder="Confirmar contraseña"
               />
-              <Link to="/dashboard">
+             
                 <Button
-                  onClick={handleCreateAccount}
                   type="submit"
                   variant="primary"
                   isFull
                 >
                   Crear cuenta
                 </Button>
-              </Link>
-            </form>
+            </Form>
           )}
         </Formik>
       </div>
