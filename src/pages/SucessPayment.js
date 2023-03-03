@@ -14,17 +14,17 @@ export default function SuccessPayment() {
         <p className="font-bold text-orange-one text-2xl">
           ¡Tu pago se realizó con éxito!
         </p>
-        <p className="text-green-one">
-          En breve nos comunicaremos contigo para hacerte llegar tu paquete.
-        </p>
+      
       </div>
 
-      <div className="flex place-content-center mt-16">
-        <Link to="/dashboard">
-        <Button variant="primary" inverse>
-          Volver al menú principal
-        </Button>
-        </Link>
+      <div className="flex place-content-center align-middle justify-center mt-16 text-xl">
+      <p className="text-green-one">Agenda tu cita para la entrega de tu kkpak <Link className="text-orange-one font-bold" to="/agenda-entrega">
+         aquí
+        </Link> </p>
+
+         
+        
+         
       </div>
     </div>
   )
