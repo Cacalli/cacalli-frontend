@@ -23,6 +23,7 @@ import UserDashboardContent from "./components/UserDashboardContent/UserDashboar
 import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import SuccessPayment from "./pages/SucessPayment";
 import DeclinePayment from "./pages/DeclinePayment";
+import Calendly from "./pages/Calendly";
 
 function App() {
   window.localStorage.clear();
@@ -46,8 +47,8 @@ function App() {
         </Route>
         <Route path="pago-exitoso" element={<SuccessPayment />} />
         <Route path="pago-fallido" element={<DeclinePayment />} />
-        <Route path="admin" element={<AdminDashboard />}>
-        </Route>
+        <Route path="admin" element={<AdminDashboard />}></Route>
+        <Route path="agenda-entrega" element={<Calendly />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     )
