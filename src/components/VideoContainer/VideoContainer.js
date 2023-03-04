@@ -3,6 +3,7 @@ export default function VideoContainer() {
     <div className="flex  bg-green-one py-40">
       <div className=" md:flex flex-1 justify-center">
         <iframe
+        className="rounded-lg"
           width="700"
           height="350"
           src="https://www.youtube.com/embed/OA30NLDQQMY"

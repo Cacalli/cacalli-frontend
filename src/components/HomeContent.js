@@ -10,7 +10,7 @@ export default function HomeContent() {
       backgroundRepeat: "no-repeat",
     }}/>  
 
-      <div className="relative w-10/12 mx-auto">
+      <div className="relative w-11/12 mx-auto">
         <div className="gap-9 flex items-center mb-8">
           <img className="w-40 mb-6 md:w-52" src="/assets/logoCacalli.png" />
           <h1 className="font-bold text-4xl md:text-7xl text-green-one">
