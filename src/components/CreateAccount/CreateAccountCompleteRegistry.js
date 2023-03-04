@@ -53,9 +53,19 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
       });
   };
 
-  const handleChange = () => {
-    console.log("handle change");
+  const handleChange = (property, value) => {
+    console.log(property, value);
   };
+
+  // const handleChange = useCallback(
+  //   (key, value) =>
+  //     formik.setValues({
+  //       ...formik.values,
+  //       [key]: value,
+  //     }),
+  //   [formik]
+  // );
+
   const handleOptions = (e) => {
     console.log(e.target.value);
   };
@@ -81,10 +91,11 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
           instructions: "",
         }}
         validationSchema={completeRegistrySchema}
+        onChange={handleChange}
         onSubmit={handleCompleteRegistry}
         className="grid gap-4 mb-6"
       >
-        {({ values, errors, handleChange, handleSubmit }) => (
+        {({ values, errors, onChange, handleSubmit }) => (
           <Form>
             <div className="mb-2">
               <p className="font-bold text-neutral-gray-two">Dirección</p>
@@ -92,7 +103,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
                 <Input
                   name="city"
                   value={values.city}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange("lastName", e.target.value)}
                   className="w-full"
                   placeholder="Ciudad"
                 />
