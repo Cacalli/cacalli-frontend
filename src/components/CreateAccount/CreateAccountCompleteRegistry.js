@@ -4,10 +4,12 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import Dropdown from "../Dropdown/Dropdown";
 
 //http://ec2-34-227-93-62.compute-1.amazonaws.com
 
 export default function CreateAccountCompleteRegistry({ firstName }) {
+  const [availableDays, setAvailableDays] = useState([]);
   const completeRegistrySchema = Yup.object().shape({
     city: Yup.string(),
     state: Yup.string(),
@@ -33,16 +35,6 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
     recolectionHour,
     instructions,
   }) => {
-    // const body = {
-    //   city,
-    //   state,
-    //   zipCode,
-    //   street,
-    //   town,
-    //   recolectionDay,
-    //   recolectionHour,
-    //   instructions,
-    // };
     fetch(`http://localhost:8001/zone/checkZipcode/${zipCode}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -50,11 +42,10 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        // if (data.ok === true && data.payload != null) {
-        //   //localStorage.setItem("token", data.payload);
-        //   console.log("zipcode valido");
-        // }
+        const days = data.payload[0].schedules.map((item) => {
+          return item.day;
+        });
+        setAvailableDays(days);
       })
       .catch((error) => {
         console.error(error);
@@ -62,6 +53,12 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
       });
   };
 
+  const handleChange = () => {
+    console.log("handle change");
+  };
+  const handleOptions = (e) => {
+    console.log(e.target.value);
+  };
   return (
     <div className="flex flex-col mx-auto py-6  w-8/12">
       <div className="text-2xl mb-6">
@@ -146,6 +143,12 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
                     onChange={handleChange}
                     className="w-full"
                     placeholder="Día"
+                  />
+                  <Dropdown
+                    options={availableDays}
+                    defaultText="Elige el dia"
+                    name="Dia"
+                    onChange={handleOptions}
                   />
                   <Input
                     name="recolectionHour"
