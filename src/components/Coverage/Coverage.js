@@ -4,13 +4,13 @@ import Button from "../Button/Button";
 export default function Coverage() {
   const [location, setLocation] = useState("");
   const handleSearchClick = () => {
-    console.log("do search");
+ 
   };
-  console.log(location);
+ 
   return (
     <div className="bg-orange-one py-40">
       <div className="w-10/12 flex mx-auto">
-        <div className="flex w-full items-center">
+        <div className="md:flex w-full items-center">
           <div className="flex-1">
             <div className="mb-6">
               <p className="text-7xl text-neutral-white font-lovelo">
