@@ -1,40 +1,62 @@
-import { Formik } from "formik";
+import { Formik, Form } from "formik";
 import { useState } from "react";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 
+//http://ec2-34-227-93-62.compute-1.amazonaws.com
+
 export default function CreateAccountCompleteRegistry({ firstName }) {
   const completeRegistrySchema = Yup.object().shape({
     city: Yup.string(),
     state: Yup.string(),
-    zipCode: Yup.string(),
-    street: Yup.string(),
-    town: Yup.string(),
-    recolectionDay: Yup.string(),
-    recolectionHour: Yup.string(),
-    instructions: Yup.string(),
+    zipCode: Yup.string()
+      .matches(/^[0-9]+$/, "Must be only digits")
+      .min(5, "Must be exactly 5 digits")
+      .max(5, "Must be exactly 5 digits"),
+    street: Yup.string().max(20),
+    town: Yup.string().max(20),
+    recolectionDay: Yup.number(),
+    recolectionHour: Yup.number(),
+    instructions: Yup.string().max(200),
   });
 
-  const handleCompleteRegistry = ({city, state, zipCode,street,town,recolectionDay,recolectionHour,instructions}) => {
-    const body = { };
-    fetch("http://ec2-34-227-93-62.compute-1.amazonaws.com/user", {
+  const handleCompleteRegistry = ({
+    city,
+    state,
+    zipCode,
+    street,
+    town,
+    recolectionDay,
+    recolectionHour,
+    instructions,
+  }) => {
+    const body = {
+      city,
+      state,
+      zipCode,
+      street,
+      town,
+      recolectionDay,
+      recolectionHour,
+      instructions,
+    };
+    fetch("localhost:8001/zone/checkZipcode", {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log(data.payload);
         // if (data.ok === true && data.payload != null) {
-        //   localStorage.setItem("token", data.payload);
-        //   console.log("creaste tu cuenta");
-        //   navigate("/dashboard");
+        //   //localStorage.setItem("token", data.payload);
+        //   console.log("zipcode valido");
         // }
       })
       .catch((error) => {
-        throw new Error("No podemos crear tu cuenta por ahora :(")
+        throw new Error("No podemos crear tu cuenta por ahora :(");
       });
   };
 
@@ -55,16 +77,16 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
           zipCode: "",
           street: "",
           town: "",
-          recolectionDay: "",
-          recolectionHour: "",
+          recolectionDay: 0,
+          recolectionHour: 0,
           instructions: "",
         }}
         validationSchema={completeRegistrySchema}
-        onSubmit={(values) => handleCompleteRegistry(values)}
+        onSubmit={handleCompleteRegistry}
         className="grid gap-4 mb-6"
       >
         {({ values, errors, handleChange, handleSubmit }) => (
-          <form>
+          <Form>
             <div className="mb-2">
               <p className="font-bold text-neutral-gray-two">Dirección</p>
               <div className="grid grid-cols-3 gap-6 mt-4">
@@ -140,12 +162,10 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
                 placeholder="Instrucciones de recolección"
               ></textarea>
             </div>
-         <Link to="/dashboard">
-         <Button variant="primary" isfull>
+            <Button type="submit" variant="primary" isfull>
               Finalizar registro
             </Button>
-         </Link>
-          </form>
+          </Form>
         )}
       </Formik>
     </div>
