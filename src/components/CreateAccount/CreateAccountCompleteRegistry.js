@@ -22,6 +22,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
     instructions: Yup.string().max(200),
   });
 
+  //const url = "localhost:8001/zone/checkZipcode?" + New
   const handleCompleteRegistry = ({
     city,
     state,
@@ -32,30 +33,31 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
     recolectionHour,
     instructions,
   }) => {
-    const body = {
-      city,
-      state,
-      zipCode,
-      street,
-      town,
-      recolectionDay,
-      recolectionHour,
-      instructions,
-    };
-    fetch("localhost:8001/zone/checkZipcode", {
+    // const body = {
+    //   city,
+    //   state,
+    //   zipCode,
+    //   street,
+    //   town,
+    //   recolectionDay,
+    //   recolectionHour,
+    //   instructions,
+    // };
+    fetch(`http://localhost:8001/zone/checkZipcode/${zipCode}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+      //body: JSON.stringify(body),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.payload);
+        console.log(data);
         // if (data.ok === true && data.payload != null) {
         //   //localStorage.setItem("token", data.payload);
         //   console.log("zipcode valido");
         // }
       })
       .catch((error) => {
+        console.error(error);
         throw new Error("No podemos crear tu cuenta por ahora :(");
       });
   };
@@ -162,7 +164,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
                 placeholder="Instrucciones de recolección"
               ></textarea>
             </div>
-            <Button type="submit" variant="primary" isfull>
+            <Button type="submit" variant="primary">
               Finalizar registro
             </Button>
           </Form>
