@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import Dropdown from "../Dropdown/Dropdown";
@@ -9,25 +9,35 @@ import completeRegistrySchema from "../../schemas/completeRegistry";
 
 export default function CreateAccountCompleteRegistry({ firstName }) {
   const [availableDays, setAvailableDays] = useState([]);
+  const [currentField, setCurrentField] = useState("");
+  const [currentFieldName, setCurrentFieldName] = useState("");
 
   //const url = "localhost:8001/zone/checkZipcode?" + New
-  const handleCompleteRegistry = (values) => {
-    fetch(`http://localhost:8001/zone/checkZipcode/${values.zipCode}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-      //body: JSON.stringify(body),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const days = data.payload[0].schedules.map((item) => {
-          return item.day;
+  const handleCompleteRegistry = () => {};
+
+  const validateZipCode = () => {
+    if (formik.values.zipCode.length === 5) {
+      fetch(
+        `http://localhost:8001/zone/checkZipcode/${formik.values.zipCode}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          //body: JSON.stringify(body),
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          // const days = data.payload[0].schedules.map((item) => {
+          //   return item.day;
+          // });
+          // setAvailableDays(days);
+        })
+        .catch((error) => {
+          console.error(error);
+          throw new Error("No podemos crear tu cuenta por ahora :(");
         });
-        setAvailableDays(days);
-      })
-      .catch((error) => {
-        console.error(error);
-        throw new Error("No podemos crear tu cuenta por ahora :(");
-      });
+    }
   };
 
   const formik = useFormik({
@@ -36,12 +46,21 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
     onSubmit: handleCompleteRegistry,
   });
 
+  const handleDaysDropdown = (event) => {
+    formik.setValues({ ...formik.values, day: event.target.value });
+  };
+
+  useEffect(() => {
+    validateZipCode();
+  }, [formik.values.zipCode]);
+
   const setInputValue = useCallback(
-    (key, value) =>
+    (key, value) => {
       formik.setValues({
         ...formik.values,
         [key]: value,
-      }),
+      });
+    },
     [formik]
   );
 
