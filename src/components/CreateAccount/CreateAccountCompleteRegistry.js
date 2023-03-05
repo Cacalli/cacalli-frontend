@@ -9,6 +9,7 @@ import completeRegistrySchema from "../../schemas/completeRegistry";
 
 export default function CreateAccountCompleteRegistry({ firstName }) {
   const [availableDays, setAvailableDays] = useState([]);
+  const [availableHours, setAvailableHours] =useState([]) 
   const [currentField, setCurrentField] = useState("");
   const [currentFieldName, setCurrentFieldName] = useState("");
 
@@ -28,10 +29,10 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          // const days = data.payload[0].schedules.map((item) => {
-          //   return item.day;
-          // });
-          // setAvailableDays(days);
+          const days = data.payload[0].schedules.map((item) => {
+            return item.day;
+          });
+          setAvailableDays(days);
         })
         .catch((error) => {
           console.error(error);
@@ -126,7 +127,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
               Selecciona el día y hora en el que podríamos{" "}
             </p>
             <div className="grid grid-cols-3 gap-6 mt-4">
-              <Input
+              {/* <Input
                 name="recolectionDay"
                 value={formik.values.recolectionDay}
                 onChange={(e) =>
@@ -134,20 +135,20 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
                 }
                 className="w-full"
                 placeholder="Día"
-              />
+              /> */}
               <Dropdown
                 options={availableDays}
                 defaultText="Elige el dia"
                 name="Dia"
               />
-              <Input
-                name="recolectionHour"
-                value={formik.values.recolectionHour}
+              <Dropdown
+              options={availableHours}
+              defaultText="Elige la hora"
+              name="recolectionHour"
                 onChange={(e) =>
                   setInputValue("recolectionHour", e.target.value)
                 }
                 className="w-full"
-                placeholder="Hora"
               />
             </div>
           </div>
