@@ -1,41 +1,18 @@
-import { Formik, Form } from "formik";
-import { useState } from "react";
+import { useFormik } from "formik";
+import { useState, useCallback } from "react";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
-import * as Yup from "yup";
-import { Link } from "react-router-dom";
 import Dropdown from "../Dropdown/Dropdown";
+import completeRegistrySchema from "../../schemas/completeRegistry";
 
 //http://ec2-34-227-93-62.compute-1.amazonaws.com
 
 export default function CreateAccountCompleteRegistry({ firstName }) {
   const [availableDays, setAvailableDays] = useState([]);
-  const completeRegistrySchema = Yup.object().shape({
-    city: Yup.string(),
-    state: Yup.string(),
-    zipCode: Yup.string()
-      .matches(/^[0-9]+$/, "Must be only digits")
-      .min(5, "Must be exactly 5 digits")
-      .max(5, "Must be exactly 5 digits"),
-    street: Yup.string().max(20),
-    town: Yup.string().max(20),
-    recolectionDay: Yup.number(),
-    recolectionHour: Yup.number(),
-    instructions: Yup.string().max(200),
-  });
 
   //const url = "localhost:8001/zone/checkZipcode?" + New
-  const handleCompleteRegistry = ({
-    city,
-    state,
-    zipCode,
-    street,
-    town,
-    recolectionDay,
-    recolectionHour,
-    instructions,
-  }) => {
-    fetch(`http://localhost:8001/zone/checkZipcode/${zipCode}`, {
+  const handleCompleteRegistry = (values) => {
+    fetch(`http://localhost:8001/zone/checkZipcode/${values.zipCode}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       //body: JSON.stringify(body),
@@ -53,22 +30,21 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
       });
   };
 
-  const handleChange = (property, value) => {
-    console.log(property, value);
-  };
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: completeRegistrySchema,
+    onSubmit: handleCompleteRegistry,
+  });
 
-  // const handleChange = useCallback(
-  //   (key, value) =>
-  //     formik.setValues({
-  //       ...formik.values,
-  //       [key]: value,
-  //     }),
-  //   [formik]
-  // );
+  const setInputValue = useCallback(
+    (key, value) =>
+      formik.setValues({
+        ...formik.values,
+        [key]: value,
+      }),
+    [formik]
+  );
 
-  const handleOptions = (e) => {
-    console.log(e.target.value);
-  };
   return (
     <div className="flex flex-col mx-auto py-6  w-8/12">
       <div className="text-2xl mb-6">
@@ -79,111 +55,104 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
           Te invitamos a completar tu registro para poder brindarte servicio
         </p>
       </div>
-      <Formik
-        initialValues={{
-          city: "",
-          state: "",
-          zipCode: "",
-          street: "",
-          town: "",
-          recolectionDay: 0,
-          recolectionHour: 0,
-          instructions: "",
-        }}
-        validationSchema={completeRegistrySchema}
-        onChange={handleChange}
-        onSubmit={handleCompleteRegistry}
-        className="grid gap-4 mb-6"
-      >
-        {({ values, errors, onChange, handleSubmit }) => (
-          <Form>
-            <div className="mb-2">
-              <p className="font-bold text-neutral-gray-two">Dirección</p>
-              <div className="grid grid-cols-3 gap-6 mt-4">
-                <Input
-                  name="city"
-                  value={values.city}
-                  onChange={(e) => handleChange("lastName", e.target.value)}
-                  className="w-full"
-                  placeholder="Ciudad"
-                />
-                <Input
-                  name="state"
-                  value={values.state}
-                  onChange={handleChange}
-                  className="w-full"
-                  placeholder="Estado"
-                />
-                <Input
-                  name="zipCode"
-                  value={values.zipCode}
-                  onChange={handleChange}
-                  className="w-full"
-                  placeholder="Código postal"
-                />
-              </div>
-            </div>
-            <div className="mb-4 grid grid-cols-3 gap-6">
+      <form>
+        <div className="mb-2">
+          <p className="font-bold text-neutral-gray-two">Dirección</p>
+          <div className="grid grid-cols-3 gap-6 mt-4">
+            <Input
+              name="city"
+              value={formik.values.city}
+              onChange={(e) => setInputValue("city", e.target.value)}
+              className="w-full"
+              placeholder="Ciudad"
+            />
+            <Input
+              name="state"
+              value={formik.values.state}
+              onChange={(e) => setInputValue("state", e.target.value)}
+              className="w-full"
+              placeholder="Estado"
+            />
+            <Input
+              name="zipCode"
+              value={formik.values.zipCode}
+              onChange={(e) => setInputValue("zipCode", e.target.value)}
+              className="w-full"
+              placeholder="Código postal"
+            />
+          </div>
+        </div>
+        <div className="mb-4 grid grid-cols-3 gap-6">
+          <Input
+            name="street"
+            value={formik.values.street}
+            onChange={(e) => setInputValue("street", e.target.value)}
+            className="w-full"
+            placeholder="Calle"
+          />
+          <Input
+            name="town"
+            value={formik.values.town}
+            onChange={(e) => setInputValue("town", e.target.value)}
+            className="w-full"
+            placeholder="Municipio/alcaldía"
+          />
+        </div>
+        <div className="mb-6">
+          <div className="mb-4">
+            <p className="font-bold text-neutral-gray-two">
+              Información de recolección
+            </p>
+            <p className="text-neutral-gray-three">
+              Selecciona el día y hora en el que podríamos{" "}
+            </p>
+            <div className="grid grid-cols-3 gap-6 mt-4">
               <Input
-                name="street"
-                value={values.street}
-                onChange={handleChange}
+                name="recolectionDay"
+                value={formik.values.recolectionDay}
+                onChange={(e) =>
+                  setInputValue("recolectionDay", e.target.value)
+                }
                 className="w-full"
-                placeholder="Calle"
+                placeholder="Día"
+              />
+              <Dropdown
+                options={availableDays}
+                defaultText="Elige el dia"
+                name="Dia"
               />
               <Input
-                name="town"
-                value={values.town}
-                onChange={handleChange}
+                name="recolectionHour"
+                value={formik.values.recolectionHour}
+                onChange={(e) =>
+                  setInputValue("recolectionHour", e.target.value)
+                }
                 className="w-full"
-                placeholder="Municipio/alcaldía"
+                placeholder="Hora"
               />
             </div>
-            <div className="mb-6">
-              <div className="mb-4">
-                <p className="font-bold text-neutral-gray-two">
-                  Información de recolección
-                </p>
-                <p className="text-neutral-gray-three">
-                  Selecciona el día y hora en el que podríamos{" "}
-                </p>
-                <div className="grid grid-cols-3 gap-6 mt-4">
-                  <Input
-                    name="recolectionDay"
-                    value={values.recolectionDay}
-                    onChange={handleChange}
-                    className="w-full"
-                    placeholder="Día"
-                  />
-                  <Dropdown
-                    options={availableDays}
-                    defaultText="Elige el dia"
-                    name="Dia"
-                    onChange={handleOptions}
-                  />
-                  <Input
-                    name="recolectionHour"
-                    value={values.recolectionHour}
-                    onChange={handleChange}
-                    className="w-full"
-                    placeholder="Hora"
-                  />
-                </div>
-              </div>
-              <textarea
-                name="instructions"
-                value={values.instructions}
-                onChange={handleChange}
-                className="p-3 border border-neutral-gray-two rounded w-full h-52"
-                placeholder="Instrucciones de recolección"
-              ></textarea>
-            </div>
-            <Button type="submit" variant="primary">
-              Finalizar registro
-            </Button>
-          </Form>
-        )}
-      </Formik>
+          </div>
+          <textarea
+            name="instructions"
+            value={formik.values.instructions}
+            className="p-3 border border-neutral-gray-two rounded w-full h-52"
+            placeholder="Instrucciones de recolección"
+          ></textarea>
+        </div>
+        <Button type="submit" variant="primary">
+          Finalizar registro
+        </Button>
+      </form>
     </div>
   );
 }
+const initialValues = {
+  city: "",
+  state: "",
+  zipCode: "",
+  street: "",
+  town: "",
+  recolectionDay: 0,
+  recolectionHour: 0,
+  instructions: "",
+};
