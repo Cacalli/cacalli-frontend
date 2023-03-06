@@ -1,6 +1,6 @@
-export default function Dropdown({ options, defaultText, name, onChange }) {
+export default function Dropdown({ options, defaultText, name, onChange, ...restProps }) {
   return (
-    <select name={name} onChange={onChange} disabled={options.length === 0}>
+    <select name={name} onChange={onChange} disabled={options.length === 0} {...restProps}>
       <option value="">{defaultText}</option>
       {options.length > 0
         ? options.map((option) => {

@@ -8,6 +8,7 @@ export default function Input({
   className,
   helperText,
   variant="default",
+  maxLength,
   ...restProps
 }) {
   const classes = {
