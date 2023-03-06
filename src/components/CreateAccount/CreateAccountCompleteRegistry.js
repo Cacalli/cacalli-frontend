@@ -12,8 +12,8 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
   const [availableHours, setAvailableHours] = useState([]);
 
   //const url = "localhost:8001/zone/checkZipcode?" + New
-  const handleCompleteRegistry = () => {
-    console.log(formik.values)
+  const handleOnSubmit = () => {
+    console.log(formik.values);
   };
 
   const validateZipCode = () => {
@@ -28,41 +28,40 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-if (data.payload.available ) {
- validateAvailableDays()
-}
+          if (data.payload.available) {
+            validateAvailableDays();
+          }
         })
         .catch((error) => {
           console.error(error);
-          throw new Error("Tu código postal no está dentro del área de servicio");
+          throw new Error(
+            "Tu código postal no está dentro del área de servicio"
+          );
         });
     }
   };
 
-  const validateAvailableDays = () =>{
-      fetch(
-        `http://localhost:8001/zone/daysAvailable/03100`,
-        {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-          //body: JSON.stringify(body),
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Estos son los días disponibles",data.payload);
-      const days = ["Lunes", "Martes", "Miércoles"]
-      setAvailableDays(days)
-        })
-        .catch((error) => {
-          console.error(error);
-          throw new Error("No hay días disponibles por ahora");
-        });
-  }
+  const validateAvailableDays = () => {
+    fetch(`http://localhost:8001/zone/daysAvailable/03100`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      //body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Estos son los días disponibles", data.payload);
+        const days = ["Lunes", "Martes", "Miércoles"];
+        setAvailableDays(days);
+      })
+      .catch((error) => {
+        console.error(error);
+        throw new Error("No hay días disponibles por ahora");
+      });
+  };
 
   const validateAvailableHours = () => {
-    const hours = ["una", "dos", "tres"]
-    setAvailableHours(hours)
+    const hours = ["una", "dos", "tres"];
+    setAvailableHours(hours);
     // fetch(
     //     `http://localhost:8001/zone/availableSchedules/zipCode`,
     //     {
@@ -81,22 +80,20 @@ if (data.payload.available ) {
     //       console.error(error);
     //       throw new Error("No hay horas disponibles por ahora");
     //     });
-  }
+  };
   const formik = useFormik({
     initialValues: initialValues,
-    validationSchema: completeRegistrySchema,
-    onSubmit: handleCompleteRegistry,
+  // validationSchema: completeRegistrySchema,
+    onSubmit: handleOnSubmit,
   });
 
   const handleDropDown = (value, name) => {
-    
-     formik.setValues({ ...formik.values, [name]: value });
-console.log(value,name)
-if (name=== "recolectionDay") {
-  validateAvailableHours()
-}
+    formik.setValues({ ...formik.values, [name]: value });
+    console.log(value, name);
+    if (name === "recolectionDay") {
+      validateAvailableHours();
+    }
   };
-
 
   useEffect(() => {
     validateZipCode();
@@ -128,7 +125,7 @@ if (name=== "recolectionDay") {
           <p className="font-bold text-neutral-gray-two">Dirección</p>
           <div className="grid grid-cols-3 gap-6 mt-4">
             <Input
-            maxLength=""
+              maxLength=""
               name="city"
               value={formik.values.city}
               onChange={(e) => setInputValue("city", e.target.value)}
@@ -136,7 +133,7 @@ if (name=== "recolectionDay") {
               placeholder="Ciudad"
             />
             <Input
-            maxLength=""
+              maxLength=""
               name="state"
               value={formik.values.state}
               onChange={(e) => setInputValue("state", e.target.value)}
@@ -144,7 +141,7 @@ if (name=== "recolectionDay") {
               placeholder="Estado"
             />
             <Input
-            maxLength="5"
+              maxLength="5"
               name="zipCode"
               value={formik.values.zipCode}
               onChange={(e) => setInputValue("zipCode", e.target.value)}
@@ -155,7 +152,7 @@ if (name=== "recolectionDay") {
         </div>
         <div className="mb-4 grid grid-cols-3 gap-6">
           <Input
-          maxLength=""
+            maxLength=""
             name="street"
             value={formik.values.street}
             onChange={(e) => setInputValue("street", e.target.value)}
@@ -163,7 +160,7 @@ if (name=== "recolectionDay") {
             placeholder="Calle"
           />
           <Input
-          maxLength=""
+            maxLength=""
             name="neighborhood"
             value={formik.values.neighborhood}
             onChange={(e) => setInputValue("neighborhood", e.target.value)}
@@ -171,7 +168,7 @@ if (name=== "recolectionDay") {
             placeholder="Colonia"
           />
           <Input
-          maxLength=""
+            maxLength=""
             name="number"
             value={formik.values.number}
             onChange={(e) => setInputValue("number", e.target.value)}
@@ -179,7 +176,7 @@ if (name=== "recolectionDay") {
             placeholder="Número"
           />
           <Input
-          maxLength=""
+            maxLength=""
             name="interiorNumber"
             value={formik.values.interiorNumber}
             onChange={(e) => setInputValue("interiorNumber", e.target.value)}
@@ -187,10 +184,10 @@ if (name=== "recolectionDay") {
             placeholder="Número interior"
           />
           <Input
-          maxLength=""
+            maxLength=""
             name="municipality"
             value={formik.values.municipality}
-            onChange={(e) => setInputValue("town", e.target.value)}
+            onChange={(e) => setInputValue("municipality", e.target.value)}
             className="w-full"
             placeholder="Municipio/alcaldía"
           />
@@ -203,20 +200,24 @@ if (name=== "recolectionDay") {
             <p className="text-neutral-gray-three mb-6">
               Selecciona el día y hora en el que podríamos pasar a tu domicilio
             </p>
-            <div className="grid grid-cols-3 gap-6 my-6" >
+            <div className="grid grid-cols-3 gap-6 my-6">
               <Dropdown
-              className="border py-1 rounded px-1"
+                className="border py-1 rounded px-1"
                 options={availableDays}
                 defaultText="Elige el dia"
                 name="recolectionDay"
-                onChange={(e) => handleDropDown(e.target.value, "recolectionDay")}
+                onChange={(e) =>
+                  handleDropDown(e.target.value, "recolectionDay")
+                }
               />
               <Dropdown
-              className="border py-1 rounded px-1"
+                className="border py-1 rounded px-1"
                 options={availableHours}
                 defaultText="Elige la hora"
                 name="recolectionHour"
-                onChange={(e) => handleDropDown(e.target.value, "recolectionHour")}
+                onChange={(e) =>
+                  handleDropDown(e.target.value, "recolectionHour")
+                }
               />
             </div>
           </div>
@@ -228,9 +229,7 @@ if (name=== "recolectionDay") {
             onChange={(e) => handleDropDown(e.target.value, "instructions")}
           ></textarea>
         </div>
-        <button type="submit">
-          Finalizar registro
-        </button>
+        <button type="submit">Finalizar registro</button>
       </form>
     </div>
   );
@@ -240,7 +239,10 @@ const initialValues = {
   state: "",
   zipCode: "",
   street: "",
-  town: "",
+  number: "",
+  neighborhood: "",
+  interiorNumber: "",
+  municipality: "",
   recolectionDay: "",
   recolectionHour: "",
   instructions: "",
