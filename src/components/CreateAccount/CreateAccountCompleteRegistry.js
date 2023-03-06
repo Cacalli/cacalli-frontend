@@ -10,11 +10,11 @@ import completeRegistrySchema from "../../schemas/completeRegistry";
 export default function CreateAccountCompleteRegistry({ firstName }) {
   const [availableDays, setAvailableDays] = useState([]);
   const [availableHours, setAvailableHours] = useState([]);
-  const [currentField, setCurrentField] = useState("");
-  const [currentFieldName, setCurrentFieldName] = useState("");
 
   //const url = "localhost:8001/zone/checkZipcode?" + New
-  const handleCompleteRegistry = () => {};
+  const handleCompleteRegistry = () => {
+    console.log(formik.values)
+  };
 
   const validateZipCode = () => {
     if (formik.values.zipCode.length === 5) {
@@ -23,16 +23,14 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
-          //body: JSON.stringify(body),
         }
       )
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          // const days = data.payload[0].schedules.map((item) => {
-          //   return item.day;
-          // });
-          // setAvailableDays(days);
+if (data.payload.available ) {
+ validateAvailableDays()
+}
         })
         .catch((error) => {
           console.error(error);
@@ -42,7 +40,6 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
   };
 
   const validateAvailableDays = () =>{
-    if (validateZipCode) {
       fetch(
         `http://localhost:8001/zone/daysAvailable/03100`,
         {
@@ -54,16 +51,36 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
         .then((response) => response.json())
         .then((data) => {
           console.log("Estos son los días disponibles",data.payload);
-          const days = data.payload[0].schedules.map((item) => {
-            return item.day;
-          });
-          setAvailableDays(days);
+      const days = ["Lunes", "Martes", "Miércoles"]
+      setAvailableDays(days)
         })
         .catch((error) => {
           console.error(error);
           throw new Error("No hay días disponibles por ahora");
         });
-    }
+  }
+
+  const validateAvailableHours = () => {
+    const hours = ["una", "dos", "tres"]
+    setAvailableHours(hours)
+    // fetch(
+    //     `http://localhost:8001/zone/availableSchedules/zipCode`,
+    //     {
+    //       method: "GET",
+    //       headers: { "Content-Type": "application/json" },
+    //       body: JSON.stringify({zipCode: formik.values.zipCode, day: recolectionDay}),
+    //     }
+    //   )
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       console.log("Estos son las horas disponibles",data.payload);
+    //   const hours = ["Lunes", "Martes", "Miércoles"]
+    //   setAvailableDays(hours)
+    //     })
+    //     .catch((error) => {
+    //       console.error(error);
+    //       throw new Error("No hay horas disponibles por ahora");
+    //     });
   }
   const formik = useFormik({
     initialValues: initialValues,
@@ -71,19 +88,19 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
     onSubmit: handleCompleteRegistry,
   });
 
-  const handleDaysDropdown = () => {
+  const handleDropDown = (value, name) => {
     
-    // formik.setValues({ ...formik.values, day: event.target.value });
-
+     formik.setValues({ ...formik.values, [name]: value });
+console.log(value,name)
+if (name=== "recolectionDay") {
+  validateAvailableHours()
+}
   };
 
-  const handleHoursDropdown = (event)=> {
-    formik.setValues({ ...formik.values, hour: event.target.value });
-  }
 
   useEffect(() => {
     validateZipCode();
-    validateAvailableDays();
+    // validateAvailableDays();
   }, [formik.values.zipCode]);
 
   const setInputValue = useCallback(
@@ -106,7 +123,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
           Te invitamos a completar tu registro para poder brindarte servicio
         </p>
       </div>
-      <form>
+      <form className="" onSubmit={formik.handleSubmit}>
         <div className="mb-2">
           <p className="font-bold text-neutral-gray-two">Dirección</p>
           <div className="grid grid-cols-3 gap-6 mt-4">
@@ -127,7 +144,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
               placeholder="Estado"
             />
             <Input
-            maxLength=""
+            maxLength="5"
               name="zipCode"
               value={formik.values.zipCode}
               onChange={(e) => setInputValue("zipCode", e.target.value)}
@@ -191,16 +208,15 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
               className="border py-1 rounded px-1"
                 options={availableDays}
                 defaultText="Elige el dia"
-                name="Dia"
+                name="recolectionDay"
+                onChange={(e) => handleDropDown(e.target.value, "recolectionDay")}
               />
               <Dropdown
               className="border py-1 rounded px-1"
                 options={availableHours}
                 defaultText="Elige la hora"
                 name="recolectionHour"
-                onChange={(e) =>
-                  setInputValue("recolectionHour", e.target.value)
-                }
+                onChange={(e) => handleDropDown(e.target.value, "recolectionHour")}
               />
             </div>
           </div>
@@ -209,11 +225,12 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
             value={formik.values.instructions}
             className="p-3 border border-neutral-gray-two rounded w-full h-52"
             placeholder="Instrucciones de recolección"
+            onChange={(e) => handleDropDown(e.target.value, "instructions")}
           ></textarea>
         </div>
-        <Button type="submit" variant="primary">
+        <button type="submit">
           Finalizar registro
-        </Button>
+        </button>
       </form>
     </div>
   );
@@ -224,7 +241,7 @@ const initialValues = {
   zipCode: "",
   street: "",
   town: "",
-  recolectionDay: 0,
-  recolectionHour: 0,
+  recolectionDay: "",
+  recolectionHour: "",
   instructions: "",
 };
