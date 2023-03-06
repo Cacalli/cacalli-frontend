@@ -42,7 +42,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
   };
 
   const validateAvailableDays = () => {
-    fetch(`http://localhost:8001/zone/daysAvailable/03100`, {
+    fetch(`http://localhost:8001/zone/daysAvailable/${formik.values.zipCode}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       //body: JSON.stringify(body),
@@ -50,8 +50,8 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
       .then((response) => response.json())
       .then((data) => {
         console.log("Estos son los días disponibles", data.payload);
-        const days = ["Lunes", "Martes", "Miércoles"];
-        setAvailableDays(days);
+       setAvailableDays(data.payload);
+       validateAvailableHours()
       })
       .catch((error) => {
         console.error(error);
@@ -60,30 +60,28 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
   };
 
   const validateAvailableHours = () => {
-    const hours = ["una", "dos", "tres"];
-    setAvailableHours(hours);
-    // fetch(
-    //     `http://localhost:8001/zone/availableSchedules/zipCode`,
-    //     {
-    //       method: "GET",
-    //       headers: { "Content-Type": "application/json" },
-    //       body: JSON.stringify({zipCode: formik.values.zipCode, day: recolectionDay}),
-    //     }
-    //   )
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       console.log("Estos son las horas disponibles",data.payload);
-    //   const hours = ["Lunes", "Martes", "Miércoles"]
-    //   setAvailableDays(hours)
-    //     })
-    //     .catch((error) => {
-    //       console.error(error);
-    //       throw new Error("No hay horas disponibles por ahora");
-    //     });
+    // setAvailableHours(hours);
+    fetch(
+        `http://localhost:8001/zone/availableSchedules/${formik.values.zipCode}/Lunes`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Estos son las horas disponibles",data.payload);
+      // const hours = ["Lunes", "Martes", "Miércoles"]
+      // setAvailableDays(hours)
+        })
+        .catch((error) => {
+          console.error(error);
+          throw new Error("No hay horas disponibles por ahora");
+        });
   };
   const formik = useFormik({
     initialValues: initialValues,
-  // validationSchema: completeRegistrySchema,
+  //validationSchema: completeRegistrySchema,
     onSubmit: handleOnSubmit,
   });
 
