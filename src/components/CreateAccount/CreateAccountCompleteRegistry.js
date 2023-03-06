@@ -62,7 +62,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
   const validateAvailableHours = () => {
     // setAvailableHours(hours);
     fetch(
-        `http://localhost:8001/zone/availableSchedules/${formik.values.zipCode}/Lunes`,
+        `http://localhost:8001/zone/schedulesAvailable/${formik.values.zipCode}/Lunes`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -70,9 +70,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log("Estos son las horas disponibles",data.payload);
-      // const hours = ["Lunes", "Martes", "Miércoles"]
-      // setAvailableDays(hours)
+         setAvailableHours(data.payload);
         })
         .catch((error) => {
           console.error(error);
