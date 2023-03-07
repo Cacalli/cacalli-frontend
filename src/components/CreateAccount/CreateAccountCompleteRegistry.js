@@ -4,22 +4,52 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import Dropdown from "../Dropdown/Dropdown";
 import completeRegistrySchema from "../../schemas/completeRegistry";
+import { useOutletContext } from "react-router-dom";
 
 //http://ec2-34-227-93-62.compute-1.amazonaws.com
 
 export default function CreateAccountCompleteRegistry({ firstName }) {
   const [availableDays, setAvailableDays] = useState([]);
   const [availableHours, setAvailableHours] = useState([]);
+  const {
+    token: [token, setToken],
+  } = useOutletContext();
 
   //const url = "localhost:8001/zone/checkZipcode?" + New
   const handleOnSubmit = () => {
-    console.log(formik.values);
+    fetch(
+      `http://localhost:8001/user/complete`,
+      {
+        method: "PUT",
+          headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+        body: JSON.stringify(formik.values),
+        // {...formik.values, formik.values.number: parseInt(formik.values.number)}
+      }
+    )
+    // .then( console.log(JSON.stringify(formik.values)))
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        // setToken(data.payload)
+        // if (data.payload.available) {
+        //   validateAvailableDays();
+        // }
+      })
+      .catch((error) => {
+        console.error(error);
+        throw new Error(
+          "El usuario no se pudo crear"
+        );
+      });
   };
 
   const validateZipCode = () => {
-    if (formik.values.zipCode.length === 5) {
+    if (formik.values.zipcode.length === 5) {
       fetch(
-        `http://localhost:8001/zone/checkZipcode/${formik.values.zipCode}`,
+        `http://localhost:8001/zone/checkZipcode/${formik.values.zipcode}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -42,14 +72,14 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
   };
 
   const validateAvailableDays = () => {
-    fetch(`http://localhost:8001/zone/daysAvailable/${formik.values.zipCode}`, {
+    fetch(`http://localhost:8001/zone/daysAvailable/${formik.values.zipcode}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       //body: JSON.stringify(body),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Estos son los días disponibles", data.payload);
+        // console.log("Estos son los días disponibles", data.payload);
        setAvailableDays(data.payload);
        validateAvailableHours()
       })
@@ -62,7 +92,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
   const validateAvailableHours = () => {
     // setAvailableHours(hours);
     fetch(
-        `http://localhost:8001/zone/schedulesAvailable/${formik.values.zipCode}/Lunes`,
+        `http://localhost:8001/zone/schedulesAvailable/${formik.values.zipcode}/Lunes`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -85,8 +115,8 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
 
   const handleDropDown = (value, name) => {
     formik.setValues({ ...formik.values, [name]: value });
-    console.log(value, name);
-    if (name === "recolectionDay") {
+    // console.log(value, name);
+    if (name === "day") {
       validateAvailableHours();
     }
   };
@@ -94,7 +124,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
   useEffect(() => {
     validateZipCode();
     // validateAvailableDays();
-  }, [formik.values.zipCode]);
+  }, [formik.values.zipcode]);
 
   const setInputValue = useCallback(
     (key, value) => {
@@ -121,7 +151,6 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
           <p className="font-bold text-neutral-gray-two">Dirección</p>
           <div className="grid grid-cols-3 gap-6 mt-4">
             <Input
-              maxLength=""
               name="city"
               value={formik.values.city}
               onChange={(e) => setInputValue("city", e.target.value)}
@@ -129,7 +158,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
               placeholder="Ciudad"
             />
             <Input
-              maxLength=""
+
               name="state"
               value={formik.values.state}
               onChange={(e) => setInputValue("state", e.target.value)}
@@ -138,9 +167,9 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
             />
             <Input
               maxLength="5"
-              name="zipCode"
-              value={formik.values.zipCode}
-              onChange={(e) => setInputValue("zipCode", e.target.value)}
+              name="zipcode"
+              value={formik.values.zipcode}
+              onChange={(e) => setInputValue("zipcode", e.target.value)}
               className="w-full"
               placeholder="Código postal"
             />
@@ -148,7 +177,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
         </div>
         <div className="mb-4 grid grid-cols-3 gap-6">
           <Input
-            maxLength=""
+
             name="street"
             value={formik.values.street}
             onChange={(e) => setInputValue("street", e.target.value)}
@@ -156,7 +185,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
             placeholder="Calle"
           />
           <Input
-            maxLength=""
+
             name="neighborhood"
             value={formik.values.neighborhood}
             onChange={(e) => setInputValue("neighborhood", e.target.value)}
@@ -164,23 +193,23 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
             placeholder="Colonia"
           />
           <Input
-            maxLength=""
+
             name="number"
             value={formik.values.number}
             onChange={(e) => setInputValue("number", e.target.value)}
             className="w-full"
             placeholder="Número"
           />
-          <Input
-            maxLength=""
+          {/* <Input
+
             name="interiorNumber"
             value={formik.values.interiorNumber}
             onChange={(e) => setInputValue("interiorNumber", e.target.value)}
             className="w-full"
             placeholder="Número interior"
-          />
+          /> */}
           <Input
-            maxLength=""
+
             name="municipality"
             value={formik.values.municipality}
             onChange={(e) => setInputValue("municipality", e.target.value)}
@@ -201,18 +230,18 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
                 className="border py-1 rounded px-1"
                 options={availableDays}
                 defaultText="Elige el dia"
-                name="recolectionDay"
+                name="day"
                 onChange={(e) =>
-                  handleDropDown(e.target.value, "recolectionDay")
+                  handleDropDown(e.target.value, "day")
                 }
               />
               <Dropdown
                 className="border py-1 rounded px-1"
                 options={availableHours}
                 defaultText="Elige la hora"
-                name="recolectionHour"
+                name="time"
                 onChange={(e) =>
-                  handleDropDown(e.target.value, "recolectionHour")
+                  handleDropDown(e.target.value, "time")
                 }
               />
             </div>
@@ -226,7 +255,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
           ></textarea>
         </div>
         <div className=" flex space-x-10 text-neutral-white">
-        <a className="bg-green-one px-2 py-1 rounded" type="submit">Finalizar registro</a>
+        <button className="bg-green-one px-2 py-1 rounded" type="submit">Finalizar registro</button>
         <a href="/dashboard" className="bg-red-destructive px-2 py-1 rounded"> Cancelar</a>
         </div>
       </form>
@@ -234,15 +263,14 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
   );
 }
 const initialValues = {
-  city: "",
-  state: "",
-  zipCode: "",
-  street: "",
-  number: "",
-  neighborhood: "",
-  interiorNumber: "",
-  municipality: "",
-  recolectionDay: "",
-  recolectionHour: "",
-  instructions: "",
+"street": "",
+"number": "",
+"interior": "",
+"neighborhood": "",
+"municipality": "",
+"state": "",
+"zipcode": "",
+"time": "",
+"day":  "",
+"city": ""
 };

@@ -10,7 +10,7 @@ export default function AdminDashboard() {
 
   const [users, setUsers] = useState([])
 useEffect(()=>{
-  fetch("https://cacalli.mx/user/all", {
+  fetch("http://localhost:8001/user/all", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

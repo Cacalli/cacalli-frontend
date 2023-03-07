@@ -39,7 +39,7 @@ export default function CreateAccount() {
 
   const handleCreateAccount = ({ name, email, phone, password }) => {
     const body = { firstName: name, email, phone, password };
-    fetch("https://cacalli.mx/user", {
+    fetch("http://localhost:8001/user", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
