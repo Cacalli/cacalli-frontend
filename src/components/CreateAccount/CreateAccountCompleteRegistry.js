@@ -225,7 +225,10 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
             onChange={(e) => handleDropDown(e.target.value, "instructions")}
           ></textarea>
         </div>
-        <button type="submit">Finalizar registro</button>
+        <div className=" flex space-x-10 text-neutral-white">
+        <a className="bg-green-one px-2 py-1 rounded" type="submit">Finalizar registro</a>
+        <a href="/dashboard" className="bg-red-destructive px-2 py-1 rounded"> Cancelar</a>
+        </div>
       </form>
     </div>
   );
