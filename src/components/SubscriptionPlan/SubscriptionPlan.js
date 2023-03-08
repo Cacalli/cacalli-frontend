@@ -39,7 +39,7 @@ export default function SubscriptionPlan() {
 
   return (
     <div>
-      <div className="flex justify-center my-4">
+      <div className="flex justify-center my-10">
         <h2 className="text-5xl text-green-one font-semibold pr-4">
           PLANES DE SUSCRIPCIÓN
         </h2>

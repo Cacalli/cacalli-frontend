@@ -3,7 +3,7 @@ import { FaWhatsapp, FaEnvelope} from 'react-icons/fa';
 // import { AiOutlineMail } from "@react-icons/all-files/ai/AiOutlineMail";
 export default function ContactContent() {
   return (
-    <div className="pt-4">
+    <div className="pt-10">
       <div className="flex h-96" style={{backgroundColor: "#ACDADE"}}>
         <img className="w-full h-full object-contain" src="/assets/vista-frontal-hermoso-perro.jpg" />
       </div>
