@@ -11,9 +11,9 @@ import { useOutletContext } from "react-router-dom";
 export default function CreateAccountCompleteRegistry({ firstName }) {
   const [availableDays, setAvailableDays] = useState([]);
   const [availableHours, setAvailableHours] = useState([]);
-  const {
-    token: [token, setToken],
-  } = useOutletContext();
+  // const {
+  //   token: [token, setToken],
+  // } = useOutletContext();
 
   //const url = "localhost:8001/zone/checkZipcode?" + New
   const handleOnSubmit = () => {
@@ -23,7 +23,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
         method: "PUT",
           headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
+        // Authorization: "Bearer " + token,
       },
         body: JSON.stringify(formik.values),
         // {...formik.values, formik.values.number: parseInt(formik.values.number)}

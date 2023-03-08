@@ -39,11 +39,11 @@ export default function SubscriptionPlan() {
 
   return (
     <div>
-      <div className="flex justify-center mb-4">
+      <div className="flex justify-center my-4">
         <h2 className="text-5xl text-green-one font-semibold pr-4">
           PLANES DE SUSCRIPCIÓN
         </h2>
-        <img className="h-14" src="/assets/buckets.png" />
+        <img className="h-10" src="/assets/buckets.png" />
       </div>
       <p className="text-neutral-gray-two text-center mb-10">
         *Todos los planes tienen un costo único de inscripción de $100 MXN
