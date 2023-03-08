@@ -38,7 +38,7 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 mt-16 gap-16">
           <Testimony
             iconImage="/assets/user-example.jpg"
-            name="Jessica"
+            name="Gabriela Rosas"
             testimonyText="Desde que empecé a usar el método Cacalli, esto es un párrafo de texto ejemplo Eelerisque in pharetra vulputate tristique et sed tortor. Feugiat a lectus quis a."
           ></Testimony>
           <Testimony
