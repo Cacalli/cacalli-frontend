@@ -8,6 +8,7 @@ export default function Input({
   className,
   helperText,
   variant="default",
+  maxLength,
   ...restProps
 }) {
   const classes = {
@@ -29,6 +30,7 @@ export default function Input({
         value={value}
         onChange={onChange}
         className={classes.input}
+        maxLength={maxLength}
         {...restProps}
       />
       {helperText && <div className="text-xs">{helperText}</div>}

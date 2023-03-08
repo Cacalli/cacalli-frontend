@@ -11,7 +11,7 @@ export default function Calculator() {
   const [addAnotherPet, setAddAnotherPet] = useState("");
   let navigate = useNavigate();
   return (
-    <div className="mt-4 mb-44">
+    <div className="mt-10 mb-44">
       <h2 className="text-green-one font-semibold text-5xl text-center mb-20">
         CALCULA TU PLAN IDEAL
       </h2>
