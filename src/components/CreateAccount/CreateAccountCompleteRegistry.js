@@ -11,19 +11,21 @@ import { useOutletContext } from "react-router-dom";
 export default function CreateAccountCompleteRegistry({ firstName }) {
   const [availableDays, setAvailableDays] = useState([]);
   const [availableHours, setAvailableHours] = useState([]);
-  // const {
-  //   token: [token, setToken],
-  // } = useOutletContext();
+  
+  const {
+    token: [token, setToken],
+  } = useOutletContext();
 
   //const url = "localhost:8001/zone/checkZipcode?" + New
   const handleOnSubmit = () => {
+    console.log(formik.values)
     fetch(
       `http://localhost:8001/user/complete`,
       {
         method: "PUT",
           headers: {
         "Content-Type": "application/json",
-        // Authorization: "Bearer " + token,
+        Authorization: `Bearer ` + token,
       },
         body: JSON.stringify(formik.values),
         // {...formik.values, formik.values.number: parseInt(formik.values.number)}
@@ -41,7 +43,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
       .catch((error) => {
         console.error(error);
         throw new Error(
-          "El usuario no se pudo crear"
+          "No se pudo actualizar tu información por ahora"
         );
       });
   };
@@ -150,13 +152,13 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
         <div className="mb-2">
           <p className="font-bold text-neutral-gray-two">Dirección</p>
           <div className="grid grid-cols-3 gap-6 mt-4">
-            <Input
+            {/* <Input
               name="city"
               value={formik.values.city}
               onChange={(e) => setInputValue("city", e.target.value)}
               className="w-full"
               placeholder="Ciudad"
-            />
+            /> */}
             <Input
 
               name="state"
@@ -200,14 +202,14 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
             className="w-full"
             placeholder="Número"
           />
-          {/* <Input
+          <Input
 
-            name="interiorNumber"
-            value={formik.values.interiorNumber}
-            onChange={(e) => setInputValue("interiorNumber", e.target.value)}
+            name="interior"
+            value={formik.values.interior}
+            onChange={(e) => setInputValue("interior", e.target.value)}
             className="w-full"
             placeholder="Número interior"
-          /> */}
+          />
           <Input
 
             name="municipality"
@@ -271,6 +273,5 @@ const initialValues = {
 "state": "",
 "zipcode": "",
 "time": "",
-"day":  "",
-"city": ""
+"day":  ""
 };
