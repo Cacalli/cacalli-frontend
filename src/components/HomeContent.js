@@ -2,7 +2,7 @@ import Button from "./Button/Button";
 
 export default function HomeContent() {
   return (
-    <div className="mt-14 relative md:pt-52 md:block flex flex-col h-screen">
+    <div className="mt-14 relative md:py-52 md:block flex flex-col md:min-h-screen">
       <div
         className="md:absolute w-full md:h-full md:top-0 md:left-0 md:z-0 h-60 order-last"
         style={{
@@ -16,7 +16,7 @@ export default function HomeContent() {
       <div className="relative w-11/12 mx-auto">
         <div className="gap-9 flex items-center mb-8">
           <img className="w-40 mb-6 md:w-52" src="/assets/logoCacalli.png" />
-          <h1 className="font-bold text-4xl md:text-7xl text-green-one">
+          <h1 className="font-bold text-3xl md:text-6xl  text-green-one">
             REINVENTANDO <span className="flex">CICLOS</span>
           </h1>
         </div>
