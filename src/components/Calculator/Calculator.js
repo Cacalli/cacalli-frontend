@@ -16,7 +16,7 @@ export default function Calculator() {
         CALCULA TU PLAN IDEAL
       </h2>
 
-      <div className="md:mx-16 text-sm md:text-base text-neutral-gray-two mb-9">
+      <div className="text-sm md:text-base text-neutral-gray-two mb-9">
         <p>
           Te haremos algunas preguntas generales sobre tus mascotas para
           sugerirte la mejor opción de contratación.
@@ -26,24 +26,26 @@ export default function Calculator() {
         </p>
       </div>
 
-      <div className="flex md:flex gap-16 mb-9">
+      <div className="flex md:flex-row flex-col gap-6 md:gap-16 mb-9">
         <div>
           <p className=" text-icon-hover text-sm md:text-base mb-2.5">Nombre</p>
           <input
             type="text"
             value={petName}
-            className="border border-orange-two px-3 py-2 md:w-60 w-40 text-sm md:text-bas rounded"
+            className="border border-orange-two px-3 py-2 md:w-60 w-full text-sm md:text-bas rounded"
             placeholder="¿Cómo se llama tu mascota?"
             onChange={(e) => setPetName(e.target.value)}
           />
         </div>
         <div>
-          <p className="text-sm md:text-base text-icon-hover mb-2.5">Tipo de mascota</p>
+          <p className="text-sm md:text-base text-icon-hover mb-2.5">
+            Tipo de mascota
+          </p>
           <Button
             onClick={() => {
               setPet("Perro");
             }}
-            className="py-1 px-2 mx-2"
+            className="py-1 px-1 text-neutral-gray-two text-xs md:text-base"
             variant={pet === "Perro" ? "primary" : ""}
           >
             Perro
@@ -52,72 +54,94 @@ export default function Calculator() {
             onClick={() => {
               setPet("Gato");
             }}
-            className="py-1 px-2"
+            className="py-1 px-2 text-neutral-gray-two text-xs md:text-base"
             variant={pet === "Gato" ? "primary" : ""}
           >
             Gato
           </Button>
         </div>
       </div>
-      <p className=" text-sm md:text-base text-icon-hover  mb-10">
+      <p className=" text-sm md:text-base text-icon-hover mb-2.5">
         ¿De qué tamaño es tu mascota?
       </p>
 
-      <div className="flex md:flex-row mb-16 space-x-2 md:space-x-5 w-10 md:w-auto text-center text-neutral-gray-three">
-        <Button
+      <div className="flex flex-wrap gap-2 md:flex-row mb-16 md:gap-5  text-center text-neutral-gray-three">
+    <div>
+    <Button
           onClick={() => {
             setSize("Muy chico");
           }}
           variant={size === "Muy chico" ? "tertiary" : ""}
-          className="flex flex-col items-center text-xs md:text-base space-y-2 md:border md:border-solid border-transparent rounded"
+          className="px-0 py-0 w-32 border md:border md:border-solid rounded"
         >
-          <img className="" src="/assets/xsmall-dog-icon.png" />
+         <div  className="text-center space-y-1 text-xs md:text-base p-3.5 md:py-2">
+         <img className="h-8 md:h-14 mx-auto" src="/assets/dog-xs.png" />
           <p>Muy chico</p>
+         </div>
         </Button>
+    </div>
 
+        <div>
         <Button
           onClick={() => {
             setSize("Chico");
           }}
           variant={size === "Chico" ? "tertiary" : ""}
-          className="flex flex-col items-center space-y-2 md:border md:border-solid border-transparent rounded"
+          className="px-0 py-0 w-32 border md:border md:border-solid rounded"
         >
-          <img className="" src="/assets/small-dog-icon.png" />
+         <div className="text-center space-y-1 text-xs md:text-base p-3.5 md:py-2">
+       <img className="h-8 md:h-14 mx-auto" src="/assets/dog-sm.png" />
           <p>Chico</p>
+         </div>
         </Button>
+        </div>
 
-        <Button
+       <div>
+       <Button
           onClick={() => {
             setSize("Mediano");
           }}
           variant={size === "Mediano" ? "tertiary" : ""}
-          className="flex flex-col items-center space-y-2 md:border md:border-solid border-transparent rounded"
+          className="px-0 py-0 w-32  border md:border md:border-solid rounded"
         >
-          <img className="" src="/assets/medium-dog-icon.png" />
+         <div className="text-center space-y-1 text-xs md:text-base p-3.5 md:py-2">
+         <img  className="h-8 md:h-14 mx-auto" src="/assets/dog-md.png" />
           <p>Mediano</p>
+         </div>
         </Button>
-        <Button
+       </div>
+       <div>
+       <Button
           onClick={() => {
             setSize("Grande");
           }}
           variant={size === "Grande" ? "tertiary" : ""}
-          className="flex flex-col items-center space-y-2 md:border md:border-solid border-transparent rounded "
+          className="px-0 py-0 w-32 border md:border md:border-solid rounded"
         >
-          <img className="" src="/assets/large-dog-icon.png" />
+          <div className="text-center space-y-1 text-xs md:text-base p-3.5 md:py-2">
+          <img className="h-8 md:h-14 mx-auto" src="/assets/dog-l.png" />
           <p>Grande</p>
+          </div>
+         
         </Button>
-        <Button
+       </div>
+       <div>
+       <Button
           onClick={() => {
             setSize("Muy grande");
           }}
           variant={size === "Muy grande" ? "tertiary" : ""}
-          className="flex flex-col items-center space-y-2 md:border md:border-solid border-transparent rounded"
+          className="px-0 py-0 w-32 border md:border md:border-solid rounded"
         >
-          <img src="/assets/xlarge-dog-icon.png" />
+          <div className="text-center space-y-1 text-xs md:text-base p-3.5 md:p-2">
+          <img className="h-8 md:h-14 mx-auto" src="/assets/dog-xl.png" />
           <p>Muy grande</p>
+          </div>
+          
         </Button>
+       </div>
       </div>
-      <div className=" flex md:flex space-x-5">
+      <div className="flex md:flex space-x-5 text-xs md:text-base">
         <Button
           onClick={() => {
             setAddAnotherPet("Mascota añadida");
@@ -130,7 +154,7 @@ export default function Calculator() {
           onClick={() => {
             return navigate("/plan-suscripcion");
           }}
-          variant="primary"
+          variant="primary" inverse
         >
           Confirmar
         </Button>
