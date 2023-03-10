@@ -6,40 +6,33 @@ export default function CompletedRegistry() {
     token: [token, setToken],
   } = useOutletContext();
 
-  const formik = useFormik({
-    // initialValues: initialValues,
-    onSubmit: handleInfo,
-  });
-
   const handleInfo = () => {
-    fetch(
-      `http://localhost:8001/user`,
-      {
-        method: "GET",
-          headers: {
+    fetch(`http://localhost:8001/user`, {
+      method: "GET",
+      headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ` + token,
       },
-        // body: JSON.stringify(formik.values),
-      }
-    )
+      // body: JSON.stringify(formik.values),
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data.payload);
       })
       .catch((error) => {
         console.error(error);
-        throw new Error(
-          "No se puede mostrar tu información por ahora"
-        );
+        throw new Error("No se puede mostrar tu información por ahora");
       });
   };
 
+  const formik = useFormik({
+    // initialValues: initialValues,
+    onSubmit: handleInfo,
+  });
+
   return (
     <div className="flex bg-red-destructive">
-    <p>
-this is your info:
-    </p>
+      <p>this is your info:</p>
     </div>
   );
 }
