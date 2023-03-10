@@ -72,9 +72,9 @@ export default function Calculator() {
             setSize("Muy chico");
           }}
           variant={size === "Muy chico" ? "tertiary" : ""}
-          className="px-0 py-0 w-32 border md:border md:border-solid rounded"
+          className="text-center space-y-1 text-xs md:text-base p-2 md:px-0 w-32 border md:border md:border-solid rounded"
         >
-         <div  className="text-center space-y-1 text-xs md:text-base p-3.5 md:py-2">
+         <div>
          <img className="h-8 md:h-14 mx-auto" src="/assets/dog-xs.png" />
           <p>Muy chico</p>
          </div>
@@ -87,9 +87,9 @@ export default function Calculator() {
             setSize("Chico");
           }}
           variant={size === "Chico" ? "tertiary" : ""}
-          className="px-0 py-0 w-32 border md:border md:border-solid rounded"
+          className="text-center space-y-1 text-xs md:text-base p-2 md:px-0 w-32 border md:border md:border-solid rounded"
         >
-         <div className="text-center space-y-1 text-xs md:text-base p-3.5 md:py-2">
+         <div >
        <img className="h-8 md:h-14 mx-auto" src="/assets/dog-sm.png" />
           <p>Chico</p>
          </div>
@@ -102,9 +102,9 @@ export default function Calculator() {
             setSize("Mediano");
           }}
           variant={size === "Mediano" ? "tertiary" : ""}
-          className="px-0 py-0 w-32  border md:border md:border-solid rounded"
+          className="text-center space-y-1 text-xs md:text-base p-2 md:px-0 w-32 border md:border md:border-solid rounded"
         >
-         <div className="text-center space-y-1 text-xs md:text-base p-3.5 md:py-2">
+         <div >
          <img  className="h-8 md:h-14 mx-auto" src="/assets/dog-md.png" />
           <p>Mediano</p>
          </div>
@@ -116,9 +116,9 @@ export default function Calculator() {
             setSize("Grande");
           }}
           variant={size === "Grande" ? "tertiary" : ""}
-          className="px-0 py-0 w-32 border md:border md:border-solid rounded"
+          className="text-center space-y-1 text-xs md:text-base p-2 md:px-0 w-32 border md:border md:border-solid rounded"
         >
-          <div className="text-center space-y-1 text-xs md:text-base p-3.5 md:py-2">
+          <div>
           <img className="h-8 md:h-14 mx-auto" src="/assets/dog-l.png" />
           <p>Grande</p>
           </div>
@@ -131,9 +131,9 @@ export default function Calculator() {
             setSize("Muy grande");
           }}
           variant={size === "Muy grande" ? "tertiary" : ""}
-          className="px-0 py-0 w-32 border md:border md:border-solid rounded"
+          className="text-center space-y-1 text-xs md:text-base p-2 md:px-0 w-32 border md:border md:border-solid rounded"
         >
-          <div className="text-center space-y-1 text-xs md:text-base p-3.5 md:p-2">
+          <div>
           <img className="h-8 md:h-14 mx-auto" src="/assets/dog-xl.png" />
           <p>Muy grande</p>
           </div>
