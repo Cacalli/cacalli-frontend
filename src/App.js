@@ -46,7 +46,7 @@ function App() {
             element={<CreateAccountCompleteRegistry />}
           />
             <Route
-            path="dashboard"
+            path="profile"
             element={<CompletedRegistry />}
           />
         </Route>

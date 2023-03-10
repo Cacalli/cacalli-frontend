@@ -13,32 +13,32 @@ export default function CompletedRegistry() {
 
   const handleInfo = () => {
     fetch(
-      `http://localhost:8001/user/complete`,
+      `http://localhost:8001/user`,
       {
         method: "GET",
           headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ` + token,
       },
-        body: JSON.stringify(formik.values),
+        // body: JSON.stringify(formik.values),
       }
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log(data.payload);
       })
       .catch((error) => {
         console.error(error);
         throw new Error(
-          "No se mostrar tu información por ahora"
+          "No se puede mostrar tu información por ahora"
         );
       });
   };
 
   return (
-    <div className="flex">
+    <div className="flex bg-red-destructive">
     <p>
-
+this is your info:
     </p>
     </div>
   );

@@ -36,7 +36,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
       .then((data) => {
 
         if (formik.values) {
-          navigate("/dashboard");
+          navigate("/profile");
         }
       })
       .catch((error) => {
@@ -58,7 +58,6 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           if (data.payload.available) {
             validateAvailableDays();
           }
@@ -80,7 +79,6 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log("Estos son los días disponibles", data.payload);
        setAvailableDays(data.payload);
        validateAvailableHours()
       })
@@ -116,7 +114,6 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
 
   const handleDropDown = (value, name) => {
     formik.setValues({ ...formik.values, [name]: value });
-    // console.log(value, name);
     if (name === "day") {
       validateAvailableHours();
     }
