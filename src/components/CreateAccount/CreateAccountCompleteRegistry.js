@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import Dropdown from "../Dropdown/Dropdown";
 import completeRegistrySchema from "../../schemas/completeRegistry";
-import { useOutletContext } from "react-router-dom";
+import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 
 //http://ec2-34-227-93-62.compute-1.amazonaws.com
 
@@ -15,7 +15,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
   const {
     token: [token, setToken],
   } = useOutletContext();
-
+  let navigate = useNavigate();
   //const url = "localhost:8001/zone/checkZipcode?" + New
   const handleOnSubmit = () => {
     console.log(formik.values)
@@ -34,11 +34,10 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
     // .then( console.log(JSON.stringify(formik.values)))
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        // setToken(data.payload)
-        // if (data.payload.available) {
-        //   validateAvailableDays();
-        // }
+
+        if (formik.values) {
+          navigate("/dashboard");
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -258,7 +257,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
         </div>
         <div className=" flex space-x-10 text-neutral-white">
         <button className="bg-green-one px-2 py-1 rounded" type="submit">Finalizar registro</button>
-        <a href="/dashboard" className="bg-red-destructive px-2 py-1 rounded"> Cancelar</a>
+        <button className="bg-red-destructive px-2 py-1 rounded" > Cancelar</button>
         </div>
       </form>
     </div>

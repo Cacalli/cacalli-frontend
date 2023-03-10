@@ -24,6 +24,7 @@ import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import SuccessPayment from "./pages/SucessPayment";
 import DeclinePayment from "./pages/DeclinePayment";
 import Calendly from "./pages/Calendly";
+import CompletedRegistry from "./components/UserDashboardContent/CompletedRegistry";
 
 function App() {
   window.localStorage.clear();
@@ -43,6 +44,10 @@ function App() {
           <Route
             path="completa-registro"
             element={<CreateAccountCompleteRegistry />}
+          />
+            <Route
+            path="dashboard"
+            element={<CompletedRegistry />}
           />
         </Route>
         <Route path="pago-exitoso" element={<SuccessPayment />} />
