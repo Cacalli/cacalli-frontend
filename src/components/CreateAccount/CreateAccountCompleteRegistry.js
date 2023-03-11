@@ -17,9 +17,8 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
     token: [token, setToken],
   } = useOutletContext();
   let navigate = useNavigate();
-  //const url = "localhost:8001/zone/checkZipcode?" + New
+
   const handleOnSubmit = () => {
-    console.log(formik.values);
     fetch(`${baseUrl}/user/complete`, {
       method: "PUT",
       headers: {
@@ -27,12 +26,9 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
         Authorization: `Bearer ` + token,
       },
       body: JSON.stringify(formik.values),
-      // {...formik.values, formik.values.number: parseInt(formik.values.number)}
     })
-      // .then( console.log(JSON.stringify(formik.values)))
       .then((response) => response.json())
       .then((data) => {
-        console.log("data: ", data);
         if (formik.values) {
           navigate("/dashboard");
         }
@@ -73,7 +69,6 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
       .then((response) => response.json())
       .then((data) => {
         setAvailableDays(data.payload);
-        validateAvailableHours();
       })
       .catch((error) => {
         console.error(error);
@@ -81,10 +76,12 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
       });
   };
 
-  const validateAvailableHours = () => {
+  const validateAvailableHours = (day) => {
     // setAvailableHours(hours);
+
     fetch(
-      `${baseUrl}/zone/schedulesAvailable/${formik.values.zipcode}/${formik.values.day}`,
+      `${baseUrl}/zone/schedulesAvailable/${formik.values.zipcode}/${day}`,
+
       {
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -106,10 +103,9 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
   });
 
   const handleDropDown = (value, name) => {
-    console.log(value, name);
     formik.setValues({ ...formik.values, [name]: value });
     if (name === "day") {
-      validateAvailableHours();
+      validateAvailableHours(value);
     }
   };
 
