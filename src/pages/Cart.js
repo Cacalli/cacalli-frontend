@@ -1,5 +1,6 @@
 import { useOutletContext, useNavigate } from "react-router-dom";
 import Button from "../components/Button/Button";
+import baseUrl from "../utils/baseUrls";
 
 export default function Cart() {
   const {
@@ -38,7 +39,7 @@ export default function Cart() {
     });
     // console.log(body);
 
-    fetch("http://localhost:8001/user/subscription", {
+    fetch(`${baseUrl}/user/subscription`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
