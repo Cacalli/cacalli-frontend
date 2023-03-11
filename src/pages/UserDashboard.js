@@ -20,8 +20,7 @@ const fakeUser = {
   },
 };
 
-const getUserInfo = ({ firstName,email,password, phone, address }, token) => {
-
+const getUserInfo = ({ firstName, email, password, phone, address }, token) => {
   const body = { firstName, email, phone, password, address };
   fetch("http://ec2-34-227-93-62.compute-1.amazonaws.com/user", {
     method: "GET",
@@ -43,15 +42,17 @@ const getUserInfo = ({ firstName,email,password, phone, address }, token) => {
     });
 };
 
-
 const UserDashboard = () => {
   const {
     token: [token, setToken],
   } = useOutletContext();
-  return <Outlet   context={{
-    token: [token, setToken],
-  }}/>;
-  
+  return (
+    <Outlet
+      context={{
+        token: [token, setToken],
+      }}
+    />
+  );
 };
 
 export default UserDashboard;

@@ -1,5 +1,6 @@
 import { Formik, useFormik } from "formik";
 import { useOutletContext } from "react-router-dom";
+import baseUrl from "../../utils/baseUrls";
 
 export default function CompletedRegistry() {
   const {
@@ -7,7 +8,7 @@ export default function CompletedRegistry() {
   } = useOutletContext();
 
   const handleInfo = () => {
-    fetch(`http://localhost:8001/user`, {
+    fetch(`${baseUrl}/user`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
