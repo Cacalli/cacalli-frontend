@@ -1,5 +1,6 @@
 import { Outlet, useOutletContext } from "react-router-dom";
 import UserDashboardContent from "../components/UserDashboardContent/UserDashboardContent";
+import baseUrl from "../utils/baseUrls";
 
 /* Token: {localStorage.getItem("token")} */
 
@@ -20,10 +21,9 @@ const fakeUser = {
   },
 };
 
-const getUserInfo = ({ firstName,email,password, phone, address }, token) => {
-
+const getUserInfo = ({ firstName, email, password, phone, address }, token) => {
   const body = { firstName, email, phone, password, address };
-  fetch("http://ec2-34-227-93-62.compute-1.amazonaws.com/user", {
+  fetch(`${baseUrl}/user`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
     Authorization: `Bearer` + token,
@@ -43,15 +43,17 @@ const getUserInfo = ({ firstName,email,password, phone, address }, token) => {
     });
 };
 
-
 const UserDashboard = () => {
   const {
     token: [token, setToken],
   } = useOutletContext();
-  return <Outlet   context={{
-    token: [token, setToken],
-  }}/>;
-  
+  return (
+    <Outlet
+      context={{
+        token: [token, setToken],
+      }}
+    />
+  );
 };
 
 export default UserDashboard;

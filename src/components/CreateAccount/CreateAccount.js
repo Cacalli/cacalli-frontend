@@ -4,6 +4,7 @@ import { ErrorMessage, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import baseUrl from "../../utils/baseUrls";
 
 export default function CreateAccount() {
   const createAccountSchema = Yup.object().shape({
@@ -39,7 +40,7 @@ export default function CreateAccount() {
 
   const handleCreateAccount = ({ name, email, phone, password }) => {
     const body = { firstName: name, email, phone, password };
-    fetch("http://localhost:8001/user", {
+    fetch(`${baseUrl}/user`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
