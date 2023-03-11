@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { useState } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 
+
 export default function CreateAccount() {
   const createAccountSchema = Yup.object().shape({
     name: Yup.string()
@@ -39,7 +40,7 @@ export default function CreateAccount() {
 
   const handleCreateAccount = ({ name, email, phone, password }) => {
     const body = { firstName: name, email, phone, password };
-    fetch("http://localhost:8001/user", {
+    fetch(`${process.env.REACT_APP_API_URL}/user`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),

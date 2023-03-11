@@ -24,7 +24,7 @@ import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import SuccessPayment from "./pages/SucessPayment";
 import DeclinePayment from "./pages/DeclinePayment";
 import Calendly from "./pages/Calendly";
-import CompletedForm from "./components/UserDashboardContent/CompletedForm";
+
 
 function App() {
   window.localStorage.clear();
