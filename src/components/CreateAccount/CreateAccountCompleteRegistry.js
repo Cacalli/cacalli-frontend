@@ -83,7 +83,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
 
   const validateAvailableHours = () => {
     // setAvailableHours(hours);
-    fetch(`${baseUrl}/zone/schedulesAvailable/${formik.values.zipcode}/Lunes`, {
+    fetch(`${baseUrl}/zone/schedulesAvailable/${formik.values.zipcode}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
