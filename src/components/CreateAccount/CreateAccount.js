@@ -1,30 +1,45 @@
 import Button from "../Button/Button";
 import Input from "../Input/Input";
-import { ErrorMessage, Formik } from "formik";
+import { ErrorMessage, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 
 export default function CreateAccount() {
   const createAccountSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
-      .required("Required"),
-    email: Yup.string().email("Invalid email").required("Required"),
+      .required("Campo requerido"),
+    email: Yup.string().email("email inválido").required("Campo requerido"),
+    phone: Yup.number("El número debe ser de 10 dígitos")
+      .typeError("Esto no parece un número de teléfono")
+      .positive("Tu número de teléfono no debe ser negativo")
+      .integer("No incluyas puntos decimales")
+      .min(10)
+      .required("Ingresa tu número telefónico"),
+    password: Yup.string()
+      .required()
+      .min(4, "La contraseña debe contener 4 caracteres mínimo.")
+      .matches(
+        /[a-zA-Z]/,
+        "La contraseña acepta caracteres del alfabeto latino."
+      ),
+    confirmPassword: Yup.string().oneOf(
+      [Yup.ref("password"), null],
+      "Las contraseñas deben coincidir"
+    ),
   });
 
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [phone, setPhone] = useState("");
-  const [login, setLogin] = useState("");
+  const {
+    token: [token, setToken],
+  } = useOutletContext();
 
   let navigate = useNavigate();
 
-  const handleCreateAccount = ({name, email, phone, password}) => {
-    const body = {firstName: name, email, phone, password };
-    fetch("http://ec2-34-227-93-62.compute-1.amazonaws.com/user", {
+  const handleCreateAccount = ({ name, email, phone, password }) => {
+    const body = { firstName: name, email, phone, password };
+    fetch("http://localhost:8001/user", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -32,20 +47,20 @@ export default function CreateAccount() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        // if (data.ok === true && data.payload != null) {
-        //   localStorage.setItem("token", data.payload);
-        //   console.log("creaste tu cuenta");
-        //   navigate("/dashboard-usuario");
-        // }
+        if (data.ok === true && data.payload != null) {
+          setToken(data.payload);
+          localStorage.setItem("token", data.payload);
+          navigate("/dashboard");
+        }
       })
       .catch((error) => {
-        throw new Error("No podemos crear tu cuenta por ahora :(")
+        throw new Error("No podemos crear tu cuenta por ahora :(");
       });
   };
 
   // {
-  //   "email": "dos@kkli.com", 
-  //   "password": "etss", 
+  //   "email": "dos@kkli.com",
+  //   "password": "etss",
   //   "firstName": "persona",
   //   "phone": "5555555555",
   // }
@@ -55,7 +70,9 @@ export default function CreateAccount() {
       <img className="h-auto" src="/assets/landscape-login.png" />
 
       <div className="ml-8 w-96">
-        <p className="font-bold text-neutral-gray-two text-2xl mb-6">Crea tu cuenta</p>
+        <p className="font-bold text-neutral-gray-two text-2xl mb-6">
+          Crea tu cuenta
+        </p>
         <Formik
           initialValues={{
             name: "",
@@ -65,11 +82,11 @@ export default function CreateAccount() {
             confirmPassword: "",
           }}
           validationSchema={createAccountSchema}
-          onSubmit={(values) => handleCreateAccount(values)}
+          onSubmit={handleCreateAccount}
           className="grid gap-4 mb-6"
         >
-          {({ values, errors, handleChange, handleSubmit }) => (
-            <form noValidate onSubmit={handleSubmit}>
+          {({ values, errors, handleChange }) => (
+            <Form noValidate>
               <Input
                 name="name"
                 helperText={errors.name}
@@ -92,7 +109,9 @@ export default function CreateAccount() {
               <Input
                 name="phone"
                 required
+                variant={errors.phone ? "destructive" : undefined}
                 onChange={handleChange}
+                helperText={errors.phone}
                 value={values.phone}
                 placeholder="Teléfono celular"
               />
@@ -100,6 +119,8 @@ export default function CreateAccount() {
                 name="password"
                 required
                 type="password"
+                helperText={errors.password}
+                variant={errors.password ? "destructive" : undefined}
                 onChange={handleChange}
                 value={values.password}
                 placeholder="Crear contraseña"
@@ -108,16 +129,17 @@ export default function CreateAccount() {
                 name="confirmPassword"
                 required
                 type="password"
+                helperText={errors.confirmPassword}
+                variant={errors.confirmPassword ? "destructive" : undefined}
                 value={values.confirmPassword}
                 onChange={handleChange}
                 placeholder="Confirmar contraseña"
               />
-              <Link to="/dashboard">
+
               <Button type="submit" variant="primary" isFull>
                 Crear cuenta
               </Button>
-              </Link>
-            </form>
+            </Form>
           )}
         </Formik>
       </div>

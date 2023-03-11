@@ -1,5 +1,6 @@
 import Button from "../Button/Button";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
+import { useState } from "react";
 export default function UserDashboardContent() {
   return (
     <div className="flex pt-6 h-full">
@@ -30,6 +31,7 @@ export default function UserDashboardContent() {
      </Link>
        </div>
       </div>
+     
     </div>
   );
 }

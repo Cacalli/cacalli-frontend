@@ -14,7 +14,7 @@ export default function LoginForm() {
 
   const handleLoginClick = () => {
     const body = { email: email, password: password };
-    fetch("https://cacalli.mx/user/auth", {
+    fetch("http://localhost:8001/user/auth", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),

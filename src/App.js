@@ -18,11 +18,13 @@ import Login from "./pages/Login";
 import Calculator from "./components/Calculator/Calculator";
 import Cart from "./pages/Cart";
 import UserDashboard from "./pages/UserDashboard";
-import CreateAccountCompleteRegistry from "./components/Create account/CreateAccountCompleteRegistry";
+import CreateAccountCompleteRegistry from "./components/CreateAccount/CreateAccountCompleteRegistry";
 import UserDashboardContent from "./components/UserDashboardContent/UserDashboardContent";
 import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import SuccessPayment from "./pages/SucessPayment";
 import DeclinePayment from "./pages/DeclinePayment";
+import Calendly from "./pages/Calendly";
+import CompletedForm from "./components/UserDashboardContent/CompletedForm";
 
 function App() {
   window.localStorage.clear();
@@ -43,11 +45,15 @@ function App() {
             path="completa-registro"
             element={<CreateAccountCompleteRegistry />}
           />
+          {/*<Route
+            path="profile"
+            element={<CompletedForm />}
+    />*/}
         </Route>
         <Route path="pago-exitoso" element={<SuccessPayment />} />
         <Route path="pago-fallido" element={<DeclinePayment />} />
-        <Route path="admin" element={<AdminDashboard />}>
-        </Route>
+        <Route path="admin" element={<AdminDashboard />}></Route>
+        <Route path="agenda-entrega" element={<Calendly />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     )

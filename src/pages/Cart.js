@@ -36,9 +36,9 @@ export default function Cart() {
     const body = cartItems.map((item) => {
       return { ...item, period: 1 };
     });
-    console.log(body);
+    // console.log(body);
 
-    fetch("https://cacalli.mx/user/subscription", {
+    fetch("http://localhost:8001/user/subscription", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,7 +48,7 @@ export default function Cart() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("data: ", data);
+        // console.log("data: ", data);
         window.location.replace(data.payload);
       })
       .catch((error) => {
