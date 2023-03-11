@@ -83,10 +83,13 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
 
   const validateAvailableHours = () => {
     // setAvailableHours(hours);
-    fetch(`${baseUrl}/zone/schedulesAvailable/${formik.values.zipcode}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
+    fetch(
+      `${baseUrl}/zone/schedulesAvailable/${formik.values.zipcode}/${formik.values.day}`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         setAvailableHours(data.payload);
@@ -103,6 +106,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
   });
 
   const handleDropDown = (value, name) => {
+    console.log(value, name);
     formik.setValues({ ...formik.values, [name]: value });
     if (name === "day") {
       validateAvailableHours();

@@ -41,7 +41,6 @@ export default function CreateAccount() {
 
   const handleCreateAccount = ({ name, email, phone, password }) => {
     const body = { firstName: name, email, phone, password };
-    console.log("eee: ", process.env.REACT_APP_API_URL);
     fetch(`${baseUrl}/user`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
