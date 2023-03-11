@@ -4,47 +4,41 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import Dropdown from "../Dropdown/Dropdown";
 import completeRegistrySchema from "../../schemas/completeRegistry";
-import { useOutletContext } from "react-router-dom";
+import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 
 //http://ec2-34-227-93-62.compute-1.amazonaws.com
 
 export default function CreateAccountCompleteRegistry({ firstName }) {
   const [availableDays, setAvailableDays] = useState([]);
   const [availableHours, setAvailableHours] = useState([]);
-  
+
   const {
     token: [token, setToken],
   } = useOutletContext();
-
+  let navigate = useNavigate();
   //const url = "localhost:8001/zone/checkZipcode?" + New
   const handleOnSubmit = () => {
-    console.log(formik.values)
-    fetch(
-      `http://localhost:8001/user/complete`,
-      {
-        method: "PUT",
-          headers: {
+    console.log(formik.values);
+    fetch(`http://localhost:8001/user/complete`, {
+      method: "PUT",
+      headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ` + token,
       },
-        body: JSON.stringify(formik.values),
-        // {...formik.values, formik.values.number: parseInt(formik.values.number)}
-      }
-    )
-    // .then( console.log(JSON.stringify(formik.values)))
+      body: JSON.stringify(formik.values),
+      // {...formik.values, formik.values.number: parseInt(formik.values.number)}
+    })
+      // .then( console.log(JSON.stringify(formik.values)))
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        // setToken(data.payload)
-        // if (data.payload.available) {
-        //   validateAvailableDays();
-        // }
+        console.log("data: ", data);
+        if (formik.values) {
+          navigate("/dashboard");
+        }
       })
       .catch((error) => {
         console.error(error);
-        throw new Error(
-          "No se pudo actualizar tu información por ahora"
-        );
+        throw new Error("No se pudo actualizar tu información por ahora");
       });
   };
 
@@ -59,7 +53,6 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           if (data.payload.available) {
             validateAvailableDays();
           }
@@ -81,9 +74,8 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log("Estos son los días disponibles", data.payload);
-       setAvailableDays(data.payload);
-       validateAvailableHours()
+        setAvailableDays(data.payload);
+        validateAvailableHours();
       })
       .catch((error) => {
         console.error(error);
@@ -94,30 +86,29 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
   const validateAvailableHours = () => {
     // setAvailableHours(hours);
     fetch(
-        `http://localhost:8001/zone/schedulesAvailable/${formik.values.zipcode}/Lunes`,
-        {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-         setAvailableHours(data.payload);
-        })
-        .catch((error) => {
-          console.error(error);
-          throw new Error("No hay horas disponibles por ahora");
-        });
+      `http://localhost:8001/zone/schedulesAvailable/${formik.values.zipcode}/Lunes`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setAvailableHours(data.payload);
+      })
+      .catch((error) => {
+        console.error(error);
+        throw new Error("No hay horas disponibles por ahora");
+      });
   };
   const formik = useFormik({
     initialValues: initialValues,
-  //validationSchema: completeRegistrySchema,
+    //validationSchema: completeRegistrySchema,
     onSubmit: handleOnSubmit,
   });
 
   const handleDropDown = (value, name) => {
     formik.setValues({ ...formik.values, [name]: value });
-    // console.log(value, name);
     if (name === "day") {
       validateAvailableHours();
     }
@@ -160,7 +151,6 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
               placeholder="Ciudad"
             /> */}
             <Input
-
               name="state"
               value={formik.values.state}
               onChange={(e) => setInputValue("state", e.target.value)}
@@ -179,7 +169,6 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
         </div>
         <div className="mb-4 grid grid-cols-3 gap-6">
           <Input
-
             name="street"
             value={formik.values.street}
             onChange={(e) => setInputValue("street", e.target.value)}
@@ -187,7 +176,6 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
             placeholder="Calle"
           />
           <Input
-
             name="neighborhood"
             value={formik.values.neighborhood}
             onChange={(e) => setInputValue("neighborhood", e.target.value)}
@@ -195,7 +183,6 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
             placeholder="Colonia"
           />
           <Input
-
             name="number"
             value={formik.values.number}
             onChange={(e) => setInputValue("number", e.target.value)}
@@ -203,7 +190,6 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
             placeholder="Número"
           />
           <Input
-
             name="interior"
             value={formik.values.interior}
             onChange={(e) => setInputValue("interior", e.target.value)}
@@ -211,7 +197,6 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
             placeholder="Número interior"
           />
           <Input
-
             name="municipality"
             value={formik.values.municipality}
             onChange={(e) => setInputValue("municipality", e.target.value)}
@@ -233,18 +218,14 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
                 options={availableDays}
                 defaultText="Elige el dia"
                 name="day"
-                onChange={(e) =>
-                  handleDropDown(e.target.value, "day")
-                }
+                onChange={(e) => handleDropDown(e.target.value, "day")}
               />
               <Dropdown
                 className="border py-1 rounded px-1"
                 options={availableHours}
                 defaultText="Elige la hora"
                 name="time"
-                onChange={(e) =>
-                  handleDropDown(e.target.value, "time")
-                }
+                onChange={(e) => handleDropDown(e.target.value, "time")}
               />
             </div>
           </div>
@@ -257,21 +238,26 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
           ></textarea>
         </div>
         <div className=" flex space-x-10 text-neutral-white">
-        <button className="bg-green-one px-2 py-1 rounded" type="submit">Finalizar registro</button>
-        <a href="/dashboard" className="bg-red-destructive px-2 py-1 rounded"> Cancelar</a>
+          <button className="bg-green-one px-2 py-1 rounded" type="submit">
+            Finalizar registro
+          </button>
+          <button className="bg-red-destructive px-2 py-1 rounded">
+            {" "}
+            Cancelar
+          </button>
         </div>
       </form>
     </div>
   );
 }
 const initialValues = {
-"street": "",
-"number": "",
-"interior": "",
-"neighborhood": "",
-"municipality": "",
-"state": "",
-"zipcode": "",
-"time": "",
-"day":  ""
+  street: "",
+  number: "",
+  interior: "",
+  neighborhood: "",
+  municipality: "",
+  state: "",
+  zipcode: "",
+  time: "",
+  day: "",
 };
