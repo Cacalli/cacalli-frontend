@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import baseUrl from "../../utils/baseUrls";
 
+
 export default function CreateAccount() {
   const createAccountSchema = Yup.object().shape({
     name: Yup.string()

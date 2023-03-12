@@ -39,14 +39,14 @@ export default function LoginForm() {
   // 'primera@kkli.com' 'etss'
 
   return (
-    <div className="flex justify-center gap-28">
+    <div className="flex justify-center gap-28 mt-6">
       <img className="h-auto" src="/assets/landscape-login.png" />
 
-      <div className="ml-8 pt-24">
+      <div className="ml-8">
         <p className="font-bold text-2xl mb-6 text-neutral-gray-two">
           Inicia sesión en tu cuenta Cacalli
         </p>
-        <form className="grid gap-4 mb-6">
+        <form className="grid gap-4 mb-6 pt-4">
           <input
             onChange={(e) => {
               setEmail(e.target.value);
