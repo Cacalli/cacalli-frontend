@@ -24,6 +24,7 @@ export default function LoginForm() {
       .then((data) => {
         console.log(data);
         if (data.ok === true && data.payload != null) {
+          console.log(data.payload);
           setToken(data.payload);
           setTimeout(() => {
             if (data.role === "admin") {
