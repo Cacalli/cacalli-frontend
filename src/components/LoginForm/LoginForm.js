@@ -22,7 +22,6 @@ export default function LoginForm() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data.ok === true && data.payload != null) {
           console.log(data.payload);
           setToken(data.payload);
@@ -37,7 +36,6 @@ export default function LoginForm() {
         }
       });
   };
-  // 'primera@kkli.com' 'etss'
 
   return (
     <div className="flex justify-center gap-28 mt-6">
