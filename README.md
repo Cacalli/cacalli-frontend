@@ -86,4 +86,10 @@ Figma - https://www.figma.com/file/sN6YAaL7HbygWkdWcDXqQD/Cacalli-DS-V1?node-id=
 Notion -  https://www.notion.so/Cacalli-0baccb42a7674be49da154cf74fe0a99
 Wireframes- https://miro.com/app/board/uXjVPJbhD5E=/?userEmail=jessicahercon@gmail.com&track=true&utm_source=notification&utm_medium=email&utm_campaign=add-to-board&utm_content=go-to-board
 
+INSTALLING DEPENDENCIES
 
+npm i
+
+RUN THE PROJECT
+
+npm start
