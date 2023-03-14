@@ -6,7 +6,6 @@ import { useState } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import baseUrl from "../../utils/baseUrls";
 
-
 export default function CreateAccount() {
   const createAccountSchema = Yup.object().shape({
     name: Yup.string()
@@ -48,9 +47,10 @@ export default function CreateAccount() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log("data payload", data.payload);
         if (data.ok === true && data.payload != null) {
-          setToken(data.payload);
+          console.log(data.payload.token);
+          setToken(data.payload.token);
           localStorage.setItem("token", data.payload);
           navigate("/dashboard");
         }
