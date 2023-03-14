@@ -68,3 +68,22 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+
+PROJECT DEFINITION
+Cacalli is a platform that allows the final user who is interested in transforming dog feces into a resource, to register, schedule its collection and pay online automatically. In addition, it allows the administrator user to manage users, collections and payments.
+
+IMPLEMENTED TECHNOLOGIES / FRAMEWORKS / LANGUAGES
+React, Javascript, Tailwind, Formik, Yup, Gitflow
+
+WORKFLOW
+
+Trello - https://trello.com/b/xWpvHBKX/cacalli
+Figma - https://www.figma.com/file/sN6YAaL7HbygWkdWcDXqQD/Cacalli-DS-V1?node-id=344%3A5871&t=xX45PAipSBDblCcj-0
+Notion -  https://www.notion.so/Cacalli-0baccb42a7674be49da154cf74fe0a99
+Wireframes- https://miro.com/app/board/uXjVPJbhD5E=/?userEmail=jessicahercon@gmail.com&track=true&utm_source=notification&utm_medium=email&utm_campaign=add-to-board&utm_content=go-to-board
+
+
