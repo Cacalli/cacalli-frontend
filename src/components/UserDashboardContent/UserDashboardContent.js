@@ -7,25 +7,24 @@ export default function UserDashboardContent() {
     token: [token, setToken],
   } = useOutletContext();
   const [info, setInfo] = useState([]);
-console.log("TOKEEEEN",token)
+
   useEffect(() => {
-    fetch(`${baseUrl}/user`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.payload.firstName);
-        console.log(data.payload.phone);
-        console.log(data.payload.email);
-        setInfo(data);
-      });
-  }, []);
-console.log("ESTE ES EL ESTADO",info)
-console.log(info.firstName)
+    if (token && token.length) {
+      fetch(`${baseUrl}/user`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.payload);
+          setInfo(data.payload);
+        });
+    }
+  }, [token]);
+
   return (
     <div className="flex pt-6 h-full">
       <div className="flex flex-col p-16 rounded-md  bg-orange-one text-neutral-white font-inter ">
@@ -37,13 +36,16 @@ console.log(info.firstName)
                 Completa tu registro
               </Button>
             </Link>
-            {/* <p> <strong>{info.firstName}</strong> </p>  */}
-
-            {/* <p>55555</p>
-            <p> Av. México 45, Hipódromo 56789, CDMX</p>
-            <p> diego@user.com</p>  */}
-            {/* <p> {packageSize}</p>
-            <p> {subscriptionPlan}</p> */}
+            
+            {info ? (
+              <div className="space-y-2 pt-6">
+                <p>
+                  <strong>{info.firstName}</strong>
+                </p>
+                <p>{info.phone}</p>
+                <p> Av. México 45, Hipódromo 56789, CDMX</p>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
