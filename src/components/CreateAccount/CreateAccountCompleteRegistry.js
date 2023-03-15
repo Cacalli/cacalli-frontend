@@ -19,7 +19,6 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
   let navigate = useNavigate();
 
   const handleOnSubmit = () => {
-    console.log(token);
     fetch(`${baseUrl}/user/complete`, {
       method: "PUT",
       headers: {

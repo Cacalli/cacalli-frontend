@@ -37,7 +37,6 @@ export default function Cart() {
     const body = cartItems.map((item) => {
       return { ...item, period: 1 };
     });
-    // console.log(body);
 
     fetch(`${baseUrl}/user/subscription`, {
       method: "POST",
@@ -49,7 +48,6 @@ export default function Cart() {
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log("data: ", data);
         window.location.replace(data.payload);
       })
       .catch((error) => {

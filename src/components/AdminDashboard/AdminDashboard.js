@@ -55,9 +55,8 @@ export default function AdminDashboard() {
         <select
           className="text-neutral-gray-two"
           value=""
-          onChange={() => {
-            console.log("change");
-          }}
+          // onChange={() => {
+          // }}
         >
           <option>Elige una opción</option>
           <option>Nombre</option>
