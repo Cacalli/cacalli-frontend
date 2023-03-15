@@ -4,23 +4,6 @@ import baseUrl from "../utils/baseUrls";
 
 /* Token: {localStorage.getItem("token")} */
 
-const fakeUser = {
-  email: { type: String, required: true, trim: true, unique: true },
-  password: { type: String, required: true, trim: true },
-  firstName: { type: String, required: true, trim: true },
-  lastName: { type: String, trim: true },
-  phone: { type: String, required: true, trim: true, unique: true },
-  address: {
-    street: { type: String, required: true, trim: true },
-    number: { type: Number, required: true },
-    interior: Number,
-    neighborhood: { type: String, required: true },
-    municipality: { type: String, required: true },
-    state: { type: String, required: true },
-    zipCode: { type: Number, required: true },
-  },
-};
-
 const getUserInfo = ({ firstName, email, password, phone, address }, token) => {
   const body = { firstName, email, phone, password, address };
   fetch(`${baseUrl}/user`, {
@@ -31,7 +14,6 @@ const getUserInfo = ({ firstName, email, password, phone, address }, token) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       // if (data.ok === true && data.payload != null) {
       //   localStorage.setItem("token", data.payload);
       //   console.log("creaste tu cuenta");

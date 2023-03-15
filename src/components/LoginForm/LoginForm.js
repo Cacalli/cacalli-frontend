@@ -6,12 +6,21 @@ import baseUrl from "../../utils/baseUrls";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
   const {
     token: [token, setToken],
   } = useOutletContext();
 
   let navigate = useNavigate();
+
+  useEffect(() => {
+    if (role === "admin") {
+      navigate("/admin");
+    } else if (role === "client") {
+      navigate("/dashboard");
+    }
+  }, [role]);
 
   const handleLoginClick = () => {
     const body = { email: email, password: password };
@@ -23,15 +32,8 @@ export default function LoginForm() {
       .then((response) => response.json())
       .then((data) => {
         if (data.ok === true && data.payload != null) {
-          console.log(data.payload);
           setToken(data.payload);
-          setTimeout(() => {
-            if (data.role === "admin") {
-              navigate("/admin");
-            } else {
-              navigate("/dashboard");
-            }
-          }, 1000);
+          setRole(data.role);
           window.localStorage.setItem("cacalliToken", data.payload);
         }
       });
