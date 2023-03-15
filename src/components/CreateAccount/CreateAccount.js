@@ -55,7 +55,7 @@ export default function CreateAccount() {
       .then((data) => {
         if (data.ok === true && data.payload != null) {
           setToken(data.payload.token);
-          localStorage.setItem("token", data.payload.token);
+          localStorage.setItem("cacalliToken", data.payload.token);
         }
       })
       .catch((error) => {
