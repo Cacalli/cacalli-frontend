@@ -39,7 +39,9 @@ export default function CreateAccount() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    navigate("/dashboard");
+    if (token.length) {
+      navigate("/dashboard");
+    }
   }, [token]);
 
   const handleCreateAccount = ({ name, email, phone, password }) => {
