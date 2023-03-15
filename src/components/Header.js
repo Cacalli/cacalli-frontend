@@ -1,8 +1,15 @@
 import Button from "./Button/Button";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate, useOutletContext } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { FaSignOutAlt } from "react-icons/fa";
 
 export default function Header() {
+  const isLoggedIn = window.localStorage.getItem("cacalliToken");
+  let navigate = useNavigate();
+  const handleLogout = () => {
+    window.localStorage.clear();
+    navigate("/");
+  };
   return (
     <header className="flex flex-none justify-between mt-5">
       <div className="px-14 md:flex-none flex-1">
@@ -35,7 +42,7 @@ export default function Header() {
           </Button>
         </Link>
 
-        {!window.localStorage.getItem("cacalliToken") ? (
+        {!isLoggedIn ? (
           <>
             <NavLink to="unete">
               <Button variant="primary">¡Únete!</Button>
@@ -51,6 +58,16 @@ export default function Header() {
             <AiOutlineShoppingCart size="1.5em" />
           </Button>
         </NavLink>
+
+        {isLoggedIn ? (
+          <button
+            className="flex text-orange-one space-x-2 items-center"
+            onClick={handleLogout}
+          >
+            <FaSignOutAlt size="1.25em" />
+            <span>Salir</span>
+          </button>
+        ) : null}
       </nav>
     </header>
   );
