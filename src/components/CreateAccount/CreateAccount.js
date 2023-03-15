@@ -47,9 +47,7 @@ export default function CreateAccount() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("data payload", data.payload);
         if (data.ok === true && data.payload != null) {
-          console.log(data.payload.token);
           setToken(data.payload.token);
           localStorage.setItem("token", data.payload);
           navigate("/dashboard");

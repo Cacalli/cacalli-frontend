@@ -6,8 +6,6 @@ import Toggle from "../Toggle/Toggle";
 import SubscriptionPlanCard from "./SubscriptionPlanCard";
 
 export default function SubscriptionPlan() {
-  // const {content} =useFetch("https://rickandmortyapi.com/api/character/?page=19")
-  // console.log(content)
   const {
     cartItems: [cartItems, setCartItems],
     token: [token, setToken],
@@ -51,8 +49,16 @@ export default function SubscriptionPlan() {
         <p className="self-center text-neutral-gray-one text-lg font-semibold">
           Selecciona tu tipo de plan
         </p>
-        <button  className="text-neutral-white py-1 px-2 rounded bg-green-three font-semibold" variant="primary" inverse>Semanal</button>
-        <button  className="text-neutral-gray-one  font-semibold">Quincenal</button>
+        <button
+          className="text-neutral-white py-1 px-2 rounded bg-green-three font-semibold"
+          variant="primary"
+          inverse
+        >
+          Semanal
+        </button>
+        <button className="text-neutral-gray-one  font-semibold">
+          Quincenal
+        </button>
       </div>
 
       <div className="grid w-10/12 mx-auto card-wrapper gap-12 mb-14">
@@ -118,19 +124,19 @@ export default function SubscriptionPlan() {
           secante que ayuda a evitar olores.
         </p>
 
-        <p >
+        <p>
           El costo de la mensualidad del primer kkpak contratado incluye la
           visita a casa del usuario, si se contrata más de un kkpak los
           siguientes tienen un costo menor (kkpak extra).
         </p>
 
-        <p >
+        <p>
           Los kkpaks se contratan con un periodo de recolección semanal o
           quincenal.
         </p>
 
         <div>
-          <p >
+          <p>
             Solo es posible contratar kkpaks de un mismo periodo de recolección.
           </p>
         </div>
