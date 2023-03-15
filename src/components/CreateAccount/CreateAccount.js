@@ -2,7 +2,7 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import { ErrorMessage, Form, Formik } from "formik";
 import * as Yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import baseUrl from "../../utils/baseUrls";
 
@@ -38,6 +38,10 @@ export default function CreateAccount() {
 
   let navigate = useNavigate();
 
+  useEffect(() => {
+    navigate("/dashboard");
+  }, [token]);
+
   const handleCreateAccount = ({ name, email, phone, password }) => {
     const body = { firstName: name, email, phone, password };
     fetch(`${baseUrl}/user`, {
@@ -49,8 +53,7 @@ export default function CreateAccount() {
       .then((data) => {
         if (data.ok === true && data.payload != null) {
           setToken(data.payload.token);
-          localStorage.setItem("token", data.payload);
-          navigate("/dashboard");
+          localStorage.setItem("token", data.payload.token);
         }
       })
       .catch((error) => {
