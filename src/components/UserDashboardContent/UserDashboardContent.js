@@ -2,12 +2,13 @@ import Button from "../Button/Button";
 import { Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 import baseUrl from "../../utils/baseUrls";
+import { number } from "yup";
 export default function UserDashboardContent() {
   const {
     token: [token, setToken],
   } = useOutletContext();
   const [info, setInfo] = useState([]);
-
+ 
   useEffect(() => {
     if (token && token.length) {
       fetch(`${baseUrl}/user`, {
@@ -34,12 +35,14 @@ export default function UserDashboardContent() {
             alt="user"
           />
           <div className="flex flex-col space-y-4">
-            <Link to="completa-registro">
+
+          {info.address ==null ?  <Link to="completa-registro">
               <Button className="mt-6" variant="neutral">
                 Completa tu registro
               </Button>
-            </Link>
+            </Link> : null}
 
+          
             {info ? (
               <div className="space-y-2 pt-6">
                 <p>
