@@ -6,11 +6,11 @@ import VideoContainer from "../components/VideoContainer/VideoContainer";
 import About from "./About";
 
 export default function Home(){
-    const {token: [token, setToken]}=useOutletContext()
-    const cacalliToken = window.localStorage.getItem("cacalliToken")
-    if (cacalliToken) {
-        setToken(cacalliToken)
-    }
+    // const {token: [token, setToken]}=useOutletContext()
+    // const cacalliToken = window.localStorage.getItem("cacalliToken")
+    // if (cacalliToken) {
+    //     setToken(cacalliToken)
+    // }
     return(
         <div>
            
