@@ -2,12 +2,13 @@ import Button from "../Button/Button";
 import { Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 import baseUrl from "../../utils/baseUrls";
+
 export default function UserDashboardContent() {
   const {
     token: [token, setToken],
   } = useOutletContext();
   const [info, setInfo] = useState([]);
-
+const [hasAddress, setHasAddress]= useState(false)
   useEffect(() => {
     if (token && token.length) {
       fetch(`${baseUrl}/user`, {
@@ -20,10 +21,12 @@ export default function UserDashboardContent() {
         .then((response) => response.json())
         .then((data) => {
           setInfo(data.payload);
+          if (Object.keys(data.payload.address).length != 0) {
+            setHasAddress(true)
+          }
         });
     }
   }, [token]);
-
   return (
     <div className="flex pt-6 h-full">
       <div className="flex flex-col p-16 rounded-md  bg-orange-one text-neutral-white font-inter ">
@@ -34,12 +37,6 @@ export default function UserDashboardContent() {
             alt="user"
           />
           <div className="flex flex-col space-y-4">
-            <Link to="completa-registro">
-              <Button className="mt-6" variant="neutral">
-                Completa tu registro
-              </Button>
-            </Link>
-
             {info ? (
               <div className="space-y-2 pt-6">
                 <p>
@@ -49,6 +46,21 @@ export default function UserDashboardContent() {
                 <p> Av. México 45, Hipódromo 56789, CDMX</p>
               </div>
             ) : null}
+
+            {hasAddress ? (
+              <Link to="completa-registro">
+                <Button className="mt-6" variant="neutral">
+                Modificar datos
+                </Button>
+              </Link>
+            ) : (
+              <Link to="completa-registro">
+                <Button className="mt-6" variant="neutral">
+                Completa tu registro
+                </Button>
+              </Link>
+            )}
+            
           </div>
         </div>
       </div>
