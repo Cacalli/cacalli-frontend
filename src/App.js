@@ -27,7 +27,7 @@ import Calendly from "./pages/Calendly";
 
 
 function App() {
-  window.localStorage.clear();
+  // window.localStorage.clear();
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Root />}>
