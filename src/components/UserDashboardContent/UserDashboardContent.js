@@ -34,7 +34,7 @@ export default function UserDashboardContent() {
         });
     }
   }, [token]);
-  console.log("ADDRESSSSS", info.address);
+
   return (
     <div className="flex pt-6 h-full">
       <div className="flex flex-col p-16 rounded-md  bg-orange-one text-neutral-white font-inter ">
