@@ -45,10 +45,6 @@ function App() {
             path="completa-registro"
             element={<CreateAccountCompleteRegistry />}
           />
-          {/*<Route
-            path="profile"
-            element={<CompletedForm />}
-    />*/}
         </Route>
         <Route path="pago-exitoso" element={<SuccessPayment />} />
         <Route path="pago-fallido" element={<DeclinePayment />} />
