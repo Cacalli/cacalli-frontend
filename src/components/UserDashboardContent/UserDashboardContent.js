@@ -8,7 +8,8 @@ export default function UserDashboardContent() {
     token: [token, setToken],
   } = useOutletContext();
   const [info, setInfo] = useState([]);
-const [hasAddress, setHasAddress]= useState(false)
+  const [hasAddress, setHasAddress] = useState(false);
+  const [fullAddress, setFullAddress] = useState("");
   useEffect(() => {
     if (token && token.length) {
       fetch(`${baseUrl}/user`, {
@@ -20,13 +21,20 @@ const [hasAddress, setHasAddress]= useState(false)
       })
         .then((response) => response.json())
         .then((data) => {
-          setInfo(data.payload);
-          if (Object.keys(data.payload.address).length != 0) {
-            setHasAddress(true)
+          const {payload} = data 
+          const {address} = payload
+          const {street, neighborhood, state} = address
+          setInfo(payload);
+          if (Object.keys(address).length != 0) {
+            setHasAddress(true);
+            setFullAddress(
+              `${street}, ${neighborhood}, ${state}`
+            );
           }
         });
     }
   }, [token]);
+  console.log("ADDRESSSSS", info.address);
   return (
     <div className="flex pt-6 h-full">
       <div className="flex flex-col p-16 rounded-md  bg-orange-one text-neutral-white font-inter ">
@@ -43,24 +51,23 @@ const [hasAddress, setHasAddress]= useState(false)
                   <strong>{info.firstName}</strong>
                 </p>
                 <p>{info.phone}</p>
-                <p> Av. México 45, Hipódromo 56789, CDMX</p>
+                <p> {fullAddress}</p>
               </div>
             ) : null}
 
             {hasAddress ? (
               <Link to="completa-registro">
                 <Button className="mt-6" variant="neutral">
-                Modificar datos
+                  Modificar datos
                 </Button>
               </Link>
             ) : (
               <Link to="completa-registro">
                 <Button className="mt-6" variant="neutral">
-                Completa tu registro
+                  Completa tu registro
                 </Button>
               </Link>
             )}
-            
           </div>
         </div>
       </div>
