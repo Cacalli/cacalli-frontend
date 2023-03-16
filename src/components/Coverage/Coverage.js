@@ -1,12 +1,28 @@
 import { useState } from "react";
+import baseUrl from "../../utils/baseUrls";
 import Button from "../Button/Button";
 
 export default function Coverage() {
   const [location, setLocation] = useState("");
   const handleSearchClick = () => {
- 
+    fetch(`${baseUrl}/zone/checkZipcode/${location}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      // body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.ok === true && data.payload != null) {
+          const isAvailable = data.payload.available;
+          alert(
+            isAvailable
+              ? "Damos servicio en tu zona, te recomendamos iniciar sesión"
+              : "Por el momento no estamos disponibles en tu zona"
+          );
+        }
+      });
   };
- 
+
   return (
     <div className="bg-orange-one py-20 md:py-40">
       <div className="w-10/12 flex mx-auto">
@@ -27,7 +43,7 @@ export default function Coverage() {
                 //undefined... why?
                 onChange={(e) => setLocation(e.target.value)}
                 className="flex-1 outline-none rounded p-2 "
-                placeholder="Ubicación"
+                placeholder="Inserta tu código postal"
               />
               <Button
                 onClick={handleSearchClick}
