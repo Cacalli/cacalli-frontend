@@ -1,4 +1,5 @@
 import Button from "../Button/Button";
+import Card from "../Card/Card";
 import { Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 import baseUrl from "../../utils/baseUrls";
@@ -10,6 +11,8 @@ export default function UserDashboardContent() {
   const [info, setInfo] = useState([]);
   const [hasAddress, setHasAddress] = useState(false);
   const [fullAddress, setFullAddress] = useState("");
+  const [packageInfo, setPackageInfo] = useState([]);
+
   useEffect(() => {
     if (token && token.length) {
       fetch(`${baseUrl}/user`, {
@@ -21,15 +24,17 @@ export default function UserDashboardContent() {
       })
         .then((response) => response.json())
         .then((data) => {
-          const {payload} = data 
-          const {address} = payload
-          const {street, neighborhood, state} = address
+          const { payload } = data;
+          const { address } = payload;
+          const { street, neighborhood, state } = address;
           setInfo(payload);
           if (Object.keys(address).length != 0) {
             setHasAddress(true);
-            setFullAddress(
-              `${street}, ${neighborhood}, ${state}`
-            );
+            setFullAddress(`${street}, ${neighborhood}, ${state}`);
+          }
+          if (payload.subscription.packages.length != null) {
+            setPackageInfo(payload.subscription.packages);
+            //console.log(packageInfo);
           }
         });
     }
@@ -72,6 +77,7 @@ export default function UserDashboardContent() {
         </div>
       </div>
       <div className="flex-1 flex text-center justify-center items-center h-full">
+        {/**aqui debe haber un conditional rendering */}
         <div>
           <p className="">¡Aún no tienes algún plan contratado!</p>
           <Link to="/plan-suscripcion">
@@ -79,6 +85,11 @@ export default function UserDashboardContent() {
               Seleccionar un plan
             </Button>
           </Link>
+        </div>
+        <div className="">
+          {packageInfo ? (
+            <Card>{packageInfo.map((item) => `El id es: ${item._id}`)}</Card>
+          ) : null}
         </div>
       </div>
     </div>
