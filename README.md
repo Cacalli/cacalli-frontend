@@ -96,8 +96,8 @@ React, Javascript, Tailwind, Formik, Yup, Gitflow
 
 # INSTALLING DEPENDENCIES FROM THE PROJECT
 * You can use the following command in your console to install every dependency on the project in case you don't have them
-**npm i**
+* **npm i**
 
 # RUN THE PROJECT
 * If you want to run the project in your computer, right down the following command in your console
-**npm start*
+* **npm start**
