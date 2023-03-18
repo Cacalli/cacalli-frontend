@@ -3,7 +3,7 @@ import Card from "../Card/Card";
 import { Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 import baseUrl from "../../utils/baseUrls";
-import Card from "../Card/Card";
+
 export default function UserDashboardContent() {
   const {
     token: [token, setToken],
