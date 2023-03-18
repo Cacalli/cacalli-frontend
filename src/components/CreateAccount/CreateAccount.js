@@ -63,18 +63,13 @@ export default function CreateAccount() {
       });
   };
 
-  // {
-  //   "email": "dos@kkli.com",
-  //   "password": "etss",
-  //   "firstName": "persona",
-  //   "phone": "5555555555",
-  // }
-
   return (
-    <div className="flex justify-center gap-28 mt-6">
-      <img className="h-auto" src="/assets/landscape-login.png" />
+    <div className="flex md:flex-row flex-col md:w-11/12 lg:w-8/12 mx-auto justify-center gap-10 md:gap-14 mt-6">
+<div className="md:w-1/2">
+<img className="md:h-full h-60 md:w-auto w-full object-cover md:rounded-lg" style={{objectPosition:"top -30px right 0"}} src="/assets/landscape-login.png" />
 
-      <div className="ml-8 w-96">
+</div>
+      <div className="md:w-1/2 p-10">
         <p className="font-bold text-neutral-gray-two text-2xl mb-6">
           Crea tu cuenta
         </p>
