@@ -53,25 +53,25 @@ export default function Header() {
           </>
         ) : null}
 
-        <NavLink to="carrito">
-          <Button variant="secondary">
-            <AiOutlineShoppingCart size="1.5em" />
-          </Button>
-        </NavLink>
-
-        {isLoggedIn ? 
-          <div className="flex space-x-4">
-            <Link className="text-orange-one" to="/dashboard">Perfil</Link>
-     <button
-            className="flex text-orange-one space-x-2 items-center"
-            onClick={handleLogout}
-          >
-            <FaSignOutAlt size="1.25em" />
-            <span>Salir</span>
-          </button>
+        {isLoggedIn ? (
+          <div className="flex space-x-3 items-center">
+            <NavLink to="carrito">
+              <Button variant="secondary">
+                <AiOutlineShoppingCart size="1.5em" />
+              </Button>
+            </NavLink>
+            <Link className="text-orange-one" to="/dashboard">
+              Perfil
+            </Link>
+            <button
+              className="flex text-orange-one space-x-2 "
+              onClick={handleLogout}
+            >
+              <FaSignOutAlt size="1.25em" />
+              <span>Salir</span>
+            </button>
           </div>
-     
-        : null}
+        ) : null}
       </nav>
     </header>
   );
