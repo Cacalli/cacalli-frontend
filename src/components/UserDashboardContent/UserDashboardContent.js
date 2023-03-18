@@ -85,18 +85,18 @@ export default function UserDashboardContent() {
         </div>
       </div>
       <div className="flex-1 flex text-center justify-center items-center h-full">
-        <div>
-          <p className="">¡Aún no tienes algún plan contratado!</p>
-          <Link to="/plan-suscripcion">
-            <Button variant="primary" inverse>
-              Seleccionar un plan
-            </Button>
-          </Link>
-        </div>
+        
 {packageInfo ? <Card>
         <p> {packageInfo.map((item)=>(`EL ID ES: ${item._id}`))}</p>
           </Card>
-         : null}
+         : <div>
+         <p className="">¡Aún no tienes algún plan contratado!</p>
+         <Link to="/plan-suscripcion">
+           <Button variant="primary" inverse>
+             Seleccionar un plan
+           </Button>
+         </Link>
+       </div>}
 
 {/* {packageInfo != null ?  <div>
           <p className="">¡Aún no tienes algún plan contratado!</p>
