@@ -5,13 +5,12 @@ import { useEffect, useState } from "react";
 import baseUrl from "../../utils/baseUrls";
 
 export default function UserDashboardContent() {
-  const {
-    token: [token, setToken],
-  } = useOutletContext();
+  const token = window.localStorage.getItem("cacalliToken");
+
   const [info, setInfo] = useState([]);
   const [hasAddress, setHasAddress] = useState(false);
   const [fullAddress, setFullAddress] = useState("");
-  const [packageInfo, setPackageInfo] = useState([])
+  const [packageInfo, setPackageInfo] = useState([]);
   // const [hasPackage, setHasPackage] = useState(false)
   useEffect(() => {
     if (token && token.length) {
@@ -36,14 +35,13 @@ export default function UserDashboardContent() {
             setPackageInfo(payload.subscription.packages);
             //console.log(packageInfo);
           }
-           if (payload.subscription.packages.length != null) {
+          if (payload.subscription.packages.length != null) {
             // setHasPackage(true)
-            setPackageInfo(payload.subscription.packages) 
-           }
+            setPackageInfo(payload.subscription.packages);
+          }
           //  {
           //   setPackageInfo(payload.subscription.packages)
           // }
-         
         });
     }
   }, [token]);
@@ -85,20 +83,22 @@ export default function UserDashboardContent() {
         </div>
       </div>
       <div className="flex-1 flex text-center justify-center items-center h-full">
-        
-{packageInfo ? <Card>
-        <p> {packageInfo.map((item)=>(`EL ID ES: ${item._id}`))}</p>
+        {packageInfo ? (
+          <Card>
+            <p> {packageInfo.map((item) => `EL ID ES: ${item._id}`)}</p>
           </Card>
-         : <div>
-         <p className="">¡Aún no tienes algún plan contratado!</p>
-         <Link to="/plan-suscripcion">
-           <Button variant="primary" inverse>
-             Seleccionar un plan
-           </Button>
-         </Link>
-       </div>}
+        ) : (
+          <div>
+            <p className="">¡Aún no tienes algún plan contratado!</p>
+            <Link to="/plan-suscripcion">
+              <Button variant="primary" inverse>
+                Seleccionar un plan
+              </Button>
+            </Link>
+          </div>
+        )}
 
-{/* {packageInfo != null ?  <div>
+        {/* {packageInfo != null ?  <div>
           <p className="">¡Aún no tienes algún plan contratado!</p>
           <Link to="/plan-suscripcion">
             <Button variant="primary" inverse>
@@ -109,7 +109,6 @@ export default function UserDashboardContent() {
         <p> {packageInfo.map((item)=>(`EL ID ES: ${item._id}`))}</p>
           </Card>
         } */}
-
       </div>
     </div>
   );
