@@ -28,13 +28,14 @@ export default function SubscriptionPlan() {
         quantity: tempArray[index].quantity + 1,
       };
     }
-
     setCartItems(tempArray);
     setShowFlag(true);
     setTimeout(function () {
       setShowFlag(false);
     }, 5000);
   };
+
+  const [plan, setPlan] = useState("");
 
   return (
     <div>
@@ -49,16 +50,21 @@ export default function SubscriptionPlan() {
         <p className=" text-neutral-gray-one font-semibold text-lg">
           Selecciona tu tipo de plan
         </p>
-        <button
-          className="text-neutral-white py-1 px-2 rounded bg-green-three font-semibold "
-          variant="primary"
+        <Button
+          onClick={() => setPlan("Semanal")}
+          className="text-neutral-gray-three font-semibold "
           inverse
+          variant={plan === "Semanal" ? "primary" : ""}
         >
           Semanal
-        </button>
-        <button className="text-neutral-gray-one  font-semibold">
+        </Button>
+        <Button
+          className="text-neutral-gray-three font-semibold"
+          onClick={() => setPlan("Quincenal")}
+          variant={plan === "Quincenal" ? "primary" : ""}
+        >
           Quincenal
-        </button>
+        </Button>
       </div>
 
       <div className="grid w-10/12 mx-auto card-wrapper gap-12 mb-14">
