@@ -1,4 +1,5 @@
 import Button from "../Button/Button";
+import Card from "../Card/Card";
 import { Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 import baseUrl from "../../utils/baseUrls";
@@ -10,6 +11,8 @@ export default function UserDashboardContent() {
   const [info, setInfo] = useState([]);
   const [hasAddress, setHasAddress] = useState(false);
   const [fullAddress, setFullAddress] = useState("");
+  const [packageInfo, setPackageInfo] = useState([])
+  // const [hasPackage, setHasPackage] = useState(false)
   useEffect(() => {
     if (token && token.length) {
       fetch(`${baseUrl}/user`, {
@@ -21,16 +24,26 @@ export default function UserDashboardContent() {
       })
         .then((response) => response.json())
         .then((data) => {
-          const {payload} = data 
-          const {address} = payload
-          const {street, neighborhood, state} = address
+          const { payload } = data;
+          const { address } = payload;
+          const { street, neighborhood, state } = address;
           setInfo(payload);
           if (Object.keys(address).length != 0) {
             setHasAddress(true);
-            setFullAddress(
-              `${street}, ${neighborhood}, ${state}`
-            );
+            setFullAddress(`${street}, ${neighborhood}, ${state}`);
           }
+          if (payload.subscription.packages.length != null) {
+            setPackageInfo(payload.subscription.packages);
+            //console.log(packageInfo);
+          }
+           if (payload.subscription.packages.length != null) {
+            // setHasPackage(true)
+            setPackageInfo(payload.subscription.packages) 
+           }
+          //  {
+          //   setPackageInfo(payload.subscription.packages)
+          // }
+         
         });
     }
   }, [token]);
@@ -80,6 +93,23 @@ export default function UserDashboardContent() {
             </Button>
           </Link>
         </div>
+{packageInfo ? <Card>
+        <p> {packageInfo.map((item)=>(`EL ID ES: ${item._id}`))}</p>
+          </Card>
+         : null}
+
+{/* {packageInfo != null ?  <div>
+          <p className="">¡Aún no tienes algún plan contratado!</p>
+          <Link to="/plan-suscripcion">
+            <Button variant="primary" inverse>
+              Seleccionar un plan
+            </Button>
+          </Link>
+        </div> : <Card>
+        <p> {packageInfo.map((item)=>(`EL ID ES: ${item._id}`))}</p>
+          </Card>
+        } */}
+
       </div>
     </div>
   );
