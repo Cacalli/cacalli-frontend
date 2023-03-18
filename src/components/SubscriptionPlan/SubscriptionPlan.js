@@ -1,8 +1,12 @@
 import { useState } from "react";
-import { Link, NavLink, useOutletContext } from "react-router-dom";
+import {
+  Link,
+  useOutletContext,
+} from "react-router-dom";
 import useFetch from "../../hooks/UseFetch";
 import Button from "../Button/Button";
-import Toggle from "../Toggle/Toggle";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import SubscriptionPlanCard from "./SubscriptionPlanCard";
 
 export default function SubscriptionPlan() {
@@ -11,8 +15,22 @@ export default function SubscriptionPlan() {
     token: [token, setToken],
   } = useOutletContext();
 
-  const [showFlag, setShowFlag] = useState(false);
   const onAddToCartClick = (size, price, inscriptionPrice) => {
+    if (!token) {
+      toast.info(
+        <div>
+          <span>Para adquirir un paquete es necesario</span>{" "}
+          <Link
+            className="text-orange-one font-bold hover:underline"
+            to="/ingresa"
+          >
+            iniciar sesión
+          </Link>
+        </div>,
+        { position: toast.POSITION.TOP_RIGHT }
+      );
+      return;
+    }
     const tempArray = [...cartItems];
     if (!tempArray.find((item) => item.price === price)) {
       tempArray.push({
@@ -29,10 +47,9 @@ export default function SubscriptionPlan() {
       };
     }
     setCartItems(tempArray);
-    setShowFlag(true);
-    setTimeout(function () {
-      setShowFlag(false);
-    }, 5000);
+    toast.success("¡Paquete añadido a tu carrito!", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
   };
 
   const [plan, setPlan] = useState("");
@@ -152,9 +169,7 @@ export default function SubscriptionPlan() {
           adicionales al costo de cada plan
         </p>
       </div>
-      <div className="fixed top-0 right-0">
-        {showFlag ? <div className="fixed top-0 right-0">FLAG</div> : null}
-      </div>
+      <ToastContainer />
     </div>
   );
 }
