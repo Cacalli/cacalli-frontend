@@ -5,6 +5,7 @@ import Input from "../Input/Input";
 import Dropdown from "../Dropdown/Dropdown";
 import completeRegistrySchema from "../../schemas/completeRegistry";
 import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
+import baseUrl from "../../utils/baseUrls";
 
 //http://ec2-34-227-93-62.compute-1.amazonaws.com
 
@@ -16,22 +17,18 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
     token: [token, setToken],
   } = useOutletContext();
   let navigate = useNavigate();
-  //const url = "localhost:8001/zone/checkZipcode?" + New
+
   const handleOnSubmit = () => {
-    console.log(formik.values);
-    fetch(`http://localhost:8001/user/complete`, {
+    fetch(`${baseUrl}/user/complete`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ` + token,
       },
       body: JSON.stringify(formik.values),
-      // {...formik.values, formik.values.number: parseInt(formik.values.number)}
     })
-      // .then( console.log(JSON.stringify(formik.values)))
       .then((response) => response.json())
       .then((data) => {
-        console.log("data: ", data);
         if (formik.values) {
           navigate("/dashboard");
         }
@@ -44,13 +41,10 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
 
   const validateZipCode = () => {
     if (formik.values.zipcode.length === 5) {
-      fetch(
-        `http://localhost:8001/zone/checkZipcode/${formik.values.zipcode}`,
-        {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+      fetch(`${baseUrl}/zone/checkZipcode/${formik.values.zipcode}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      })
         .then((response) => response.json())
         .then((data) => {
           if (data.payload.available) {
@@ -67,7 +61,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
   };
 
   const validateAvailableDays = () => {
-    fetch(`http://localhost:8001/zone/daysAvailable/${formik.values.zipcode}`, {
+    fetch(`${baseUrl}/zone/daysAvailable/${formik.values.zipcode}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       //body: JSON.stringify(body),
@@ -75,7 +69,6 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
       .then((response) => response.json())
       .then((data) => {
         setAvailableDays(data.payload);
-        validateAvailableHours();
       })
       .catch((error) => {
         console.error(error);
@@ -83,10 +76,12 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
       });
   };
 
-  const validateAvailableHours = () => {
+  const validateAvailableHours = (day) => {
     // setAvailableHours(hours);
+
     fetch(
-      `http://localhost:8001/zone/schedulesAvailable/${formik.values.zipcode}/Lunes`,
+      `${baseUrl}/zone/schedulesAvailable/${formik.values.zipcode}/${day}`,
+
       {
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -110,7 +105,7 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
   const handleDropDown = (value, name) => {
     formik.setValues({ ...formik.values, [name]: value });
     if (name === "day") {
-      validateAvailableHours();
+      validateAvailableHours(value);
     }
   };
 

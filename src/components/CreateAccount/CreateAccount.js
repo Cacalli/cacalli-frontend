@@ -2,8 +2,9 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import { ErrorMessage, Form, Formik } from "formik";
 import * as Yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import baseUrl from "../../utils/baseUrls";
 
 export default function CreateAccount() {
   const createAccountSchema = Yup.object().shape({
@@ -37,20 +38,24 @@ export default function CreateAccount() {
 
   let navigate = useNavigate();
 
+  useEffect(() => {
+    if (token.length) {
+      navigate("/dashboard");
+    }
+  }, [token]);
+
   const handleCreateAccount = ({ name, email, phone, password }) => {
     const body = { firstName: name, email, phone, password };
-    fetch("http://localhost:8001/user", {
+    fetch(`${baseUrl}/user`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data.ok === true && data.payload != null) {
-          setToken(data.payload);
-          localStorage.setItem("token", data.payload);
-          navigate("/dashboard");
+          setToken(data.payload.token);
+          localStorage.setItem("cacalliToken", data.payload.token);
         }
       })
       .catch((error) => {

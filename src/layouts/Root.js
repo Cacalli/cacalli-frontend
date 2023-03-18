@@ -6,6 +6,7 @@ import { useState } from "react";
 export default function Root() {
   const [cartItems, setCartItems] = useState([]);
   const [token, setToken] = useState("");
+//  setToken( window.localStorage.getItem("cacalliToken"))
   return (
     <div className="flex flex-col h-screen min-h-screen">
       <Header />
@@ -18,7 +19,7 @@ export default function Root() {
         />
       </main>
 
-      <Footer />
+      {!token ? <Footer /> : null}
     </div>
   );
 }

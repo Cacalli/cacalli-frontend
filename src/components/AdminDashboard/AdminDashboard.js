@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import Button from "../Button/Button";
+import baseUrl from "../../utils/baseUrls";
 
 export default function AdminDashboard() {
   const [filter, setFilter] = useState("Usuario");
@@ -8,24 +9,23 @@ export default function AdminDashboard() {
     token: [token, setToken],
   } = useOutletContext();
 
-  const [users, setUsers] = useState([])
-useEffect(()=>{
-  fetch("http://localhost:8001/user/all", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.table(data.payload)
-      setUsers(data.payload);
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    fetch(`${baseUrl}/user/all`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
     })
-    .catch((error) => {
-      throw new Error("Hay un problema para completar el pago D:");
-    });
-}, [])
+      .then((response) => response.json())
+      .then((data) => {
+        setUsers(data.payload);
+      })
+      .catch((error) => {
+        throw new Error("Hay un problema para completar el pago D:");
+      });
+  }, []);
 
   return (
     <div className="flex flex-1 mt-10 mx-10 ">
@@ -51,7 +51,12 @@ useEffect(()=>{
         >
           Zonas
         </Button>
-        <select className="text-neutral-gray-two" value="" onChange={()=>{console.log("change")}}>
+        <select
+          className="text-neutral-gray-two"
+          value=""
+          // onChange={() => {
+          // }}
+        >
           <option>Elige una opción</option>
           <option>Nombre</option>
           <option>Dirección</option>
@@ -80,20 +85,27 @@ useEffect(()=>{
             </tr>
           </thead>
           <tbody>
-              {users && 
-           users.map(user => {
-            return   <tr key={user.id} className="border-b border-b-orange-two text-green-two">
-            <td className="p-3">{user.firstName}</td>
-            <td className="p-3">{user.address.street} {user.address.zipCode}</td>
-            <td className="p-3">{user.phone}</td>
-            <td className="p-3">{user.email}</td>
-            <td className="p-3">3/03/23</td>
-            <td className="p-3">M</td>
-            <td className="p-3">Semanal</td>
-            <td className="p-3">No</td>
-            <td className="p-3">31/31/31</td>
-            </tr>
-           })}
+            {users &&
+              users.map((user) => {
+                return (
+                  <tr
+                    key={user.id}
+                    className="border-b border-b-orange-two text-green-two"
+                  >
+                    <td className="p-3">{user.firstName}</td>
+                    <td className="p-3">
+                      {user.address.street} {user.address.zipCode}
+                    </td>
+                    <td className="p-3">{user.phone}</td>
+                    <td className="p-3">{user.email}</td>
+                    <td className="p-3">3/03/23</td>
+                    <td className="p-3">M</td>
+                    <td className="p-3">Semanal</td>
+                    <td className="p-3">No</td>
+                    <td className="p-3">31/31/31</td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </div>
