@@ -20,7 +20,6 @@ export default function AdminDashboard() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.table(data.payload);
         setUsers(data.payload);
       })
       .catch((error) => {
