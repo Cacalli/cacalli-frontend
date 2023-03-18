@@ -5,20 +5,25 @@ import { useEffect, useState } from "react";
 import baseUrl from "../../utils/baseUrls";
 
 export default function UserDashboardContent() {
-  const token = window.localStorage.getItem("cacalliToken");
-
   const [info, setInfo] = useState([]);
   const [hasAddress, setHasAddress] = useState(false);
   const [fullAddress, setFullAddress] = useState("");
   const [packageInfo, setPackageInfo] = useState([]);
   // const [hasPackage, setHasPackage] = useState(false)
   useEffect(() => {
-    if (token && token.length) {
+    setTimeout(() => {
+      fetchUser();
+    }, 1500);
+  }, []);
+
+  const fetchUser = () => {
+    if (window.localStorage.getItem("cacalliToken") !== "") {
       fetch(`${baseUrl}/user`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
+          Authorization:
+            "Bearer " + window.localStorage.getItem("cacalliToken"),
         },
       })
         .then((response) => response.json())
@@ -27,24 +32,16 @@ export default function UserDashboardContent() {
           const { address } = payload;
           const { street, neighborhood, state } = address;
           setInfo(payload);
-          if (Object.keys(address).length != 0) {
+          if (Object.keys(address).length !== 0) {
             setHasAddress(true);
             setFullAddress(`${street}, ${neighborhood}, ${state}`);
           }
-          if (payload.subscription.packages.length != null) {
-            setPackageInfo(payload.subscription.packages);
-            //console.log(packageInfo);
-          }
-          if (payload.subscription.packages.length != null) {
-            // setHasPackage(true)
+          if (payload.subscription.packages.length !== null) {
             setPackageInfo(payload.subscription.packages);
           }
-          //  {
-          //   setPackageInfo(payload.subscription.packages)
-          // }
         });
     }
-  }, [token]);
+  };
 
   return (
     <div className="flex pt-6 h-full">
@@ -97,18 +94,6 @@ export default function UserDashboardContent() {
             </Link>
           </div>
         )}
-
-        {/* {packageInfo != null ?  <div>
-          <p className="">¡Aún no tienes algún plan contratado!</p>
-          <Link to="/plan-suscripcion">
-            <Button variant="primary" inverse>
-              Seleccionar un plan
-            </Button>
-          </Link>
-        </div> : <Card>
-        <p> {packageInfo.map((item)=>(`EL ID ES: ${item._id}`))}</p>
-          </Card>
-        } */}
       </div>
     </div>
   );
