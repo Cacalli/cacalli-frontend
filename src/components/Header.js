@@ -59,15 +59,19 @@ export default function Header() {
           </Button>
         </NavLink>
 
-        {isLoggedIn ? (
-          <button
+        {isLoggedIn ? 
+          <div className="flex space-x-4">
+            <Link className="text-orange-one" to="/dashboard">Perfil</Link>
+     <button
             className="flex text-orange-one space-x-2 items-center"
             onClick={handleLogout}
           >
             <FaSignOutAlt size="1.25em" />
             <span>Salir</span>
           </button>
-        ) : null}
+          </div>
+     
+        : null}
       </nav>
     </header>
   );
