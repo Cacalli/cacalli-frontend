@@ -33,15 +33,10 @@ export default function UserDashboardContent() {
           }
           if (payload.subscription.packages.length != null) {
             setPackageInfo(payload.subscription.packages);
-            //console.log(packageInfo);
           }
           if (payload.subscription.packages.length != null) {
-            // setHasPackage(true)
             setPackageInfo(payload.subscription.packages);
           }
-          //  {
-          //   setPackageInfo(payload.subscription.packages)
-          // }
         });
     }
   }, [token]);
@@ -51,8 +46,8 @@ export default function UserDashboardContent() {
       <div className="flex flex-col p-16 rounded-md  bg-orange-one text-neutral-white font-inter ">
         <div className="w-52">
           <img
-            className="h-52 w-52 mb-6"
-            src="assets/user-profile.png"
+            className="h-52 w-52 mb-6 bg-neutral-white rounded-full object-contain p-2"
+            src="assets/plant-bucket.png"
             alt="user"
           />
           <div className="flex flex-col space-y-4">
@@ -82,11 +77,31 @@ export default function UserDashboardContent() {
           </div>
         </div>
       </div>
-      <div className="flex-1 flex text-center justify-center items-center h-full">
+      <div className=" justify-center m-9">
         {packageInfo ? (
-          <Card>
-            <p> {packageInfo.map((item) => `EL ID ES: ${item._id}`)}</p>
-          </Card>
+          <div className="flex w-auto h-auto space-x-6 text-orange-one">
+            <Card className="h-full space-y-4">
+              <p className="text-neutral-gray-one font-bold">
+                Datos de tu plan de contratación
+              </p>
+              <p className="font-bold text-2xl">{info.firstName}</p>
+              <p> {packageInfo.map((item) => `EL ID ES: ${item._id}`)}</p>
+            </Card>
+            <Card className="flex space-x-6 font-bold">
+              <div>
+                <img
+                  src="/assets/sit-dog-poop.png"
+                  className="h-24 w-30 mb-6"
+                />
+              </div>
+              <div>
+                <p className=" text-neutral-gray-one">
+                  Tu KKPAK se renovará el X de X
+                </p>
+                <p className="text-orange-one text-3xl">FALTAN X DÍAS</p>
+              </div>
+            </Card>
+          </div>
         ) : (
           <div>
             <p className="">¡Aún no tienes algún plan contratado!</p>
@@ -97,18 +112,6 @@ export default function UserDashboardContent() {
             </Link>
           </div>
         )}
-
-        {/* {packageInfo != null ?  <div>
-          <p className="">¡Aún no tienes algún plan contratado!</p>
-          <Link to="/plan-suscripcion">
-            <Button variant="primary" inverse>
-              Seleccionar un plan
-            </Button>
-          </Link>
-        </div> : <Card>
-        <p> {packageInfo.map((item)=>(`EL ID ES: ${item._id}`))}</p>
-          </Card>
-        } */}
       </div>
     </div>
   );
