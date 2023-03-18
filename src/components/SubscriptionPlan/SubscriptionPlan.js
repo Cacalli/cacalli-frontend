@@ -38,19 +38,19 @@ export default function SubscriptionPlan() {
 
   return (
     <div>
-      <div className="flex justify-center my-10">
-        <h2 className="text-5xl text-green-one font-semibold pr-4">
+      <div className="flex justify-center my-10 items-center">
+        <h2 className="text-2xl md:text-5xl text-green-one font-semibold pr-4">
           PLANES DE SUSCRIPCIÓN
         </h2>
-        <img className="h-10" src="/assets/buckets.png" />
+        <img className="h-8 md:h-10" src="/assets/buckets.png" />
       </div>
 
-      <div className="flex gap-6 justify-center mb-4">
-        <p className="self-center text-neutral-gray-one text-lg font-semibold">
+      <div className="flex-col text-center md:space-y-0 space-y-4 items-center space-x-3 md:flex md:flex-row gap-6 justify-center mb-6 text-base md:text-lg">
+        <p className=" text-neutral-gray-one font-semibold text-lg">
           Selecciona tu tipo de plan
         </p>
         <button
-          className="text-neutral-white py-1 px-2 rounded bg-green-three font-semibold"
+          className="text-neutral-white py-1 px-2 rounded bg-green-three font-semibold "
           variant="primary"
           inverse
         >
@@ -111,7 +111,7 @@ export default function SubscriptionPlan() {
           ]}
         />
       </div>
-      <div className="text-xl flex justify-center mb-6">
+      <div className="text-sm font-bold md:text-xl flex justify-center mb-8 md:mb-6">
         <p className="text-neutral-gray-two">¿Aún no sabes cuál seleccionar?</p>
         <Link to="/calcula-plan">
           <p className="text-green-one pl-2">Calcula tu KKPAK ideal</p>
