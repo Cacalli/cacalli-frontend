@@ -1,4 +1,5 @@
 import Button from "../Button/Button";
+import Card from "../Card/Card";
 import { Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 import baseUrl from "../../utils/baseUrls";
@@ -23,15 +24,17 @@ export default function UserDashboardContent() {
       })
         .then((response) => response.json())
         .then((data) => {
-          const {payload} = data 
-          const {address} = payload
-          const {street, neighborhood, state} = address
+          const { payload } = data;
+          const { address } = payload;
+          const { street, neighborhood, state } = address;
           setInfo(payload);
           if (Object.keys(address).length != 0) {
             setHasAddress(true);
-            setFullAddress(
-              `${street}, ${neighborhood}, ${state}`
-            );
+            setFullAddress(`${street}, ${neighborhood}, ${state}`);
+          }
+          if (payload.subscription.packages.length != null) {
+            setPackageInfo(payload.subscription.packages);
+            //console.log(packageInfo);
           }
            if (payload.subscription.packages.length != null) {
             // setHasPackage(true)
@@ -82,7 +85,6 @@ export default function UserDashboardContent() {
         </div>
       </div>
       <div className="flex-1 flex text-center justify-center items-center h-full">
-        
         <div>
           <p className="">¡Aún no tienes algún plan contratado!</p>
           <Link to="/plan-suscripcion">
@@ -107,6 +109,7 @@ export default function UserDashboardContent() {
         <p> {packageInfo.map((item)=>(`EL ID ES: ${item._id}`))}</p>
           </Card>
         } */}
+
       </div>
     </div>
   );
