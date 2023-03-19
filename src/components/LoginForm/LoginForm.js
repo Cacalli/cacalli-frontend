@@ -8,7 +8,6 @@ import Header from "../Header";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
 
   const {
@@ -17,13 +16,13 @@ export default function LoginForm() {
 
   let navigate = useNavigate();
 
-  useEffect(() => {
+  const redirect = (role) => {
     if (role === "admin") {
       navigate("/admin");
     } else if (role === "client") {
       navigate("/dashboard");
     }
-  }, [role]);
+  };
 
   const handleLoginClick = () => {
     const body = { email: email, password: password };
@@ -36,9 +35,9 @@ export default function LoginForm() {
       .then((data) => {
         if (data.ok === true && data.payload != null) {
           setToken(data.payload);
-          setRole(data.role);
           window.localStorage.setItem("cacalliToken", data.payload);
           window.localStorage.setItem("cacalliRole", data.role);
+          redirect(data.role);
         }
       });
   };
