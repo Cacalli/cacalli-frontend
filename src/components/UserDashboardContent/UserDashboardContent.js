@@ -39,7 +39,8 @@ export default function UserDashboardContent() {
 
           if (payload.pickupInfo) {
             setPickupInfo(payload.pickupInfo);
-            setPickupInfo(payload.pickupInfo.time);
+            // setPickupInfo(payload.pickupInfo.time);
+            console.log("ES ESTO", payload.pickupInfo);
           }
 
           if (payload.subscription) {
@@ -91,14 +92,14 @@ export default function UserDashboardContent() {
             <div className="flex space-x-6 h-full">
               <Card className=" space-y-4 text-neutral-gray-one w-8/12 ">
                 {startDate ? (
-               <div>
-                   <p className="text-neutral-gray-one font-bold text-lg">
-                    Datos de tu plan de contratación
-                  </p>
-                  <p className="text-sm text-neutral-gray-two">
-                    Miembro desde {info.subscription.startDate}
-                  </p>
-               </div>
+                  <div>
+                    <p className="text-neutral-gray-one font-bold text-lg">
+                      Datos de tu plan de contratación
+                    </p>
+                    <p className="text-sm text-neutral-gray-two">
+                      Miembro desde {info.subscription.startDate}
+                    </p>
+                  </div>
                 ) : null}
 
                 <p className="font-bold text-2xl text-orange-one">
@@ -119,7 +120,8 @@ export default function UserDashboardContent() {
                   <div>
                     <p className="text-neutral-gray-one">
                       {/* //delete or not? */}
-                      Tu KKPAK se renovará el {info.pickupInfo.day}
+                      Tu KKPAK se renovará el {info.pickupInfo.day} a las{" "}
+                      {info.pickupInfo.time}
                     </p>
                     <div className="flex mt-2 space-x-3">
                       <img
@@ -127,8 +129,8 @@ export default function UserDashboardContent() {
                         className="h-24 w-30 mb-6"
                       />
                       <p className="text-green-two">
-                        Tu próxima recolección es el {info.pickupInfo.day} entre{" "}
-                        {info.pickupInfo.time}
+                        Tu próxima recolección es el{" "}
+                        {info.pickupInfo.nextPickup}
                       </p>
                     </div>
                   </div>
