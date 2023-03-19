@@ -7,7 +7,6 @@ import Input from "../Input/Input";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
   const {
     token: [token, setToken],
@@ -15,13 +14,13 @@ export default function LoginForm() {
 
   let navigate = useNavigate();
 
-  useEffect(() => {
+  const redirect = (role) => {
     if (role === "admin") {
       navigate("/admin");
     } else if (role === "client") {
       navigate("/dashboard");
     }
-  }, [role]);
+  };
 
   const handleLoginClick = () => {
     const body = { email: email, password: password };
@@ -34,8 +33,9 @@ export default function LoginForm() {
       .then((data) => {
         if (data.ok === true && data.payload != null) {
           setToken(data.payload);
-          setRole(data.role);
           window.localStorage.setItem("cacalliToken", data.payload);
+          window.localStorage.setItem("cacalliRole", data.role);
+          redirect(data.role);
         }
       });
   };
@@ -71,16 +71,15 @@ export default function LoginForm() {
             type="password"
           />
         </form>
-        <Link to="/dashboard">
-          <Button
-            onClick={handleLoginClick}
-            type="submit"
-            variant="primary"
-            isFull
-          >
-            Inicia sesión
-          </Button>
-        </Link>
+
+        <Button
+          onClick={handleLoginClick}
+          type="submit"
+          variant="primary"
+          isFull
+        >
+          Inicia sesión
+        </Button>
         <div className="flex flex-wrap mt-6 justify-center">
           <p className="text-neutral-gray-three">¿Aún no estás registrado?</p>
           <Link to="/unete">
