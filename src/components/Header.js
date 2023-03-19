@@ -10,6 +10,7 @@ export default function Header() {
     window.localStorage.clear();
     navigate("/");
   };
+  const adminLoggedIn = window.localStorage.getItem("cacalliRole") === "admin"
   return (
     <header className="flex flex-none justify-between mt-5">
       <div className="px-14 md:flex-none flex-1">
@@ -20,7 +21,8 @@ export default function Header() {
           />
         </Link>
       </div>
-      <nav className="md:flex hidden mx-8 items-center">
+
+      {!adminLoggedIn ? <>
         <Link to="quienes-somos">
           <Button variant="secondary" inverse>
             Quiénes somos
@@ -41,7 +43,8 @@ export default function Header() {
             Contacto
           </Button>
         </Link>
-
+      </> : null}
+      <nav className="md:flex hidden mx-8 items-center">
         {!isLoggedIn ? (
           <>
             <NavLink to="unete">
@@ -55,7 +58,8 @@ export default function Header() {
 
         {isLoggedIn ? (
           <div className="flex space-x-3 items-center">
-            <NavLink to="carrito">
+            {!adminLoggedIn ? <>
+              <NavLink to="carrito"> 
               <Button variant="secondary">
                 <AiOutlineShoppingCart size="1.5em" />
               </Button>
@@ -63,8 +67,9 @@ export default function Header() {
             <Link className="text-orange-one" to="/dashboard">
               Perfil
             </Link>
+            </> : null}
             <button
-              className="flex text-orange-one space-x-2 "
+              className="flex text-orange-one space-x-2"
               onClick={handleLogout}
             >
               <FaSignOutAlt size="1.25em" />
