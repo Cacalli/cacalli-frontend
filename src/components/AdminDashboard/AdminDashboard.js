@@ -5,13 +5,11 @@ import baseUrl from "../../utils/baseUrls";
 
 export default function AdminDashboard() {
   const [filter, setFilter] = useState("Usuario");
-  const {
-    token: [token, setToken],
-  } = useOutletContext();
+  const token = window.localStorage.getItem("cacalliToken");
 
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    fetch(`${baseUrl}/user/all`, {
+    fetch(`${baseUrl}/admin/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -26,6 +24,10 @@ export default function AdminDashboard() {
         throw new Error("Hay un problema para completar el pago D:");
       });
   }, []);
+
+  const setUserStatus = (user) => {
+    console.log(user);
+  };
 
   return (
     <div className="flex flex-1 mt-10 mx-10 ">
@@ -93,9 +95,9 @@ export default function AdminDashboard() {
                     className="border-b border-b-orange-two text-green-two"
                   >
                     <td className="p-3">{user.firstName}</td>
-                    <td className="p-3">
+                    {/* <td className="p-3">
                       {user.address.street} {user.address.zipCode}
-                    </td>
+                    </td> */}
                     <td className="p-3">{user.phone}</td>
                     <td className="p-3">{user.email}</td>
                     <td className="p-3">3/03/23</td>
@@ -103,6 +105,15 @@ export default function AdminDashboard() {
                     <td className="p-3">Semanal</td>
                     <td className="p-3">No</td>
                     <td className="p-3">31/31/31</td>
+                    <td>
+                      <button
+                        onClick={() => {
+                          setUserStatus(user);
+                        }}
+                      >
+                        atrasado
+                      </button>
+                    </td>
                   </tr>
                 );
               })}

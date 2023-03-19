@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import baseUrl from "../../utils/baseUrls";
 import Input from "../Input/Input";
+import Header from "../Header";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const {
     token: [token, setToken],
   } = useOutletContext();
@@ -71,7 +73,6 @@ export default function LoginForm() {
             type="password"
           />
         </form>
-
         <Button
           onClick={handleLoginClick}
           type="submit"
