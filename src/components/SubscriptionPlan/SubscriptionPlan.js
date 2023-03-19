@@ -1,8 +1,12 @@
 import { useState } from "react";
-import { Link, NavLink, useOutletContext } from "react-router-dom";
+import {
+  Link,
+  useOutletContext,
+} from "react-router-dom";
 import useFetch from "../../hooks/UseFetch";
 import Button from "../Button/Button";
-import Toggle from "../Toggle/Toggle";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import SubscriptionPlanCard from "./SubscriptionPlanCard";
 
 export default function SubscriptionPlan() {
@@ -11,8 +15,22 @@ export default function SubscriptionPlan() {
     token: [token, setToken],
   } = useOutletContext();
 
-  const [showFlag, setShowFlag] = useState(false);
   const onAddToCartClick = (size, price, inscriptionPrice) => {
+    if (!token) {
+      toast.info(
+        <div>
+          <span>Para adquirir un paquete es necesario</span>{" "}
+          <Link
+            className="text-orange-one font-bold hover:underline"
+            to="/ingresa"
+          >
+            iniciar sesión
+          </Link>
+        </div>,
+        { position: toast.POSITION.TOP_RIGHT }
+      );
+      return;
+    }
     const tempArray = [...cartItems];
     if (!tempArray.find((item) => item.price === price)) {
       tempArray.push({
@@ -28,37 +46,42 @@ export default function SubscriptionPlan() {
         quantity: tempArray[index].quantity + 1,
       };
     }
-
     setCartItems(tempArray);
-    setShowFlag(true);
-    setTimeout(function () {
-      setShowFlag(false);
-    }, 5000);
+    toast.success("¡Paquete añadido a tu carrito!", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
   };
+
+  const [plan, setPlan] = useState("");
 
   return (
     <div>
-      <div className="flex justify-center my-10">
-        <h2 className="text-5xl text-green-one font-semibold pr-4">
+      <div className="flex justify-center my-10 items-center">
+        <h2 className="text-2xl md:text-5xl text-green-one font-semibold pr-4">
           PLANES DE SUSCRIPCIÓN
         </h2>
-        <img className="h-10" src="/assets/buckets.png" />
+        <img className="h-8 md:h-10" src="/assets/buckets.png" />
       </div>
 
-      <div className="flex gap-6 justify-center mb-4">
-        <p className="self-center text-neutral-gray-one text-lg font-semibold">
+      <div className="flex-col text-center md:space-y-0 space-y-4 items-center space-x-3 md:flex md:flex-row gap-6 justify-center mb-6 text-base md:text-lg">
+        <p className=" text-neutral-gray-one font-semibold text-lg">
           Selecciona tu tipo de plan
         </p>
-        <button
-          className="text-neutral-white py-1 px-2 rounded bg-green-three font-semibold"
-          variant="primary"
+        <Button
+          onClick={() => setPlan("Semanal")}
+          className="text-neutral-gray-three font-semibold "
           inverse
+          variant={plan === "Semanal" ? "primary" : ""}
         >
           Semanal
-        </button>
-        <button className="text-neutral-gray-one  font-semibold">
+        </Button>
+        <Button
+          className="text-neutral-gray-three font-semibold"
+          onClick={() => setPlan("Quincenal")}
+          variant={plan === "Quincenal" ? "primary" : ""}
+        >
           Quincenal
-        </button>
+        </Button>
       </div>
 
       <div className="grid w-10/12 mx-auto card-wrapper gap-12 mb-14">
@@ -111,7 +134,7 @@ export default function SubscriptionPlan() {
           ]}
         />
       </div>
-      <div className="text-xl flex justify-center mb-6">
+      <div className="text-sm font-bold md:text-xl flex justify-center mb-8 md:mb-6">
         <p className="text-neutral-gray-two">¿Aún no sabes cuál seleccionar?</p>
         <Link to="/calcula-plan">
           <p className="text-green-one pl-2">Calcula tu KKPAK ideal</p>
@@ -146,9 +169,7 @@ export default function SubscriptionPlan() {
           adicionales al costo de cada plan
         </p>
       </div>
-      <div className="fixed top-0 right-0">
-        {showFlag ? <div className="fixed top-0 right-0">FLAG</div> : null}
-      </div>
+      <ToastContainer />
     </div>
   );
 }

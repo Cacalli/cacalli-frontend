@@ -1,6 +1,9 @@
 import { useState } from "react";
 import baseUrl from "../../utils/baseUrls";
 import Button from "../Button/Button";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 export default function Coverage() {
   const [location, setLocation] = useState("");
@@ -8,17 +11,29 @@ export default function Coverage() {
     fetch(`${baseUrl}/zone/checkZipcode/${location}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
-      // body: JSON.stringify(body),
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.ok === true && data.payload != null) {
-          const isAvailable = data.payload.available;
-          alert(
-            isAvailable
-              ? "Damos servicio en tu zona, te recomendamos iniciar sesión"
-              : "Por el momento no estamos disponibles en tu zona"
+        const isAvailable = data.payload.available;
+        if (isAvailable) {
+          toast.info(
+            <div>
+              <span>Damos servicio en tu zona, te recomendamos</span>{" "}
+              <Link
+                className="text-orange-one font-bold hover:underline"
+                to="/ingresa"
+              >
+                iniciar sesión
+              </Link>
+            </div>,
+            {
+              position: toast.POSITION.TOP_CENTER,
+            }
           );
+        } else {
+          toast.info("Por el momento no estamos disponibles en tu zona", {
+            position: toast.POSITION.TOP_CENTER,
+          });
         }
       });
   };
@@ -62,6 +77,7 @@ export default function Coverage() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

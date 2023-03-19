@@ -11,7 +11,9 @@ export default function UserDashboardContent() {
   const [hasAddress, setHasAddress] = useState(false);
   const [fullAddress, setFullAddress] = useState("");
   const [packageInfo, setPackageInfo] = useState([]);
-  // const [hasPackage, setHasPackage] = useState(false)
+  const [pickupInfo, setPickupInfo] = useState("");
+  const [startDate, setStartDate] = useState("");
+
   useEffect(() => {
     if (token && token.length) {
       fetch(`${baseUrl}/user`, {
@@ -33,15 +35,16 @@ export default function UserDashboardContent() {
           }
           if (payload.subscription.packages.length != null) {
             setPackageInfo(payload.subscription.packages);
-            //console.log(packageInfo);
           }
-          if (payload.subscription.packages.length != null) {
-            // setHasPackage(true)
-            setPackageInfo(payload.subscription.packages);
+
+          if (payload.pickupInfo) {
+            setPickupInfo(payload.pickupInfo);
+            setPickupInfo(payload.pickupInfo.time);
           }
-          //  {
-          //   setPackageInfo(payload.subscription.packages)
-          // }
+
+          if (payload.subscription) {
+            setStartDate(payload.subscription.startDate);
+          }
         });
     }
   }, [token]);
@@ -51,8 +54,8 @@ export default function UserDashboardContent() {
       <div className="flex flex-col p-16 rounded-md  bg-orange-one text-neutral-white font-inter ">
         <div className="w-52">
           <img
-            className="h-52 w-52 mb-6"
-            src="assets/user-profile.png"
+            className="h-52 w-52 mb-6 bg-neutral-white rounded-full object-contain p-2"
+            src="assets/plant-bucket.png"
             alt="user"
           />
           <div className="flex flex-col space-y-4">
@@ -82,11 +85,63 @@ export default function UserDashboardContent() {
           </div>
         </div>
       </div>
-      <div className="flex-1 flex text-center justify-center items-center h-full">
+      <div className=" justify-center m-9">
         {packageInfo ? (
-          <Card>
-            <p> {packageInfo.map((item) => `EL ID ES: ${item._id}`)}</p>
-          </Card>
+          <div>
+            <div className="flex space-x-6 h-full">
+              <Card className=" space-y-4 text-neutral-gray-one w-8/12 ">
+                {startDate ? (
+               <div>
+                   <p className="text-neutral-gray-one font-bold text-lg">
+                    Datos de tu plan de contratación
+                  </p>
+                  <p className="text-sm text-neutral-gray-two">
+                    Miembro desde {info.subscription.startDate}
+                  </p>
+               </div>
+                ) : null}
+
+                <p className="font-bold text-2xl text-orange-one">
+                  {info.firstName}
+                </p>
+                <p></p>
+                <p>
+                  {" "}
+                  {packageInfo.map(
+                    (item) =>
+                      `${item.quantity} paquete ${item.packageName} contratados`
+                  )}
+                </p>
+              </Card>
+
+              {pickupInfo ? (
+                <Card className="flex space-x-6 font-bold">
+                  <div>
+                    <p className="text-neutral-gray-one">
+                      {/* //delete or not? */}
+                      Tu KKPAK se renovará el {info.pickupInfo.day}
+                    </p>
+                    <div className="flex mt-2 space-x-3">
+                      <img
+                        src="/assets/sit-dog-poop.png"
+                        className="h-24 w-30 mb-6"
+                      />
+                      <p className="text-green-two">
+                        Tu próxima recolección es el {info.pickupInfo.day} entre{" "}
+                        {info.pickupInfo.time}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              ) : null}
+            </div>
+            <Card>
+              <p className="mt-4 text-orange-one">Historial de pagos</p>
+              <div className="bg-orange-three">
+                <p>example</p>
+              </div>
+            </Card>
+          </div>
         ) : (
           <div>
             <p className="">¡Aún no tienes algún plan contratado!</p>
@@ -97,18 +152,6 @@ export default function UserDashboardContent() {
             </Link>
           </div>
         )}
-
-        {/* {packageInfo != null ?  <div>
-          <p className="">¡Aún no tienes algún plan contratado!</p>
-          <Link to="/plan-suscripcion">
-            <Button variant="primary" inverse>
-              Seleccionar un plan
-            </Button>
-          </Link>
-        </div> : <Card>
-        <p> {packageInfo.map((item)=>(`EL ID ES: ${item._id}`))}</p>
-          </Card>
-        } */}
       </div>
     </div>
   );

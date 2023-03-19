@@ -9,24 +9,24 @@ export default function ContactContent() {
       </div>
 
       <div className="my-10 text-center">
-      <p className="font-bold text-6xl my-4 text-green-three"> CONTÁCTANOS</p>
-        <p className="text-2xl text-orange-one font-josefin-sans">
+      <p className="font-bold text-4xl md:text-6xl my-4 text-green-three"> CONTÁCTANOS</p>
+        <p className="text-lg md:text-2xl text-orange-one font-josefin-sans">
           Nos gustaría saber tus dudas
         </p>
        
       </div>
 
-      <div className="flex gap-10 my-10 text-center mx-10 place-content-center">
-        <Card className=" text-2xl text-orange-one w-96">
-            <p className="mb-4">
-                <FaWhatsapp className="mx-auto mb-4" size="1.5em"/>
-                555-cacalli
+      <div className="flex flex-wrap gap-10 my-10 text-center mx-10 place-content-center">
+        <Card className="text-orange-one w-96 mb-6 max-w-full">
+            <p className="mb-4 ">
+                <FaWhatsapp className="mx-auto mb-2 md:mb-4 text-2xl" size="1.2em"/>
+                <span className="text-base md:text-2xl">555-cacalli</span>
             </p>
         </Card>
-        <Card className="text-2xl text-orange-one w-96">
+        <Card className="text-orange-one w-96 max-w-full">
             <p className="mb-4">
-                <FaEnvelope className="mx-auto mb-4" size="1.5em"/>
-                contactocacalli@gmail.com
+                <FaEnvelope className="mx-auto mb-4 text-2xl" size="1.2em"/>
+                <span className="text-base md:text-2xl">contactocacalli@gmail.com</span>
             </p>
         </Card>
       </div>
