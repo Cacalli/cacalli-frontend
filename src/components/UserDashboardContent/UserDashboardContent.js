@@ -13,7 +13,7 @@ export default function UserDashboardContent() {
   const [packageInfo, setPackageInfo] = useState([]);
   const [pickupInfo, setPickupInfo] = useState("");
   const [startDate, setStartDate] = useState("");
-
+  const [payments, setPayments] = useState([]);
   useEffect(() => {
     if (token && token.length) {
       fetch(`${baseUrl}/user`, {
@@ -39,12 +39,13 @@ export default function UserDashboardContent() {
 
           if (payload.pickupInfo) {
             setPickupInfo(payload.pickupInfo);
-            // setPickupInfo(payload.pickupInfo.time);
-            console.log("ES ESTO", payload.pickupInfo);
           }
 
           if (payload.subscription) {
             setStartDate(payload.subscription.startDate);
+          }
+          if (payload.payments) {
+            setPayments(payload.payments);
           }
         });
     }
@@ -137,12 +138,25 @@ export default function UserDashboardContent() {
                 </Card>
               ) : null}
             </div>
-            <Card>
-              <p className="mt-4 text-orange-one">Historial de pagos</p>
-              <div className="bg-orange-three">
-                <p>example</p>
+            {payments ? (
+              <div>
+                <Card>
+                  <p className="mt-4 text-orange-one">Historial de pagos</p>
+
+                  <div className="bg-orange-three">
+                    {payments.map((item) => {
+                      return (
+                        <tr className="border-b border-b-orange-two text-neutral-gray-two">
+                          <td className="p-1">{item.fecha}</td>
+                          <td className="p-1">{item.monto}</td>
+                          <td className="p-1">{item.estado}</td>
+                        </tr>
+                      );
+                    })}
+                  </div>
+                </Card>
               </div>
-            </Card>
+            ) : null}
           </div>
         ) : (
           <div>
