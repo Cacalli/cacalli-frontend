@@ -13,7 +13,7 @@ export default function UserDashboardContent() {
   const [packageInfo, setPackageInfo] = useState([]);
   const [pickupInfo, setPickupInfo] = useState("");
   const [startDate, setStartDate] = useState("");
-
+  const [payments, setPayments] = useState([]);
   useEffect(() => {
     if (token && token.length) {
       fetch(`${baseUrl}/user`, {
@@ -39,11 +39,13 @@ export default function UserDashboardContent() {
 
           if (payload.pickupInfo) {
             setPickupInfo(payload.pickupInfo);
-            setPickupInfo(payload.pickupInfo.time);
           }
 
           if (payload.subscription) {
             setStartDate(payload.subscription.startDate);
+          }
+          if (payload.payments) {
+            setPayments(payload.payments);
           }
         });
     }
@@ -91,14 +93,14 @@ export default function UserDashboardContent() {
             <div className="flex space-x-6 h-full">
               <Card className=" space-y-4 text-neutral-gray-one w-8/12 ">
                 {startDate ? (
-               <div>
-                   <p className="text-neutral-gray-one font-bold text-lg">
-                    Datos de tu plan de contratación
-                  </p>
-                  <p className="text-sm text-neutral-gray-two">
-                    Miembro desde {info.subscription.startDate}
-                  </p>
-               </div>
+                  <div>
+                    <p className="text-neutral-gray-one font-bold text-lg">
+                      Datos de tu plan de contratación
+                    </p>
+                    <p className="text-sm text-neutral-gray-two">
+                      Miembro desde {info.subscription.startDate}
+                    </p>
+                  </div>
                 ) : null}
 
                 <p className="font-bold text-2xl text-orange-one">
@@ -119,7 +121,8 @@ export default function UserDashboardContent() {
                   <div>
                     <p className="text-neutral-gray-one">
                       {/* //delete or not? */}
-                      Tu KKPAK se renovará el {info.pickupInfo.day}
+                      Tu KKPAK se renovará el {info.pickupInfo.day} a las{" "}
+                      {info.pickupInfo.time}
                     </p>
                     <div className="flex mt-2 space-x-3">
                       <img
@@ -127,20 +130,33 @@ export default function UserDashboardContent() {
                         className="h-24 w-30 mb-6"
                       />
                       <p className="text-green-two">
-                        Tu próxima recolección es el {info.pickupInfo.day} entre{" "}
-                        {info.pickupInfo.time}
+                        Tu próxima recolección es el{" "}
+                        {info.pickupInfo.nextPickup}
                       </p>
                     </div>
                   </div>
                 </Card>
               ) : null}
             </div>
-            <Card>
-              <p className="mt-4 text-orange-one">Historial de pagos</p>
-              <div className="bg-orange-three">
-                <p>example</p>
+            {payments ? (
+              <div>
+                <Card>
+                  <p className="mt-4 text-orange-one">Historial de pagos</p>
+
+                  <div className="bg-orange-three">
+                    {payments.map((item) => {
+                      return (
+                        <tr className="border-b border-b-orange-two text-neutral-gray-two">
+                          <td className="p-1">{item.fecha}</td>
+                          <td className="p-1">{item.monto}</td>
+                          <td className="p-1">{item.estado}</td>
+                        </tr>
+                      );
+                    })}
+                  </div>
+                </Card>
               </div>
-            </Card>
+            ) : null}
           </div>
         ) : (
           <div>
