@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import baseUrl from "../../utils/baseUrls";
 import Input from "../Input/Input";
+import Header from "../Header";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
+
   const {
     token: [token, setToken],
   } = useOutletContext();
@@ -36,6 +38,7 @@ export default function LoginForm() {
           setToken(data.payload);
           setRole(data.role);
           window.localStorage.setItem("cacalliToken", data.payload);
+          window.localStorage.setItem("cacalliRole", data.role);
         }
       });
   };
@@ -71,16 +74,14 @@ export default function LoginForm() {
             type="password"
           />
         </form>
-        <Link to="/dashboard">
-          <Button
-            onClick={handleLoginClick}
-            type="submit"
-            variant="primary"
-            isFull
-          >
-            Inicia sesión
-          </Button>
-        </Link>
+        <Button
+          onClick={handleLoginClick}
+          type="submit"
+          variant="primary"
+          isFull
+        >
+          Inicia sesión
+        </Button>
         <div className="flex flex-wrap mt-6 justify-center">
           <p className="text-neutral-gray-three">¿Aún no estás registrado?</p>
           <Link to="/unete">
