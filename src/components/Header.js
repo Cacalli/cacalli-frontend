@@ -10,7 +10,7 @@ export default function Header() {
     window.localStorage.clear();
     navigate("/");
   };
-  const adminLoggedIn = window.localStorage.getItem("cacalliRole") === "admin"
+  const adminLoggedIn = window.localStorage.getItem("cacalliRole") === "admin";
   return (
     <header className="flex flex-none justify-end mt-5 items-center">
       <div className="px-14 md:flex-none flex-1 mr-auto">
@@ -22,28 +22,30 @@ export default function Header() {
         </Link>
       </div>
 
-      {!adminLoggedIn ? <div className="justify-end">
-        <Link to="quienes-somos">
-          <Button variant="secondary" inverse>
-            Quiénes somos
-          </Button>
-        </Link>
-        <Link to="calcula-plan">
-          <Button variant="secondary" inverse>
-            Calcula tu plan
-          </Button>
-        </Link>
-        <Link to="plan-suscripcion">
-          <Button variant="secondary" inverse>
-            Precios
-          </Button>
-        </Link>
-        <Link to="contacto">
-          <Button variant="secondary" inverse>
-            Contacto
-          </Button>
-        </Link>
-      </div> : null}
+      {!adminLoggedIn ? (
+        <div className="justify-end">
+          <Link to="quienes-somos">
+            <Button variant="secondary" inverse>
+              Quiénes somos
+            </Button>
+          </Link>
+          <Link to="calcula-plan">
+            <Button variant="secondary" inverse>
+              Calcula tu plan
+            </Button>
+          </Link>
+          <Link to="plan-suscripcion">
+            <Button variant="secondary" inverse>
+              Precios
+            </Button>
+          </Link>
+          <Link to="contacto">
+            <Button variant="secondary" inverse>
+              Contacto
+            </Button>
+          </Link>
+        </div>
+      ) : null}
       <nav className="md:flex hidden mr-6 items-center">
         {!isLoggedIn ? (
           <>
@@ -58,16 +60,18 @@ export default function Header() {
 
         {isLoggedIn ? (
           <div className="flex space-x-4 items-center ">
-            {!adminLoggedIn ? <>
-              <NavLink to="carrito"> 
-              <button className="text-orange-one items-center flex">
-                <AiOutlineShoppingCart size="1.5em" />
-              </button>
-            </NavLink>
-            <Link className="text-orange-one" to="/dashboard">
-              Perfil
-            </Link>
-            </> : null}
+            {!adminLoggedIn ? (
+              <>
+                <NavLink to="carrito">
+                  <button className="text-orange-one items-center flex">
+                    <AiOutlineShoppingCart size="1.5em" />
+                  </button>
+                </NavLink>
+                <Link className="text-orange-one" to="/dashboard">
+                  Perfil
+                </Link>
+              </>
+            ) : null}
             <button
               className="flex text-orange-one space-x-2 items-center"
               onClick={handleLogout}
