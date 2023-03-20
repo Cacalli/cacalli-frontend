@@ -45,7 +45,6 @@ export default function UserDashboardContent() {
             setStartDate(payload.subscription.startDate);
           }
           if (payload.payments) {
-            console.log("PAGOS", payload.payments);
             setPayments(payload.payments);
           }
         });
