@@ -40,7 +40,6 @@ export default function UserDashboardContent() {
           }
 
           if (payload.pickupInfo) {
-            console.log(payload.pickupInfo);
             const pickupDate = new Date(payload.pickupInfo.nextPickup);
             setNextPickupDate(pickupDate);
             setPickupInfo(payload.pickupInfo);
