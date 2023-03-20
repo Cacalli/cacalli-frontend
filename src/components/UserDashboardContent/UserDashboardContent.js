@@ -14,6 +14,8 @@ export default function UserDashboardContent() {
   const [pickupInfo, setPickupInfo] = useState("");
   const [startDate, setStartDate] = useState("");
   const [payments, setPayments] = useState([]);
+  const [nextPickupDate, setNextPickupDate] = useState({});
+
   useEffect(() => {
     if (token && token.length) {
       fetch(`${baseUrl}/user`, {
@@ -38,11 +40,14 @@ export default function UserDashboardContent() {
           }
 
           if (payload.pickupInfo) {
+            const pickupDate = new Date(payload.pickupInfo.nextPickup);
+            setNextPickupDate(pickupDate);
             setPickupInfo(payload.pickupInfo);
           }
 
           if (payload.subscription) {
-            setStartDate(payload.subscription.startDate);
+            const date = new Date(payload.subscription.startDate);
+            setStartDate(date);
           }
           if (payload.payments) {
             setPayments(payload.payments);
@@ -98,7 +103,9 @@ export default function UserDashboardContent() {
                       Datos de tu plan de contratación
                     </p>
                     <p className="text-sm text-neutral-gray-two">
-                      Miembro desde {info.subscription.startDate}
+                      {`Miembro desde ${startDate.getDate()} ${
+                        startDate.getMonth() + 1
+                      } ${startDate.getFullYear()}`}
                     </p>
                   </div>
                 ) : null}
@@ -131,7 +138,9 @@ export default function UserDashboardContent() {
                       />
                       <p className="text-green-two">
                         Tu próxima recolección es el{" "}
-                        {info.pickupInfo.nextPickup}
+                        {`${nextPickupDate.getDate()} ${
+                          nextPickupDate.getMonth() + 1
+                        } ${nextPickupDate.getFullYear()}`}
                       </p>
                     </div>
                   </div>
