@@ -12,8 +12,8 @@ export default function Header() {
   };
   const adminLoggedIn = window.localStorage.getItem("cacalliRole") === "admin"
   return (
-    <header className="flex flex-none justify-between mt-5">
-      <div className="px-14 md:flex-none flex-1">
+    <header className="flex flex-none justify-end mt-5 items-center">
+      <div className="px-14 md:flex-none flex-1 mr-auto">
         <Link to="/">
           <img
             className="w-30 h-14 py-2 md:mx-0 mx-auto"
@@ -22,7 +22,7 @@ export default function Header() {
         </Link>
       </div>
 
-      {!adminLoggedIn ? <>
+      {!adminLoggedIn ? <div className="justify-end">
         <Link to="quienes-somos">
           <Button variant="secondary" inverse>
             Quiénes somos
@@ -43,8 +43,8 @@ export default function Header() {
             Contacto
           </Button>
         </Link>
-      </> : null}
-      <nav className="md:flex hidden mx-8 items-center">
+      </div> : null}
+      <nav className="md:flex hidden mr-6 items-center">
         {!isLoggedIn ? (
           <>
             <NavLink to="unete">
@@ -57,19 +57,19 @@ export default function Header() {
         ) : null}
 
         {isLoggedIn ? (
-          <div className="flex space-x-3 items-center">
+          <div className="flex space-x-4 items-center ">
             {!adminLoggedIn ? <>
               <NavLink to="carrito"> 
-              <Button variant="secondary">
+              <button className="text-orange-one items-center flex">
                 <AiOutlineShoppingCart size="1.5em" />
-              </Button>
+              </button>
             </NavLink>
             <Link className="text-orange-one" to="/dashboard">
               Perfil
             </Link>
             </> : null}
             <button
-              className="flex text-orange-one space-x-2"
+              className="flex text-orange-one space-x-2 items-center"
               onClick={handleLogout}
             >
               <FaSignOutAlt size="1.25em" />
