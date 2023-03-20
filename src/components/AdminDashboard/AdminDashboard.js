@@ -36,7 +36,6 @@ export default function AdminDashboard() {
     //setFilterUsers(event.target.value);
     const stringUser = event.target.value.toLowerCase();
     if (event.target.value.length > 0) {
-      console.log(event.target.value);
       const filteredUsers = backupUsers.filter((user) => {
         return (
           user.firstName.toLowerCase().includes(stringUser) ||
