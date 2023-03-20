@@ -26,7 +26,7 @@ export default function AdminDashboard() {
   }, []);
 
   const setUserStatus = (user) => {
-    console.log(user);
+    //console.log(user);
   };
 
   return (

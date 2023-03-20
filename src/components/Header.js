@@ -10,9 +10,10 @@ export default function Header() {
     window.localStorage.clear();
     navigate("/");
   };
+  const adminLoggedIn = window.localStorage.getItem("cacalliRole") === "admin";
   return (
-    <header className="flex flex-none justify-between mt-5">
-      <div className="px-14 md:flex-none flex-1">
+    <header className="flex flex-none justify-end mt-5 items-center">
+      <div className="px-14 md:flex-none flex-1 mr-auto">
         <Link to="/">
           <img
             className="w-30 h-14 py-2 md:mx-0 mx-auto"
@@ -20,28 +21,32 @@ export default function Header() {
           />
         </Link>
       </div>
-      <nav className="md:flex hidden mx-8 items-center">
-        <Link to="quienes-somos">
-          <Button variant="secondary" inverse>
-            Quiénes somos
-          </Button>
-        </Link>
-        <Link to="calcula-plan">
-          <Button variant="secondary" inverse>
-            Calcula tu plan
-          </Button>
-        </Link>
-        <Link to="plan-suscripcion">
-          <Button variant="secondary" inverse>
-            Precios
-          </Button>
-        </Link>
-        <Link to="contacto">
-          <Button variant="secondary" inverse>
-            Contacto
-          </Button>
-        </Link>
 
+      {!adminLoggedIn ? (
+        <div className="justify-end">
+          <Link to="quienes-somos">
+            <Button variant="secondary" inverse>
+              Quiénes somos
+            </Button>
+          </Link>
+          <Link to="calcula-plan">
+            <Button variant="secondary" inverse>
+              Calcula tu plan
+            </Button>
+          </Link>
+          <Link to="plan-suscripcion">
+            <Button variant="secondary" inverse>
+              Precios
+            </Button>
+          </Link>
+          <Link to="contacto">
+            <Button variant="secondary" inverse>
+              Contacto
+            </Button>
+          </Link>
+        </div>
+      ) : null}
+      <nav className="md:flex hidden mr-6 items-center">
         {!isLoggedIn ? (
           <>
             <NavLink to="unete">
@@ -54,17 +59,21 @@ export default function Header() {
         ) : null}
 
         {isLoggedIn ? (
-          <div className="flex space-x-3 items-center">
-            <NavLink to="carrito">
-              <Button variant="secondary">
-                <AiOutlineShoppingCart size="1.5em" />
-              </Button>
-            </NavLink>
-            <Link className="text-orange-one" to="/dashboard">
-              Perfil
-            </Link>
+          <div className="flex space-x-4 items-center ">
+            {!adminLoggedIn ? (
+              <>
+                <NavLink to="carrito">
+                  <button className="text-orange-one items-center flex">
+                    <AiOutlineShoppingCart size="1.5em" />
+                  </button>
+                </NavLink>
+                <Link className="text-orange-one" to="/dashboard">
+                  Perfil
+                </Link>
+              </>
+            ) : null}
             <button
-              className="flex text-orange-one space-x-2 "
+              className="flex text-orange-one space-x-2 items-center"
               onClick={handleLogout}
             >
               <FaSignOutAlt size="1.25em" />
