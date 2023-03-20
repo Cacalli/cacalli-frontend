@@ -8,6 +8,8 @@ export default function AdminDashboard() {
   const token = window.localStorage.getItem("cacalliToken");
 
   const [users, setUsers] = useState([]);
+  const [backupUsers, setBackupUsers] = useState([]);
+
   useEffect(() => {
     fetch(`${baseUrl}/admin/users`, {
       method: "GET",
@@ -19,6 +21,7 @@ export default function AdminDashboard() {
       .then((response) => response.json())
       .then((data) => {
         setUsers(data.payload);
+        setBackupUsers(data.payload);
       })
       .catch((error) => {
         throw new Error("Hay un problema para completar el pago D:");
@@ -29,12 +32,28 @@ export default function AdminDashboard() {
     //console.log(user);
   };
 
+  const filterByName = (event) => {
+    //setFilterUsers(event.target.value);
+    const stringUser = event.target.value.toLowerCase();
+    if (event.target.value.length > 0) {
+      console.log(event.target.value);
+      const filteredUsers = backupUsers.filter((user) => {
+        return (
+          user.firstName.toLowerCase().includes(stringUser) ||
+          user.email.toLowerCase().includes(stringUser)
+        );
+      });
+      setUsers(filteredUsers);
+    }
+  };
+
   return (
     <div className="flex flex-1 mt-10 mx-10 ">
       <div className="flex flex-col pr-6 space-y-8">
         <input
           className="mt-4 border border-neutral-gray-two rounded px-4"
           placeholder="Buscar"
+          onChange={filterByName}
         />
         <Button
           onClick={() => {
