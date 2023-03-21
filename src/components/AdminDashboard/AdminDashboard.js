@@ -2,16 +2,17 @@ import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import Button from "../Button/Button";
 import baseUrl from "../../utils/baseUrls";
+import AdminFilter from "../AdminFilters/AdminFilters";
 
 export default function AdminDashboard() {
   const [filter, setFilter] = useState("Usuario");
-  const {
-    token: [token, setToken],
-  } = useOutletContext();
+  const token = window.localStorage.getItem("cacalliToken");
 
   const [users, setUsers] = useState([]);
+  const [backupUsers, setBackupUsers] = useState([]);
+
   useEffect(() => {
-    fetch(`${baseUrl}/user/all`, {
+    fetch(`${baseUrl}/admin/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -21,11 +22,30 @@ export default function AdminDashboard() {
       .then((response) => response.json())
       .then((data) => {
         setUsers(data.payload);
+        setBackupUsers(data.payload);
       })
       .catch((error) => {
         throw new Error("Hay un problema para completar el pago D:");
       });
   }, []);
+
+  const setUserStatus = (user) => {
+    //console.log(user);
+  };
+
+  const filterByName = (event) => {
+    //setFilterUsers(event.target.value);
+    const stringUser = event.target.value.toLowerCase();
+    if (event.target.value.length > 0) {
+      const filteredUsers = backupUsers.filter((user) => {
+        return (
+          user.firstName.toLowerCase().includes(stringUser) ||
+          user.email.toLowerCase().includes(stringUser)
+        );
+      });
+      setUsers(filteredUsers);
+    }
+  };
 
   return (
     <div className="flex flex-1 mt-10 mx-10 ">
@@ -33,41 +53,10 @@ export default function AdminDashboard() {
         <input
           className="mt-4 border border-neutral-gray-two rounded px-4"
           placeholder="Buscar"
+          onChange={filterByName}
         />
-        <Button
-          onClick={() => {
-            setFilter("Usuario");
-          }}
-          variant={filter === "Usuario" ? "primary" : ""}
-        >
-          Usuarios
-        </Button>
-        <Button
-          onClick={() => {
-            setFilter("Zona");
-          }}
-          className="py-1 px-2 mx-2"
-          variant={filter === "Zona" ? "primary" : ""}
-        >
-          Zonas
-        </Button>
-        <select
-          className="text-neutral-gray-two"
-          value=""
-          // onChange={() => {
-          // }}
-        >
-          <option>Elige una opción</option>
-          <option>Nombre</option>
-          <option>Dirección</option>
-          <option>Teléfono</option>
-          <option>Email</option>
-          <option>Día de recolección</option>
-          <option>Tamaño</option>
-          <option>Plan</option>
-          <option>Extra</option>
-          <option>Renovación</option>
-        </select>
+
+        <AdminFilter token={token} />
       </div>
       <div>
         <table className="table-fixed text-left border-collapse w-full shadow-md rounded-lg overflow-hidden">
@@ -93,9 +82,9 @@ export default function AdminDashboard() {
                     className="border-b border-b-orange-two text-green-two"
                   >
                     <td className="p-3">{user.firstName}</td>
-                    <td className="p-3">
+                    {/* <td className="p-3">
                       {user.address.street} {user.address.zipCode}
-                    </td>
+                    </td> */}
                     <td className="p-3">{user.phone}</td>
                     <td className="p-3">{user.email}</td>
                     <td className="p-3">3/03/23</td>
@@ -103,6 +92,15 @@ export default function AdminDashboard() {
                     <td className="p-3">Semanal</td>
                     <td className="p-3">No</td>
                     <td className="p-3">31/31/31</td>
+                    <td>
+                      <button
+                        onClick={() => {
+                          setUserStatus(user);
+                        }}
+                      >
+                        atrasado
+                      </button>
+                    </td>
                   </tr>
                 );
               })}

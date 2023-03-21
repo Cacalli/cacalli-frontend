@@ -11,7 +11,11 @@ export default function UserDashboardContent() {
   const [hasAddress, setHasAddress] = useState(false);
   const [fullAddress, setFullAddress] = useState("");
   const [packageInfo, setPackageInfo] = useState([]);
-  // const [hasPackage, setHasPackage] = useState(false)
+  const [pickupInfo, setPickupInfo] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [payments, setPayments] = useState([]);
+  const [nextPickupDate, setNextPickupDate] = useState({});
+
   useEffect(() => {
     if (token && token.length) {
       fetch(`${baseUrl}/user`, {
@@ -33,15 +37,21 @@ export default function UserDashboardContent() {
           }
           if (payload.subscription.packages.length != null) {
             setPackageInfo(payload.subscription.packages);
-            //console.log(packageInfo);
           }
-          if (payload.subscription.packages.length != null) {
-            // setHasPackage(true)
-            setPackageInfo(payload.subscription.packages);
+
+          if (payload.pickupInfo) {
+            const pickupDate = new Date(payload.pickupInfo.nextPickup);
+            setNextPickupDate(pickupDate);
+            setPickupInfo(payload.pickupInfo);
           }
-          //  {
-          //   setPackageInfo(payload.subscription.packages)
-          // }
+
+          if (payload.subscription) {
+            const date = new Date(payload.subscription.startDate);
+            setStartDate(date);
+          }
+          if (payload.payments) {
+            setPayments(payload.payments);
+          }
         });
     }
   }, [token]);
@@ -51,8 +61,8 @@ export default function UserDashboardContent() {
       <div className="flex flex-col p-16 rounded-md  bg-orange-one text-neutral-white font-inter ">
         <div className="w-52">
           <img
-            className="h-52 w-52 mb-6"
-            src="assets/user-profile.png"
+            className="h-52 w-52 mb-6 bg-neutral-white rounded-full object-contain p-2"
+            src="assets/plant-bucket.png"
             alt="user"
           />
           <div className="flex flex-col space-y-4">
@@ -82,11 +92,81 @@ export default function UserDashboardContent() {
           </div>
         </div>
       </div>
-      <div className="flex-1 flex text-center justify-center items-center h-full">
+      <div className=" justify-center m-9">
         {packageInfo ? (
-          <Card>
-            <p> {packageInfo.map((item) => `EL ID ES: ${item._id}`)}</p>
-          </Card>
+          <div>
+            <div className="flex space-x-6 h-full">
+              <Card className=" space-y-4 text-neutral-gray-one w-8/12 ">
+                {startDate ? (
+                  <div>
+                    <p className="text-neutral-gray-one font-bold text-lg">
+                      Datos de tu plan de contratación
+                    </p>
+                    <p className="text-sm text-neutral-gray-two">
+                      {`Miembro desde ${startDate.getDate()} ${
+                        startDate.getMonth() + 1
+                      } ${startDate.getFullYear()}`}
+                    </p>
+                  </div>
+                ) : null}
+
+                <p className="font-bold text-2xl text-orange-one">
+                  {info.firstName}
+                </p>
+                <p></p>
+                <p>
+                  {" "}
+                  {packageInfo.map(
+                    (item) =>
+                      `${item.quantity} paquete ${item.packageName} contratados`
+                  )}
+                </p>
+              </Card>
+
+              {pickupInfo ? (
+                <Card className="flex space-x-6 font-bold">
+                  <div>
+                    <p className="text-neutral-gray-one">
+                      {/* //delete or not? */}
+                      Tu KKPAK se renovará el {info.pickupInfo.day} a las{" "}
+                      {info.pickupInfo.time}
+                    </p>
+                    <div className="flex mt-2 space-x-3">
+                      <img
+                        src="/assets/sit-dog-poop.png"
+                        className="h-24 w-30 mb-6"
+                      />
+                      <p className="text-green-two">
+                        Tu próxima recolección es el{" "}
+                        {`${nextPickupDate.getDate()} ${
+                          nextPickupDate.getMonth() + 1
+                        } ${nextPickupDate.getFullYear()}`}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              ) : null}
+            </div>
+            {payments ? (
+              <div>
+                <Card>
+                  <p className="mt-4 text-orange-one">Historial de pagos</p>
+
+                  <div className="bg-orange-three">
+                    {payments.map((item) => {
+                      return (
+                        <tr className="border-b border-b-orange-two text-neutral-gray-two">
+                          <td className="p-1">{item.fecha}</td>
+                          <td className="p-1">{item.monto}</td>
+                          <td className="p-1">{item.estado}</td>
+                        </tr>
+                      );
+                    })}
+                  </div>
+                </Card>
+              </div>
+            ) : null}
+          </div>
         ) : (
           <div>
             <p className="">¡Aún no tienes algún plan contratado!</p>
@@ -97,18 +177,6 @@ export default function UserDashboardContent() {
             </Link>
           </div>
         )}
-
-        {/* {packageInfo != null ?  <div>
-          <p className="">¡Aún no tienes algún plan contratado!</p>
-          <Link to="/plan-suscripcion">
-            <Button variant="primary" inverse>
-              Seleccionar un plan
-            </Button>
-          </Link>
-        </div> : <Card>
-        <p> {packageInfo.map((item)=>(`EL ID ES: ${item._id}`))}</p>
-          </Card>
-        } */}
       </div>
     </div>
   );

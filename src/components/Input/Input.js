@@ -18,7 +18,7 @@ export default function Input({
       "border rounded px-2 py-2",
       {
         "border-red-destructive": variant=="destructive",
-        "border-neutral-gray-two": variant=="default",
+        "border-neutral-gray-four": variant=="default",
       }
     ),
   };
