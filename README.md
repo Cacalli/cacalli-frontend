@@ -18,7 +18,7 @@ For the workflow we include agile methodologies such as Kanban to divide and ass
 
 [Cacalli's Trello](https://trello.com/b/xWpvHBKX/cacalli)
 
-The gitflow was a key tool to work with our repositories. By creating a branch from master called `develop` and sub branches from develop in order to work in features and fixes according to the objectives of the sprint.
+The gitflow was a key tool to work with our repositories. By creating a branch from master called `develop` and sub branches from develop in order to work in features and fixes according to the objectives of each sprint.
 
 [Gitflow](https://www.atlassian.com/es/git/tutorials/comparing-workflows/gitflow-workflow#:~:text=%C2%BFQu%C3%A9%20es%20Gitflow%3F,vez%20y%20quien%20lo%20populariz%C3%B3.)
 
@@ -26,14 +26,18 @@ The gitflow was a key tool to work with our repositories. By creating a branch f
 
 [Cacalli's Wireframes](https://miro.com/app/board/uXjVPJbhD5E=/?userEmail=jessicahercon@gmail.com&track=true&utm_source=notification&utm_medium=email&utm_campaign=add-to-board&utm_content=go-to-board)
 
+![Wireframes](/public/assets/documentation/cacalli-wireframes.png)
+
 ## Notion
 
-In Notion you can visualize the objective and vision of the written business. In addition, the first approaches of the web page will be found:
+In Notion you can visualize the objective and vision of the written business. In addition, the first approaches of the web page can be found at:
 
 [Cacalli's Notion](https://www.notion.so/Cacalli-0baccb42a7674be49da154cf74fe0a99)
 
 ## Figma
 
-In Figma you can check the design system. Cacalli defined colors and you they can be displayed as well as fonts. You can also find the high frames:
+In Figma you can check the design system. Cacalli defined colors and they can be displayed as well as fonts. You can also find the high frames at:
 
 [Cacalli's Figma](https://www.figma.com/file/sN6YAaL7HbygWkdWcDXqQD/Cacalli-DS-V1?node-id=344%3A5871&t=xX45PAipSBDblCcj-0)
+
+![Figma Screenshot](/public/assets/documentation/cacalli-figma.png)
