@@ -2,9 +2,9 @@ import { FaTimes } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import Button from "../Button/Button";
 import Header from "../Header";
-export default function MobileMenu({toggleMenu}){
+export default function MobileMenu({toggleMenu, showMenu}){
     return(
-        <div className="fixed inset-0 flex flex-col w-full mx-auto h-96 z-30 bg-orange-four rounded">
+        <div className={`fixed mobile-menu inset-0 flex flex-col w-full mx-auto min-h-full z-30 bg-orange-four rounded ${showMenu ? "" : "expanded"}`}>
             <button onClick={toggleMenu} className=" text-orange-one p-4">
                 <FaTimes/>
             </button>

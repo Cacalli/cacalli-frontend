@@ -95,7 +95,7 @@ export default function Header() {
         <FaBars className="text-orange-one" size="1.5em" />
       </button>
     </header>
-    {showMenu ? <MobileMenu toggleMenu={toggleMenu}/> : null}
+   <MobileMenu toggleMenu={toggleMenu} showMenu={showMenu}/>
     </>
   );
 }
