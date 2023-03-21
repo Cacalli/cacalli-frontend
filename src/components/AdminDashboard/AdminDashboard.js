@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import Button from "../Button/Button";
 import baseUrl from "../../utils/baseUrls";
+import AdminFilter from "../AdminFilters/AdminFilters";
 
 export default function AdminDashboard() {
   const [filter, setFilter] = useState("Usuario");
@@ -54,40 +55,8 @@ export default function AdminDashboard() {
           placeholder="Buscar"
           onChange={filterByName}
         />
-        <Button
-          onClick={() => {
-            setFilter("Usuario");
-          }}
-          variant={filter === "Usuario" ? "primary" : ""}
-        >
-          Usuarios
-        </Button>
-        <Button
-          onClick={() => {
-            setFilter("Zona");
-          }}
-          className="py-1 px-2 mx-2"
-          variant={filter === "Zona" ? "primary" : ""}
-        >
-          Zonas
-        </Button>
-        <select
-          className="text-neutral-gray-two"
-          value=""
-          // onChange={() => {
-          // }}
-        >
-          <option>Elige una opción</option>
-          <option>Nombre</option>
-          <option>Dirección</option>
-          <option>Teléfono</option>
-          <option>Email</option>
-          <option>Día de recolección</option>
-          <option>Tamaño</option>
-          <option>Plan</option>
-          <option>Extra</option>
-          <option>Renovación</option>
-        </select>
+
+        <AdminFilter token={token} />
       </div>
       <div>
         <table className="table-fixed text-left border-collapse w-full shadow-md rounded-lg overflow-hidden">
