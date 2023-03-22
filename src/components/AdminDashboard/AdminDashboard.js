@@ -31,7 +31,7 @@ export default function AdminDashboard() {
   }, []);
 
   const setUserStatus = (user) => {
-    const body = { email: user.email };
+    const body = { userEmail: user.email };
     fetch(`${baseUrl}/admin/pickup/complete`, {
       method: "PUT",
       headers: {
