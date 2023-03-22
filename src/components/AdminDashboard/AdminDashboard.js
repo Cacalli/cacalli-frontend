@@ -21,7 +21,6 @@ export default function AdminDashboard() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setUsers(data.payload);
         setBackupUsers(data.payload);
       })
@@ -65,7 +64,7 @@ export default function AdminDashboard() {
     <div className="flex flex-1 mt-10 mx-10 ">
       <div className="flex flex-col pr-6 space-y-8">
         <input
-          className="mt-4 border border-neutral-gray-two rounded px-4"
+          className="mt-4 border border-neutral-gray-two rounded px-4 py-1"
           placeholder="Buscar"
           onChange={filterByName}
         />
@@ -78,13 +77,17 @@ export default function AdminDashboard() {
             <tr className="text-neutral-white p-3 bg">
               <th className="p-3">Nombre</th>
               <th className="p-3">Dirección</th>
+              <th className="p-3">Correo</th>
               <th className="p-3">Teléfono</th>
-              <th className="p-3">Email</th>
-              <th className="p-3">Día de recolección</th>
+              <th className="p-3">Miembro desde</th>
               <th className="p-3">Tamaño</th>
-              <th className="p-3">Plan</th>
-              <th className="p-3">Extra</th>
-              <th className="p-3">Renovación</th>
+              <th className="p-3">Periodo</th>
+              <th className="p-3">Zona</th>
+              <th className="p-3">Dia</th>
+              <th className="p-3">Horario</th>
+              <th className="p-3">Estado de suscripción</th>
+              <th className="p-3">Estado de recolección</th>
+              <th className="p-3">Recolección</th>
             </tr>
           </thead>
           <tbody>
