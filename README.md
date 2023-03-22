@@ -1,103 +1,66 @@
-# Getting Started with Create React App
+# CACALLI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Definition
 
-## Available Scripts
+Cacalli is a platform that allows the final user who is interested in transforming dog feces into a resource, to register, schedule its collection date and pay online automatically.  
+In addition, it allows the administrator user to manage registered users, collections and payments.
 
-In the project directory, you can run:
+## Technologies implemented
 
-### `npm start`
+> - [Reactjs](https://react.dev/)
+> - [Tailwind](https://tailwindcss.com/)
+> - [Formik](https://formik.org/)
+> - [Yup](https://www.npmjs.com/package/yup)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Workflow
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+For the workflow we include agile methodologies such as Kanban to divide and assign tasks among team members with the help of a task board divided by 5 columns: **Backlog**, **To Do**, **In Progress**, **Revieweing** and **Done**.
 
-### `npm test`
+[Cacalli's Trello](https://trello.com/b/xWpvHBKX/cacalli)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The gitflow was a key tool to work with our repositories. By creating a branch from master called `develop` and sub branches from develop in order to work in features and fixes according to the objectives of each sprint.
 
-### `npm run build`
+[Gitflow](https://www.atlassian.com/es/git/tutorials/comparing-workflows/gitflow-workflow#:~:text=%C2%BFQu%C3%A9%20es%20Gitflow%3F,vez%20y%20quien%20lo%20populariz%C3%B3.)
 
-Builds the app for production to the `build` folder.\
+## Wireframes
+
+[Cacalli's Wireframes](https://miro.com/app/board/uXjVPJbhD5E=/?userEmail=jessicahercon@gmail.com&track=true&utm_source=notification&utm_medium=email&utm_campaign=add-to-board&utm_content=go-to-board)
+
+![Wireframes](/public/assets/documentation/cacalli-wireframes.png)
+
+## Notion
+
+In Notion you can visualize the objective and vision of the written business. In addition, the first approaches of the web page can be found at:
+
+[Cacalli's Notion](https://www.notion.so/Cacalli-0baccb42a7674be49da154cf74fe0a99)
+
+## Figma
+
+In Figma you can check the design system. Cacalli defined colors and they can be displayed as well as fonts. You can also find the high frames at:
+
+[Cacalli's Figma](https://www.figma.com/file/sN6YAaL7HbygWkdWcDXqQD/Cacalli-DS-V1?node-id=344%3A5871&t=xX45PAipSBDblCcj-0)
+
+![Figma Screenshot](/public/assets/documentation/cacalli-figma.png)
+
+## Features
+
+> - The user can register with a new account and authenticate his login by means of a token.
+> - The user can choose a subscription plan and proceed to payment through the Stripe service, which is in charge of processing the payment method entered by the user.
+> - The administrator can filter the dashboard information through the available filters: general search engine, filter by zone, by day and by schedule.
+
+---
+
+## Availale Scripts
+
+`npm install` - Installs all the packages in the **pakcage.json** file in your local environment.
+
+`npm start ` - Runs the app in the development mode.
+Open http://localhost:3000 to view it in your browser.
+
+`npm run build` - Builds the app for production to the build folder.  
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
+The build is minified and the filenames include the hashes.
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-
-
-
-
-# PROJECT DEFINITION
-Cacalli is a platform that allows the final user who is interested in transforming dog feces into a resource, to register, schedule its collection and pay online automatically. In addition, it allows the administrator user to manage users, collections and payments.
-
-# IMPLEMENTED TECHNOLOGIES / FRAMEWORKS / LANGUAGES
-React, Javascript, Tailwind, Formik, Yup, Gitflow
-
-#WORKFLOW
-
-*In Miro, you will see the first wireframes of the application
-*Wireframes- https://miro.com/app/board/uXjVPJbhD5E=/?userEmail=jessicahercon@gmail.com&track=true&utm_source=notification&utm_medium=email&utm_campaign=add-to-board&utm_content=go-to-board
-
-*In Notion you can visualize the objective and vision of the written business. In addition, the first approaches of the web page will be found:
-*Notion -  https://www.notion.so/Cacalli-0baccb42a7674be49da154cf74fe0a99
-
-*In Figma you can check the design system. Cacalli defined colors and you they can be displayed as well as fonts. You can also find the high frames: 
-* Figma - https://www.figma.com/file/sN6YAaL7HbygWkdWcDXqQD/Cacalli-DS-V1?node-id=344%3A5871&t=xX45PAipSBDblCcj-0
-
-* The team decided to use Trello to assign everyone a task and work in an agile way so they could visualize each part and progress of the project:
-* Trello - https://trello.com/b/xWpvHBKX/cacalli
-
-
-# INSTALLING DEPENDENCIES FROM THE PROJECT
-* You can use the following command in your console to install every dependency on the project in case you don't have them
-* **npm i**
-
-# RUN THE PROJECT
-* If you want to run the project in your computer, right down the following command in your console
-* **npm start**
+See the section about [deployment](https://create-react-app.dev/docs/deployment/) for more information.
