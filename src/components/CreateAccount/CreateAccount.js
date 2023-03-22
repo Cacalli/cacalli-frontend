@@ -38,11 +38,6 @@ export default function CreateAccount() {
 
   let navigate = useNavigate();
 
-  useEffect(() => {
-    if (token.length) {
-      navigate("/dashboard");
-    }
-  }, [token]);
 
   const handleCreateAccount = ({ name, email, phone, password }) => {
     const body = { firstName: name, email, phone, password };
@@ -56,6 +51,7 @@ export default function CreateAccount() {
         if (data.ok === true && data.payload != null) {
           setToken(data.payload.token);
           localStorage.setItem("cacalliToken", data.payload.token);
+          navigate("/dashboard")
         }
       })
       .catch((error) => {
