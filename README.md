@@ -41,3 +41,26 @@ In Figma you can check the design system. Cacalli defined colors and they can be
 [Cacalli's Figma](https://www.figma.com/file/sN6YAaL7HbygWkdWcDXqQD/Cacalli-DS-V1?node-id=344%3A5871&t=xX45PAipSBDblCcj-0)
 
 ![Figma Screenshot](/public/assets/documentation/cacalli-figma.png)
+
+## Features
+
+> - The user can register with a new account and authenticate his login by means of a token.
+> - The user can choose a subscription plan and proceed to payment through the Stripe service, which is in charge of processing the payment method entered by the user.
+> - The administrator can filter the dashboard information through the available filters: general search engine, filter by zone, by day and by schedule.
+
+---
+
+## Availale Scripts
+
+`npm install` - Installs all the packages in the **pakcage.json** file in your local environment.
+
+`npm start ` - Runs the app in the development mode.
+Open http://localhost:3000 to view it in your browser.
+
+`npm run build` - Builds the app for production to the build folder.  
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.
+Your app is ready to be deployed!
+
+See the section about [deployment](https://create-react-app.dev/docs/deployment/) for more information.
