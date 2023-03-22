@@ -21,6 +21,7 @@ export default function AdminDashboard() {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setUsers(data.payload);
         setBackupUsers(data.payload);
       })
@@ -30,7 +31,20 @@ export default function AdminDashboard() {
   }, []);
 
   const setUserStatus = (user) => {
-    //console.log(user);
+    const body = { userEmail: user.email };
+    fetch(`${baseUrl}/admin/pickup/complete`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => {
+        throw new Error("No podemos actualizar tu estatus");
+      });
   };
 
   const filterByName = (event) => {
