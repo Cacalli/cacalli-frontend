@@ -7,7 +7,7 @@ import MobileMenu from "./MobileMenu/MobileMenu";
 
 export default function Header() {
   const isLoggedIn = window.localStorage.getItem("cacalliToken");
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(true);
   let navigate = useNavigate();
   const handleLogout = () => {
     window.localStorage.clear();
