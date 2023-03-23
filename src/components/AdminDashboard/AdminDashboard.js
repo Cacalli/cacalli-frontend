@@ -92,9 +92,10 @@ export default function AdminDashboard() {
               <th className="p-3">Día</th>
               <th className="p-3">Zona</th>
               <th className="p-3">Horario</th>
-              <th className="p-3">Estatus</th>
-              <th className="p-3">Estado de suscripción</th>
+              <th className="p-3">Próxima recolección</th>
               <th className="p-3">Estado de recolección</th>
+              {/* <th className="p-3">Estado de suscripción</th> */}
+              <th className="p-3">Completar recolección</th>
             </tr>
           </thead>
           <tbody>
@@ -117,8 +118,9 @@ export default function AdminDashboard() {
                     <td className="p-3">{user.pickupInfo.day}</td>
                     <td className="p-3">{user.pickupInfo.zone}</td>
                     <td className="p-3">{user.pickupInfo.time}</td>
+                    <td className="p-3">{user.pickupInfo.nextPickup.slice(0,10)}</td>
                     <td className="p-3 capitalize">{user.pickupInfo.status  === "on time" ? <FaCalendarCheck className="ml-3" size="1.5em"/> : <FaExclamationCircle/>}</td>
-                    <td> empty</td>
+                    {/* <td> empty</td> */}
                     <td>
                       <Button
                       className="ml-5"
