@@ -32,7 +32,6 @@ export default function AdminFilter({ token, setQuery }) {
       .then((response) => response.json())
       .then((data) => {
         setFilters(data.payload);
-        console.log(data.payload);
       })
       .catch((error) => {
         throw new Error("No se puede filtrar la informacion");
