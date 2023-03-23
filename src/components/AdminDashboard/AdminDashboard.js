@@ -50,7 +50,6 @@ export default function AdminDashboard() {
       .then((data) => {
         setUsers(data.payload);
         setBackupUsers(data.payload);
-        console.log("ES ESTOOOO", data.payload);
       })
       .catch((error) => {
         throw new Error("Hay un problema para completar el pago D:");
