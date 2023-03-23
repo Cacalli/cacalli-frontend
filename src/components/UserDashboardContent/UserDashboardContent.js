@@ -92,7 +92,7 @@ export default function UserDashboardContent() {
           </div>
         </div>
       </div>
-      <div className=" justify-center m-9">
+      <div className=" justify-center m-9 flex items-center w-9/12">
         {Object.keys(packageInfo).length !== 0 ? (
           <div>
             <div className="flex space-x-6 h-full">
