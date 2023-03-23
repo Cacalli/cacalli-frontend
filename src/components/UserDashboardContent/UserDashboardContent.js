@@ -168,8 +168,8 @@ export default function UserDashboardContent() {
             ) : null}
           </div>
         ) : (
-          <div>
-            <p className="">¡Aún no tienes algún plan contratado!</p>
+          <div className="flex flex-col items-center justify-center">
+            <p>¡Aún no tienes algún plan contratado!</p>
             <Link to="/plan-suscripcion">
               <Button variant="primary" inverse>
                 Seleccionar un plan
