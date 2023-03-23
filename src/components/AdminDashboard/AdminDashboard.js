@@ -12,21 +12,7 @@ export default function AdminDashboard() {
   const [backupUsers, setBackupUsers] = useState([]);
 
   useEffect(() => {
-    fetch(`${baseUrl}/admin/users`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setUsers(data.payload);
-        setBackupUsers(data.payload);
-      })
-      .catch((error) => {
-        throw new Error("Hay un problema para completar el pago D:");
-      });
+    fetchUsers();
   }, []);
 
   const setUserStatus = (user) => {
@@ -45,6 +31,28 @@ export default function AdminDashboard() {
         throw new Error("No podemos actualizar tu estatus");
       });
   };
+
+  const setQuery = (query) => {
+    fetchUsers(query);
+  }
+
+  const fetchUsers = (param = "") => {
+    fetch(`${baseUrl}/admin/users${param}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setUsers(data.payload);
+        setBackupUsers(data.payload);
+      })
+      .catch((error) => {
+        throw new Error("Hay un problema para completar el pago D:");
+      });
+  }
 
   const filterByName = (event) => {
     //setFilterUsers(event.target.value);
@@ -69,7 +77,7 @@ export default function AdminDashboard() {
           onChange={filterByName}
         />
 
-        <AdminFilter token={token} />
+        <AdminFilter token={token} setQuery={setQuery}/>
       </div>
       <div>
         <table className="table-fixed text-left border-collapse w-full shadow-md rounded-lg overflow-hidden">

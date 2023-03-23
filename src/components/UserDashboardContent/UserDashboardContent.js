@@ -92,8 +92,8 @@ export default function UserDashboardContent() {
           </div>
         </div>
       </div>
-      <div className=" justify-center m-9">
-        {packageInfo ? (
+      <div className=" justify-center m-9 flex items-center w-9/12">
+        {Object.keys(packageInfo).length !== 0 ? (
           <div>
             <div className="flex space-x-6 h-full">
               <Card className=" space-y-4 text-neutral-gray-one w-8/12 ">
@@ -123,7 +123,7 @@ export default function UserDashboardContent() {
                 </p>
               </Card>
 
-              {pickupInfo ? (
+              {Object.keys(pickupInfo).length !== 0 ? (
                 <Card className="flex space-x-6 font-bold">
                   <div>
                     <p className="text-neutral-gray-one">
@@ -147,7 +147,7 @@ export default function UserDashboardContent() {
                 </Card>
               ) : null}
             </div>
-            {payments ? (
+            {Object.keys(payments).length !== 0 ? (
               <div>
                 <Card>
                   <p className="mt-4 text-orange-one">Historial de pagos</p>

@@ -2,14 +2,27 @@ import { useEffect, useState } from "react";
 import baseUrl from "../../utils/baseUrls";
 import Button from "../Button/Button";
 
-export default function AdminFilter({ token }) {
+export default function AdminFilter({ token, setQuery }) {
   const [filters, setFilters] = useState([]);
   const [selectedZone, setSelectedZone] = useState("all");
   const [selectedDay, setSelectedDay] = useState("all");
   const [selectedTime, setSelectedTime] = useState("all");
 
+
   useEffect(() => {
-    fetch(`${baseUrl}/admin/zoneFilters`, {
+    let query = "";
+    if(selectedDay != "all" || selectedTime != "all" || selectedZone != "all"){
+      query += "?"
+      query += selectedDay != "all" ? "day=" + selectedDay + "&": "";
+      query += selectedTime != "all" ? "time=" + selectedTime + "&": "";
+      query += selectedZone != "all" ? "zone=" + selectedZone: ""; 
+    }
+    fetchFilter(query);
+    setQuery(query);
+  }, [selectedDay, selectedZone, selectedTime])
+
+  const fetchFilter = (param) => {
+    fetch(`${baseUrl}/admin/zoneFilters${param}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +37,7 @@ export default function AdminFilter({ token }) {
       .catch((error) => {
         throw new Error("No se puede filtrar la informacion");
       });
-  }, []);
+  }
 
   return (
     <>
