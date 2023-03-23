@@ -38,11 +38,11 @@ export default function Header() {
               Quiénes somos
             </Button>
           </Link>
-          <Link to="calcula-plan">
+          {/* <Link to="calcula-plan">
             <Button variant="secondary" inverse>
               Calcula tu plan
             </Button>
-          </Link>
+          </Link> */}
           <Link to="plan-suscripcion">
             <Button variant="secondary" inverse>
               Precios

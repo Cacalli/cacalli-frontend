@@ -34,7 +34,7 @@ export default function MobileMenu({ toggleMenu, showMenu }) {
           Quiénes somos
         </Button>
 
-        <Button
+        {/* <Button
           variant="secondary"
           inverse
           onClick={() => {
@@ -42,7 +42,7 @@ export default function MobileMenu({ toggleMenu, showMenu }) {
           }}
         >
           Calcula tu plan
-        </Button>
+        </Button> */}
 
         <Button
           variant="secondary"
