@@ -3,6 +3,8 @@ import { useOutletContext } from "react-router-dom";
 import Button from "../Button/Button";
 import baseUrl from "../../utils/baseUrls";
 import AdminFilter from "../AdminFilters/AdminFilters";
+import { SlCheck } from "react-icons/sl";
+import { FaCalendarCheck, FaExclamationCircle } from "react-icons/fa";
 
 export default function AdminDashboard() {
   const [filter, setFilter] = useState("Usuario");
@@ -34,7 +36,7 @@ export default function AdminDashboard() {
 
   const setQuery = (query) => {
     fetchUsers(query);
-  }
+  };
 
   const fetchUsers = (param = "") => {
     fetch(`${baseUrl}/admin/users${param}`, {
@@ -48,11 +50,12 @@ export default function AdminDashboard() {
       .then((data) => {
         setUsers(data.payload);
         setBackupUsers(data.payload);
+        console.log("ES ESTOOOO", data.payload);
       })
       .catch((error) => {
         throw new Error("Hay un problema para completar el pago D:");
       });
-  }
+  };
 
   const filterByName = (event) => {
     //setFilterUsers(event.target.value);
@@ -77,7 +80,7 @@ export default function AdminDashboard() {
           onChange={filterByName}
         />
 
-        <AdminFilter token={token} setQuery={setQuery}/>
+        <AdminFilter token={token} setQuery={setQuery} />
       </div>
       <div>
         <table className="table-fixed text-left border-collapse w-full shadow-md rounded-lg overflow-hidden">
@@ -85,17 +88,14 @@ export default function AdminDashboard() {
             <tr className="text-neutral-white p-3 bg">
               <th className="p-3">Nombre</th>
               <th className="p-3">Dirección</th>
-              <th className="p-3">Correo</th>
               <th className="p-3">Teléfono</th>
-              <th className="p-3">Miembro desde</th>
               <th className="p-3">Tamaño</th>
-              <th className="p-3">Periodo</th>
+              <th className="p-3">Día</th>
               <th className="p-3">Zona</th>
-              <th className="p-3">Dia</th>
               <th className="p-3">Horario</th>
+              <th className="p-3">Estatus</th>
               <th className="p-3">Estado de suscripción</th>
               <th className="p-3">Estado de recolección</th>
-              <th className="p-3">Recolección</th>
             </tr>
           </thead>
           <tbody>
@@ -107,24 +107,30 @@ export default function AdminDashboard() {
                     className="border-b border-b-orange-two text-green-two"
                   >
                     <td className="p-3">{user.firstName}</td>
-                    {/* <td className="p-3">
-                      {user.address.street} {user.address.zipCode}
-                    </td> */}
+                    <td className="p-3">
+                      {user.address.street}, {user.address.zipcode},{" "}
+                      {user.address.municipality}
+                    </td>
                     <td className="p-3">{user.phone}</td>
-                    <td className="p-3">{user.email}</td>
-                    <td className="p-3">3/03/23</td>
-                    <td className="p-3">M</td>
-                    <td className="p-3">Semanal</td>
-                    <td className="p-3">No</td>
-                    <td className="p-3">31/31/31</td>
+                    <td className="p-3 capitalize">
+                      {user.subscription.packages[0].packageName}
+                    </td>
+                    <td className="p-3">{user.pickupInfo.day}</td>
+                    <td className="p-3">{user.pickupInfo.zone}</td>
+                    <td className="p-3">{user.pickupInfo.time}</td>
+                    <td className="p-3 capitalize">{user.pickupInfo.status  === "on time" ? <FaCalendarCheck className="ml-3" size="1.5em"/> : <FaExclamationCircle/>}</td>
+                    <td> empty</td>
                     <td>
-                      <button
+                      <Button
+                      className="ml-5"
+                      variant="tertiary"
+                      inverse
                         onClick={() => {
                           setUserStatus(user);
                         }}
                       >
-                        atrasado
-                      </button>
+                        <SlCheck size="1.25em"/>
+                      </Button>
                     </td>
                   </tr>
                 );
