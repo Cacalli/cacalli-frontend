@@ -69,7 +69,7 @@ export default function CreateAccount() {
         />
       </div>
       <div className="md:w-1/2 p-10">
-        <p className="font-bold text-neutral-gray-two text-2xl mb-6">
+        <p className=" text-neutral-gray-two text-2xl mb-6 rubik">
           Crea tu cuenta
         </p>
         <Formik
