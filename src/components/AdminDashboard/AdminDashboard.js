@@ -108,29 +108,37 @@ export default function AdminDashboard() {
                   >
                     <td className="p-3">{user.firstName}</td>
                     <td className="p-3">
-                      {user.address.street}, {user.address.zipcode},{" "}
-                      {user.address.municipality}
+                      {user.address?.street}, {user.address?.zipcode},{" "}
+                      {user.address?.municipality}
                     </td>
                     <td className="p-3">{user.phone}</td>
                     <td className="p-3 capitalize">
-                      {user.subscription.packages[0].packageName}
+                      {user.subscription?.packages[0]?.packageName}
                     </td>
-                    <td className="p-3">{user.pickupInfo.day}</td>
-                    <td className="p-3">{user.pickupInfo.zone}</td>
-                    <td className="p-3">{user.pickupInfo.time}</td>
-                    <td className="p-3">{user.pickupInfo.nextPickup.slice(0,10)}</td>
-                    <td className="p-3 capitalize">{user.pickupInfo.status  === "on time" ? <FaCalendarCheck className="ml-3" size="1.5em"/> : <FaExclamationCircle/>}</td>
+                    <td className="p-3">{user.pickupInfo?.day}</td>
+                    <td className="p-3">{user.pickupInfo?.zone}</td>
+                    <td className="p-3">{user.pickupInfo?.time}</td>
+                    <td className="p-3">
+                      {user.pickupInfo?.nextPickup?.slice(0, 10)}
+                    </td>
+                    <td className="p-3 capitalize">
+                      {user.pickupInfo?.status === "on time" ? (
+                        <FaCalendarCheck className="ml-3" size="1.5em" />
+                      ) : (
+                        <FaExclamationCircle />
+                      )}
+                    </td>
                     {/* <td> empty</td> */}
                     <td>
                       <Button
-                      className="ml-5"
-                      variant="tertiary"
-                      inverse
+                        className="ml-5"
+                        variant="tertiary"
+                        inverse
                         onClick={() => {
                           setUserStatus(user);
                         }}
                       >
-                        <SlCheck size="1.25em"/>
+                        <SlCheck size="1.25em" />
                       </Button>
                     </td>
                   </tr>
