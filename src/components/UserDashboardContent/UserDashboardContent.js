@@ -35,7 +35,7 @@ export default function UserDashboardContent() {
             setHasAddress(true);
             setFullAddress(`${street}, ${neighborhood}, ${state}`);
           }
-          if (payload.subscription.packages.length != null) {
+          if (payload.subscription?.packages?.length != null) {
             setPackageInfo(payload.subscription.packages);
           }
 
