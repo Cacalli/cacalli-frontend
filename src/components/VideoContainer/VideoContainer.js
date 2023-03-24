@@ -3,7 +3,7 @@ export default function VideoContainer() {
     <div className=" bg-green-one md:py-40 py-20">
       <div className="flex space-y-10 md:flex-row flex-col w-10/12 mx-auto">
       <div className="md:w-1/2 flex items-center md:order-last">
-          <p className="rubik items-center text-3xl md:text-7xl text-neutral-white font-lovelo pl-24">
+          <p className="rubik items-center text-4xl md:text-7xl text-neutral-white font-lovelo pl-24">
             CONOCE CACALLI
           </p>
         </div>

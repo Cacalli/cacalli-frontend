@@ -35,7 +35,7 @@ export default function UserDashboardContent() {
             setHasAddress(true);
             setFullAddress(`${street}, ${neighborhood}, ${state}`);
           }
-          if (payload.subscription.packages.length != null) {
+          if (payload.subscription?.packages?.length != null) {
             setPackageInfo(payload.subscription.packages);
           }
 
@@ -171,7 +171,7 @@ export default function UserDashboardContent() {
           <div className="flex flex-col items-center justify-center">
             <p>¡Aún no tienes algún plan contratado!</p>
             <Link to="/plan-suscripcion">
-              <Button variant="primary" inverse>
+              <Button variant="primary" inverse className="mt-10">
                 Seleccionar un plan
               </Button>
             </Link>
