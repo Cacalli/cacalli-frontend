@@ -44,7 +44,7 @@ export default function Coverage() {
         <div className="md:flex w-full items-center">
           <div className="flex-1">
             <div className="mb-6">
-              <p className="text-5xl md:text-7xl  text-neutral-white font-lovelo">
+              <p className=" rubik text-5xl md:text-6xl  text-neutral-white font-lovelo">
                 COBERTURA
               </p>
               <p className="text-neutral-white py-4 text-xl">

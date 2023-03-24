@@ -16,8 +16,8 @@ export default function HomeContent() {
       <div className="relative w-11/12 mx-auto">
         <div className="gap-9 flex items-center mb-8">
           <img className="w-40 mb-6 md:w-52" src="/assets/logoCacalli.png" />
-          <h1 className="font-bold text-3xl md:text-6xl  text-green-one">
-            REINVENTANDO <span className="flex">CICLOS</span>
+          <h1 className="rubik font-bold text-2xl md:text-6xl  text-green-one">
+            REINVENTANDO <span className="flex rubik">CICLOS</span>
           </h1>
         </div>
 
