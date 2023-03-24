@@ -14,15 +14,15 @@ export default function HomeContent() {
       />
 
       <div className="relative w-11/12 mx-auto">
-        <div className="gap-9 flex items-center mb-8">
+        <div className="gap-9 flex flex-col md:flex-row items-center mb-8">
           <img className="w-40 mb-6 md:w-52" src="/assets/logoCacalli.png" />
-          <h1 className="rubik font-bold text-2xl md:text-6xl  text-green-one">
+          <h1 className="rubik font-bold text-4xl md:text-6xl  text-green-one">
             REINVENTANDO <span className="flex rubik">CICLOS</span>
           </h1>
         </div>
 
         <div className="md:w-1/2">
-          <p className="text-xl md:text-2xl mb-8 text-neutral-gray-two flex">
+          <p className="text-xl md:text-2xl mb-8 text-neutral-gray-two flex text-justify">
            En Cacalli hacemos composta con las heces caninas para reintegrarlas
             a los suelos de forma segura y sanitaria.
           </p>

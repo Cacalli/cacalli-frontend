@@ -10,10 +10,10 @@ export default function AboutSection() {
             <img className="rounded-xl " src="/assets/cacalliMembers.jpg" />
           </div>
           <div>
-            <p className="rubik text-green-one font-bold text-2xl md:text-3xl lg:text-5xl font-josefin-sans mb-6">
+            <p className="rubik text-green-one font-bold text-4xl md:text-3xl lg:text-5xl font-josefin-sans mb-6">
               ¿QUIÉNES SOMOS?
             </p>
-            <p className="text-base lg:text-base md:text-sm text-neutral-gray-two">
+            <p className="text-base text-justify lg:text-base md:text-sm text-neutral-gray-two">
               <b>Cacalli</b> es un proyecto de manejo de residuos domésticos,
               actualmente concentrado en la recoleccción, manejo y tratamiento
               de heces de mascotas. El tratamiento que da Cacalli a las heces,
@@ -42,7 +42,7 @@ export default function AboutSection() {
         </div>
 
         <div className="mt-24">
-          <div className="rubik text-2xl md:text-4xl font-bold text-green-one ">
+          <div className="rubik text-4xl md:text-4xl font-bold text-green-one ">
             <p>Testimonios</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-16 gap-16">
