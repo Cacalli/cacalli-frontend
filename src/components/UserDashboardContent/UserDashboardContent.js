@@ -114,13 +114,13 @@ export default function UserDashboardContent() {
                   {info.firstName}
                 </p>
                 <p></p>
-                <p>
+                <div className="flex flex-col">
                   {" "}
                   {packageInfo.map(
                     (item) =>
-                      `${item.quantity} paquete ${item.packageName} contratados`
+                   <p>{`${item.quantity} paquete ${item.packageName} contratados`}</p>
                   )}
-                </p>
+                </div>
               </Card>
 
               {Object.keys(pickupInfo).length !== 0 ? (
