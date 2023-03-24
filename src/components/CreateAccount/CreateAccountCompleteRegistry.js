@@ -209,14 +209,14 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
             </p>
             <div className="grid grid-cols-3 gap-6 my-6">
               <Dropdown
-                className="border py-1 rounded px-1"
+                className="border border-neutral-gray-two py-1 rounded px-1"
                 options={availableDays}
                 defaultText="Elige el dia"
                 name="day"
                 onChange={(e) => handleDropDown(e.target.value, "day")}
               />
               <Dropdown
-                className="border py-1 rounded px-1"
+                className="border py-1 rounded px-1 border-neutral-gray-two"
                 options={availableHours}
                 defaultText="Elige la hora"
                 name="time"
@@ -233,10 +233,10 @@ export default function CreateAccountCompleteRegistry({ firstName }) {
           ></textarea>
         </div>
         <div className=" flex space-x-10 text-neutral-white">
-          <button className="bg-green-one px-2 py-1 rounded" type="submit">
+          <button className="bg-green-one px-4 py-2 rounded" type="submit">
             Finalizar registro
           </button>
-          <button className="bg-red-destructive px-2 py-1 rounded">
+          <button className="bg-red-destructive px-4 py-2 rounded">
             {" "}
             Cancelar
           </button>

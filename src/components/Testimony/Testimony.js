@@ -1,6 +1,6 @@
 export default function Testimony({iconImage, name, testimonyText}){
     return( 
-        <div className="flex justify-center gap-7 text-lg">
+        <div className="flex justify-center gap-7 text-lg text-justify">
         
           <img className="h-20 w-20 rounded-full object-cover" src={iconImage}/> 
             
