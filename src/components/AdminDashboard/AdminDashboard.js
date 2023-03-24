@@ -29,6 +29,7 @@ export default function AdminDashboard() {
     })
       .then((response) => response.json())
       .then((data) => console.log(data))
+      .then(() => fetchUsers())
       .catch((error) => {
         throw new Error("No podemos actualizar tu estatus");
       });
@@ -67,6 +68,8 @@ export default function AdminDashboard() {
         );
       });
       setUsers(filteredUsers);
+    } else {
+      setUsers(backupUsers);
     }
   };
 
