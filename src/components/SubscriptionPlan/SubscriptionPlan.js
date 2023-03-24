@@ -57,7 +57,7 @@ export default function SubscriptionPlan() {
   return (
     <div>
       <div className="flex justify-center my-10 items-center">
-        <h2 className="text-2xl md:text-5xl text-green-one font-semibold pr-4">
+        <h2 className="rubik text-2xl md:text-5xl text-green-one font-semibold pr-4">
           PLANES DE SUSCRIPCIÓN
         </h2>
         <img className="h-8 md:h-10" src="/assets/buckets.png" />

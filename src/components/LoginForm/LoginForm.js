@@ -52,7 +52,7 @@ export default function LoginForm() {
         />
       </div>
       <div className="md:w-1/2 p-10">
-        <p className="font-bold text-neutral-gray-two text-lg md:text-2xl mb-6">
+        <p className="rubik text-neutral-gray-two text-lg md:text-2xl mb-6">
           Inicia sesión en tu cuenta Cacalli
         </p>
         <form className="grid gap-4 mb-6 pt-4">
