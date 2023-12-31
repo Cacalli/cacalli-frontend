@@ -64,3 +64,8 @@ The build is minified and the filenames include the hashes.
 Your app is ready to be deployed!
 
 See the section about [deployment](https://create-react-app.dev/docs/deployment/) for more information.
+
+
+## Landing Version
+
+for this version only indispensable funcionality to promote cacalli will be implemented.

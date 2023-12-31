@@ -26,9 +26,9 @@ export default function HomeContent() {
            En Cacalli hacemos composta con las heces caninas para reintegrarlas
             a los suelos de forma segura y sanitaria.
           </p>
-          <Button className="" variant="primary">
+          {/* <Button className="" variant="primary">
             ¡Quiero unirme!
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>

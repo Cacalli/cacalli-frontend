@@ -55,7 +55,7 @@ export default function Header() {
           </Link>
         </div>
       ) : null}
-      <nav className="md:flex hidden mr-6 items-center">
+      {/* <nav className="md:flex hidden mr-6 items-center">
         {!isLoggedIn ? (
           <>
             <NavLink to="unete">
@@ -90,7 +90,7 @@ export default function Header() {
             </button>
           </div>
         ) : null}
-      </nav>
+      </nav> */}
       <button onClick={toggleMenu} className="md:hidden flex p-4">
         <FaBars className="text-orange-one" size="1.5em" />
       </button>

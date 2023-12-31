@@ -17,11 +17,11 @@ export default function Footer(){
           <Link to="plan-suscripcion" className="my-2 block">Quiero contratar</Link>
         </div>
 
-        <div className="  text-neutral-gray-two md:text-left text-center">
+        {/* <div className="  text-neutral-gray-two md:text-left text-center">
           <p className="font-bold">Aviso de privacidad</p>
           <Link className="my-2 block">Términos y condiciones</Link>
           <Link className="my-2 block">Política de privacidad</Link>
-        </div>
+        </div> */}
 
         <div className="text-neutral-gray-two md:text-left text-center">
           <p className="font-bold">Redes sociales</p>

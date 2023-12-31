@@ -40,9 +40,9 @@ export default function SubscriptionPlanCard({
         </ul>
       </div>
 
-      <Button onClick={()=>{onAddToCartClick(size,price, inscriptionPrice)}} variant="primary" isFull>
+      {/* <Button onClick={()=>{onAddToCartClick(size,price, inscriptionPrice)}} variant="primary" isFull>
         Añadir al carrito
-      </Button>
+      </Button> */} 
     </Card>
   );
 }

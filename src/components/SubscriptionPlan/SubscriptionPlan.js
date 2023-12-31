@@ -52,7 +52,7 @@ export default function SubscriptionPlan() {
     });
   };
 
-  const [plan, setPlan] = useState("");
+  const [plan, setPlan] = useState("Semanal");
 
   return (
     <div>
@@ -85,41 +85,89 @@ export default function SubscriptionPlan() {
       </div>
 
       <div className="grid w-10/12 mx-auto card-wrapper gap-12 mb-14">
+        {plan === "Semanal" ? (
+        <>
         <SubscriptionPlanCard
           onAddToCartClick={onAddToCartClick}
-          inscriptionPrice="100"
+          inscriptionPrice="200"
           image="/assets/dog-poop.png"
-          price={100}
+          price={230}
           size="CHICO"
           packageDescription={
             "Recomendado para un perro talla chica, por ejemplo un Chihuahua"
           }
           descriptionList={[
-            "6 litros de...",
+            "6 litros de capacidad",
             "3 litros de mezcla secante",
             "La inscripción tiene un costo de $200 MXN",
-            "KKPAK extra $85 mxn",
           ]}
         />
         <SubscriptionPlanCard
           onAddToCartClick={onAddToCartClick}
-          inscriptionPrice="200"
+          inscriptionPrice="250"
           image="/assets/standing-dog-poop.png"
-          price={200}
+          price={300}
           size="MEDIANO"
           packageDescription={
             "Recomendado para un perro talla mediana, por ejemplo un Poodle"
           }
           descriptionList={[
-            "10 litros de...",
+            "10 litros de capacidad",
             "6 litros de mezcla secante",
-            "La inscripción tiene un costo de $100 MXN",
-            "KKPAK extra $85 mxn",
+            "La inscripción tiene un costo de $250 MXN",
           ]}
         />
         <SubscriptionPlanCard
           onAddToCartClick={onAddToCartClick}
-          inscriptionPrice="300"
+          inscriptionPrice="375"
+          image="/assets/sit-dog-poop.png"
+          price={400}
+          size="GRANDE"
+          packageDescription={
+            "Recomendado para un perro talla grande, por ejemplo un Doberman"
+          }
+          descriptionList={[
+            "19 litros de capacidad",
+            "10 litros de mezcla secante",
+            "La inscripción tiene un costo de $375 MXN",
+          ]}
+        />
+        </>
+        ) : (
+          <>
+        <SubscriptionPlanCard
+          onAddToCartClick={onAddToCartClick}
+          inscriptionPrice="200"
+          image="/assets/dog-poop.png"
+          price={175}
+          size="CHICO"
+          packageDescription={
+            "Recomendado para un perro talla chica, por ejemplo un Chihuahua"
+          }
+          descriptionList={[
+            "6 litros de capacidad",
+            "3 litros de mezcla secante",
+            "La inscripción tiene un costo de $200 MXN",
+          ]}
+        />
+        <SubscriptionPlanCard
+          onAddToCartClick={onAddToCartClick}
+          inscriptionPrice="250"
+          image="/assets/standing-dog-poop.png"
+          price={210}
+          size="MEDIANO"
+          packageDescription={
+            "Recomendado para un perro talla mediana, por ejemplo un Poodle"
+          }
+          descriptionList={[
+            "10 litros de capacidad",
+            "6 litros de mezcla secante",
+            "La inscripción tiene un costo de $250 MXN",
+          ]}
+        />
+        <SubscriptionPlanCard
+          onAddToCartClick={onAddToCartClick}
+          inscriptionPrice="375"
           image="/assets/sit-dog-poop.png"
           price={300}
           size="GRANDE"
@@ -127,19 +175,19 @@ export default function SubscriptionPlan() {
             "Recomendado para un perro talla grande, por ejemplo un Doberman"
           }
           descriptionList={[
-            "20 litros de...",
+            "19 litros de capacidad",
             "10 litros de mezcla secante",
-            "La inscripción tiene un costo de $100 MXN",
-            "KKPAK extra $85 mxn",
+            "La inscripción tiene un costo de $375 MXN",
           ]}
         />
+        </>)}
       </div>
-      <div className="text-sm font-bold md:text-xl flex justify-center mb-8 md:mb-6">
+      {/* <div className="text-sm font-bold md:text-xl flex justify-center mb-8 md:mb-6">
         <p className="text-neutral-gray-two">¿Aún no sabes cuál seleccionar?</p>
         <Link to="/calcula-plan">
           <p className="text-green-one pl-2">Calcula tu KKPAK ideal</p>
         </Link>
-      </div>
+      </div> */}
       <div className="flex flex-col mb-10 px-10 text-xs space-y-1 text-neutral-gray-two text-center">
         <p>
           Cada kkpak incluye 2 contenedores, del cual, uno se entrega
