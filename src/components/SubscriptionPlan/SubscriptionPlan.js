@@ -94,7 +94,7 @@ export default function SubscriptionPlan() {
           price={230}
           size="CHICO"
           packageDescription={
-            "Recomendado para un perro talla chica, por ejemplo un Chihuahua"
+            "Recomendado para un perro talla mediana, por ejemplo un Beagle, o para un gato"
           }
           descriptionList={[
             "6 litros de capacidad",
@@ -109,7 +109,7 @@ export default function SubscriptionPlan() {
           price={300}
           size="MEDIANO"
           packageDescription={
-            "Recomendado para un perro talla mediana, por ejemplo un Poodle"
+            "Recomendado para un perro talla grande o gigante, por ejemplo un gran danés, o para dos o tres gatos"
           }
           descriptionList={[
             "10 litros de capacidad",
@@ -124,7 +124,7 @@ export default function SubscriptionPlan() {
           price={400}
           size="GRANDE"
           packageDescription={
-            "Recomendado para un perro talla grande, por ejemplo un Doberman"
+            "Recomendado para dos perros de talla grande o gitante, por ejemplo dos Berneses de la montaña, o para cuatro o cinco gatos"
           }
           descriptionList={[
             "19 litros de capacidad",
@@ -142,7 +142,7 @@ export default function SubscriptionPlan() {
           price={175}
           size="CHICO"
           packageDescription={
-            "Recomendado para un perro talla chica, por ejemplo un Chihuahua"
+            "Recomendado para un perro talla chica, por ejemplo un Shiba Inu"
           }
           descriptionList={[
             "6 litros de capacidad",
@@ -157,7 +157,7 @@ export default function SubscriptionPlan() {
           price={210}
           size="MEDIANO"
           packageDescription={
-            "Recomendado para un perro talla mediana, por ejemplo un Poodle"
+            "Recomendado para un perro talla mediana, por ejemplo un Beagle, o para un gato"
           }
           descriptionList={[
             "10 litros de capacidad",
@@ -172,7 +172,7 @@ export default function SubscriptionPlan() {
           price={300}
           size="GRANDE"
           packageDescription={
-            "Recomendado para un perro talla grande, por ejemplo un Doberman"
+            "Recomendado para un perro talla grande, por ejemplo un Doberman, o para  dos o tres gatos"
           }
           descriptionList={[
             "19 litros de capacidad",

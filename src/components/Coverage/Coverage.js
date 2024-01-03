@@ -8,13 +8,15 @@ import { Link } from "react-router-dom";
 export default function Coverage() {
   const [location, setLocation] = useState("");
   const handleSearchClick = () => {
-    fetch(`${baseUrl}/zone/checkZipcode/${location}`, {
+    // fetch(`${baseUrl}/zone/checkZipcode/${location}`, {
+    fetch(`http://146.190.171.80:8001/zone/checkZipcode/${location}`, {
+
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => response.json())
       .then((data) => {
-        const isAvailable = data.payload.available;
+        const isAvailable = data.payload;
         if (isAvailable) {
           toast.info(
             <div>
