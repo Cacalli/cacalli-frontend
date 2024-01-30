@@ -45,19 +45,16 @@ Para recibir el servicio de Cacalli se paga una inscripción para cubrir el cost
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-16 gap-16">
             <Testimony
-              iconImage="/assets/user-example.jpg"
-              name="Gabriela Rosas"
-              testimonyText="Desde que empecé a usar el método Cacalli, esto es un párrafo de texto ejemplo Eelerisque in pharetra vulputate tristique et sed tortor. Feugiat a lectus quis a."
+              iconImage="/assets/gaby_momo.jpeg"
+              name="Gabriela"
+              testimonyText="Al principio mi familia se mostraba un poco escéptica sobre la metodología. Al conocer mejor cómo funciona, sin residuos no deseados, ni olores, cambió su perspectiva. Y ahora no nos imaginamos una gestión de los desechos de nuestra mascota que no sea con Cacalli"
             ></Testimony>
             <Testimony
-              iconImage="/assets/user-example.jpg"
-              name="Vane"
-              testimonyText="Desde que empecé a usar el método Cacalli, esto es un párrafo de texto ejemplo Eelerisque in pharetra vulputate tristique et sed tortor. Feugiat a lectus quis a. "
-            />
-            <Testimony
-              iconImage="/assets/user-example.jpg"
-              name="Diego"
-              testimonyText="Desde que empecé a usar el método Cacalli, esto es un párrafo de texto ejemplo Eelerisque in pharetra vulputate tristique et sed tortor. Feugiat a lectus quis a. "
+              iconImage="/assets/Lore_Djali.JPG"
+              name="Lorena"
+              testimonyText="Cacalli ha sido una excelente solución para mi y mis perras.
+              Es muy higiénico y cómodo y sobre todo me encanta no ensuciar agua ni llenar la basura de bolsitas de popó. ¡Soy fan de la solución!
+               "
             />
           </div>
         </div>
