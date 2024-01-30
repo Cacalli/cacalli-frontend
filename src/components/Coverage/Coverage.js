@@ -20,13 +20,13 @@ export default function Coverage() {
         if (isAvailable) {
           toast.info(
             <div>
-              <span>Damos servicio en tu zona, te recomendamos</span>{" "}
-              <Link
+              <span>Damos servicio en tu zona, ponte en contacto con nosotros</span>{" "}
+              {/* <Link
                 className="text-orange-one font-bold hover:underline"
                 to="/ingresa"
               >
                 iniciar sesión
-              </Link>
+              </Link> */}
             </div>,
             {
               position: toast.POSITION.TOP_CENTER,
