@@ -206,16 +206,16 @@ export default function SubscriptionPlan() {
           quincenal.
         </p>
 
-        <div>
+        {/* <div>
           <p>
             Solo es posible contratar kkpaks de un mismo periodo de recolección.
           </p>
-        </div>
+        </div> */}
 
-        <p className=" text-center mb-10">
+        {/* <p className=" text-center mb-10">
           *Todos los planes tienen un costo único de inscripción de $100 MXN
           adicionales al costo de cada plan
-        </p>
+        </p> */}
       </div>
       <ToastContainer />
     </div>
